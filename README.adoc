@@ -1,0 +1,3 @@
+= thanks4java
+
+Implementation of https://thanktoken.github.io/[ThankToken] in Java.
