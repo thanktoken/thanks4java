@@ -1,4 +1,4 @@
-package io.github.thanktoken.core.impl.v1.validate;
+package io.github.thanktoken.core.impl.v001.validate;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -12,15 +12,15 @@ import io.github.thanktoken.core.api.identity.ThankIdentityType;
 import io.github.thanktoken.core.api.validate.ThankTokenValidationException;
 import io.github.thanktoken.core.api.validate.ThankTokenValidator;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
-import io.github.thanktoken.core.impl.v1.TestKeyPairs;
-import io.github.thanktoken.core.impl.v1.strategy.ThankVersionStrategyV001;
+import io.github.thanktoken.core.impl.v001.TestKeyPairs;
+import io.github.thanktoken.core.impl.v001.strategy.ThankVersionStrategyV001;
 import io.github.thanktoken.core.impl.validate.ThankTokenValidatorImpl;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
 /**
  * Test of {@link ThankTokenValidatorImpl}.
  */
-public class ThankTokenValidatorImplTest extends Assertions {
+public class ThankTokenValidatorImplV001Test extends Assertions {
 
   private static final ThankVersionStrategyV001 STRATEGY = new ThankVersionStrategyV001(new TestIdentityProvider());
 

@@ -1,4 +1,4 @@
-package io.github.thanktoken.core.impl.v1.strategy;
+package io.github.thanktoken.core.impl.v001.strategy;
 
 import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.identity.ThankIdentityProvider;
@@ -9,7 +9,8 @@ import net.sf.mmm.security.api.crypt.asymmetric.Rsa;
 import net.sf.mmm.security.api.hash.SecurityHashConfigSha256;
 
 /**
- * The implementation of {@link ThankVersionStrategy} for {@code V001}.
+ * The implementation of {@link ThankVersionStrategy} for
+ * {@link io.github.thanktoken.core.api.header.ThankHeader#getVersion() version} {@code 2}.
  */
 public class ThankVersionStrategyV001 extends AbstractThankVersionStrategy {
 
@@ -25,7 +26,7 @@ public class ThankVersionStrategyV001 extends AbstractThankVersionStrategy {
 
   /**
    * The constructor.
-   * 
+   *
    * @param identityProvider the {@link ThankIdentityProvider} for this strategy.
    */
   public ThankVersionStrategyV001(ThankIdentityProvider identityProvider) {

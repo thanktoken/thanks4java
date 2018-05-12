@@ -1,4 +1,4 @@
-package io.github.thanktoken.core.impl.v1.strategy;
+package io.github.thanktoken.core.impl.v002.strategy;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -13,13 +13,14 @@ import io.github.thanktoken.core.impl.io.ThankWriterImpl;
 import io.github.thanktoken.core.impl.sign.ThankTokenSignerDelegate;
 import io.github.thanktoken.core.impl.sign.ThankTokenSignerImpl;
 import io.github.thanktoken.core.impl.strategy.ThankGlobalStrategyImpl;
+import io.github.thanktoken.core.impl.v002.strategy.ThankVersionStrategyV002;
 import io.github.thanktoken.core.impl.validate.ThankTokenValidatorDelegate;
 import io.github.thanktoken.core.impl.validate.ThankTokenValidatorImpl;
 
 /**
  * Test of {@link ThankGlobalStrategy} and {@link ThankStrategyFactory#getGlobalStrategy()}.
  */
-public class ThankVersionStrategyTest extends Assertions {
+public class ThankVersionStrategyV002Test extends Assertions {
 
   /**
    * Test that {@link ThankStrategyFactory#getGlobalStrategy()} finds the corret implementation via service loader.
@@ -42,11 +43,11 @@ public class ThankVersionStrategyTest extends Assertions {
   public void testVersionStrategy() {
 
     ThankStrategyFactory factory = ThankStrategyFactory.get();
-    assertThat(factory.getVersions()).containsExactly(ThankVersionStrategyV001.VERSION);
-    assertThat(factory.getLatestVersion()).isEqualTo(ThankVersionStrategyV001.VERSION);
+    assertThat(factory.getVersions()).containsExactly(ThankVersionStrategyV002.VERSION);
+    assertThat(factory.getLatestVersion()).isEqualTo(ThankVersionStrategyV002.VERSION);
     ThankVersionStrategy strategy = factory.getLatestStrategy();
-    assertThat(strategy).isNotNull().isInstanceOf(ThankVersionStrategyV001.class);
-    assertThat(strategy.getVersion()).isEqualTo(ThankVersionStrategyV001.VERSION);
+    assertThat(strategy).isNotNull().isInstanceOf(ThankVersionStrategyV002.class);
+    assertThat(strategy.getVersion()).isEqualTo(ThankVersionStrategyV002.VERSION);
     assertThat(strategy.getReader()).isInstanceOf(ThankReaderImpl.class);
     assertThat(strategy.getWriter()).isInstanceOf(ThankWriterImpl.class);
     assertThat(strategy.getSigner()).isInstanceOf(ThankTokenSignerImpl.class);
