@@ -1,11 +1,11 @@
 package io.github.thanktoken.core.api.header;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 import io.github.thanktoken.core.api.ThankSignedObject;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.reference.ThankTokenReference;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
@@ -27,9 +27,9 @@ public interface ThankHeader extends ThankSignedObject, ThankTokenReference {
   /**
    * @see ThankToken#getValue()
    *
-   * @return the fixed amount of thanks of which this {@link ThankToken} was created.
+   * @return the fixed amount of which this {@link ThankToken} was created.
    */
-  BigDecimal getAmount();
+  ThankValue getAmount();
 
   /**
    * @return the {@link ThankCurrency} of this {@link ThankToken}.

@@ -12,6 +12,7 @@ import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.ThankTokenBean;
 import io.github.thanktoken.core.api.config.ThankConfiguration;
 import io.github.thanktoken.core.api.currency.Gradido;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankHeaderBean;
 import io.github.thanktoken.core.api.header.ThankTarget;
@@ -35,7 +36,7 @@ public class ThankTokenReaderWriterTest extends Assertions implements ThankConst
 
   protected static final ThankVersion TEST_VERSION = ThankVersion.of(999);
 
-  private static final String EXPECTED_HEADER_STRING = "{\"v\":999,\"a\":100.00,\"c\":\"Gradido\",\"ts\":\"" + TEST_TIMESTAMP_STRING
+  private static final String EXPECTED_HEADER_STRING = "{\"v\":999,\"a\":\"100\",\"c\":\"Gradido\",\"ts\":\"" + TEST_TIMESTAMP_STRING
       + "\",\"loc\":\"DE/HE/412000\",\"tgt\":\"P3\",\"rcp\":\"" + TEST_PUBLIC_KEY_BASE64 + "\"}";
 
   private static final String EXPECTED_TX_STRING = "{\"ts\":\"" + TEST_TIMESTAMP_STRING + "\",\"rcp\":\"" + TEST_PUBLIC_KEY_BASE64 + "\",\"pp\":\""
@@ -138,7 +139,7 @@ public class ThankTokenReaderWriterTest extends Assertions implements ThankConst
 
     ThankHeaderBean header = new ThankHeaderBean();
     header.setVersion(TEST_VERSION);
-    header.setAmount(AMOUNT_0100_00);
+    header.setAmount(ThankValue.VALUE_100);
     header.setCurrency(Gradido.INSTANCE);
     header.setTimestamp(TEST_TIMESTAMP);
     header.setTarget(ThankTarget.PERSON_INCOME);

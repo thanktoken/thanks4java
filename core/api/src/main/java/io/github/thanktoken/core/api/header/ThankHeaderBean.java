@@ -1,12 +1,11 @@
 package io.github.thanktoken.core.api.header;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
 import io.github.thanktoken.core.api.currency.Thanks;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignature;
@@ -20,7 +19,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
 
   private ThankCurrency currency;
 
-  private BigDecimal amount;
+  private ThankValue amount;
 
   private Instant timestamp;
 
@@ -41,7 +40,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
 
     super();
     this.currency = Thanks.INSTANCE;
-    this.amount = BigDecimal.ZERO;
+    this.amount = ThankValue.ZERO;
     this.version = ThankVersion.of(1);
   }
 
@@ -96,17 +95,17 @@ public class ThankHeaderBean extends AbstractThankHeader {
   }
 
   @Override
-  public BigDecimal getAmount() {
+  public ThankValue getAmount() {
 
     return this.amount;
   }
 
   /**
-   * @param amount the new {@link #getAmount() amount}. Where suitable you may use of the predefined {@code AMOUNT_*}
-   *        constants such as {@link ThankConstants#AMOUNT_0000_01}.
+   * @param amount the new {@link #getAmount() amount}. Where suitable you may use of the predefined {@code VALUE_*}
+   *        constants such as {@link ThankValue#VALUE_0_01}.
    * @return this.
    */
-  public ThankHeaderBean setAmount(BigDecimal amount) {
+  public ThankHeaderBean setAmount(ThankValue amount) {
 
     this.amount = amount;
     return this;

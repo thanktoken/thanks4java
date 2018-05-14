@@ -1,10 +1,9 @@
 package io.github.thanktoken.core.api.currency;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankToken;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankTarget;
 
@@ -14,8 +13,8 @@ import io.github.thanktoken.core.api.header.ThankTarget;
  * {@link ThankToken token} you are permitted to vote for a particular decision like an election. In order to place your
  * vote you simply perform a transaction that transfers the token to the
  * {@link net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey public key} of the voting decision as
- * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient}. For a vote the actual decision is
- * publicly announced together with all available options and their
+ * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient}. For a vote the actual
+ * decision is publicly announced together with all available options and their
  * {@link net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey public keys} as well as the voting start and
  * deadline. Further, the voting tokens are created and distributed for all involved people. For anonymity the
  * assignment of tokens to people is done with random and additional exchange is possible to avoid traceability from
@@ -42,7 +41,7 @@ public class Vote extends ThankCurrency {
   }
 
   @Override
-  public BigDecimal getValue(ThankToken token, Instant time) {
+  public ThankValue getValue(ThankToken token, Instant time) {
 
     return token.getHeader().getAmount();
   }
@@ -54,9 +53,15 @@ public class Vote extends ThankCurrency {
   }
 
   @Override
-  protected void validateAmount(ThankHeader header) {
+  public ThankValue getMinAmount() {
 
-    validate(header, header.getAmount(), ThankConstants.AMOUNT_0001_00);
+    return ThankValue.VALUE_1;
+  }
+
+  @Override
+  public ThankValue getMaxAmount() {
+
+    return ThankValue.VALUE_1;
   }
 
   @Override

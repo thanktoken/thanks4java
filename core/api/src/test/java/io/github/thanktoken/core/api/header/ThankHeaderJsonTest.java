@@ -11,9 +11,9 @@ import javax.json.stream.JsonParser;
 import org.junit.Test;
 
 import io.github.thanktoken.core.api.TestCase;
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankDataObject;
 import io.github.thanktoken.core.api.currency.Thanks;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.field.ThankFieldMap;
 import io.github.thanktoken.core.api.io.ThankValueParser;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
@@ -33,7 +33,7 @@ public class ThankHeaderJsonTest extends TestCase {
     // given
     ThankHeaderBean token = new ThankHeaderBean();
     token.setVersion(ThankVersion.of(1));
-    token.setAmount(ThankConstants.AMOUNT_0000_10);
+    token.setAmount(ThankValue.VALUE_0_1);
     token.setCurrency(Thanks.INSTANCE);
     token.setTimestamp(TEST_TIMESTAMP);
     token.setLocation(TEST_LOCATION);
@@ -45,7 +45,7 @@ public class ThankHeaderJsonTest extends TestCase {
 
     // then
     assertThat(json).isEqualTo(
-        "{\"v\":1,\"a\":0.10,\"c\":\"Thanks\",\"ts\":\"20001231235959.0001\",\"loc\":\"DE/HE/412000\",\"tgt\":\"P3\",\"rcp\":\"AAECAwQFBgcICQoLDA0ODw==\"}");
+        "{\"v\":1,\"a\":\"0.1\",\"c\":\"Thanks\",\"ts\":\"20001231235959.0001\",\"loc\":\"DE/HE/412000\",\"tgt\":\"P3\",\"rcp\":\"AAECAwQFBgcICQoLDA0ODw==\"}");
   }
 
   /** Test of {@link ThankFieldMap#fromJson(JsonParser, ThankValueParser)} */
@@ -53,7 +53,7 @@ public class ThankHeaderJsonTest extends TestCase {
   public void testFromJson() {
 
     // given
-    String json = "{\"v\":1,\"a\":0.10,\"c\":\"Thanks\",\"ts\":\"20001231235959.0001\",\"loc\":\"DE/HE/412000\",\"tgt\":\"P3\",\"rcp\":\"AAECAwQFBgcICQoLDA0ODw==\"}";
+    String json = "{\"v\":1,\"a\":\"0.1\",\"c\":\"Thanks\",\"ts\":\"20001231235959.0001\",\"loc\":\"DE/HE/412000\",\"tgt\":\"P3\",\"rcp\":\"AAECAwQFBgcICQoLDA0ODw==\"}";
     JsonParser jsonParser = Json.createParser(new StringReader(json));
     ThankValueParser parser = new ThankValueParser() {
 
@@ -76,7 +76,7 @@ public class ThankHeaderJsonTest extends TestCase {
     // then
     assertThat(header).isNotNull();
     assertThat(header.getVersion()).isEqualTo(ThankVersion.of(1));
-    assertThat(header.getAmount()).isEqualTo(ThankConstants.AMOUNT_0000_10);
+    assertThat(header.getAmount()).isSameAs(ThankValue.VALUE_0_1);
     assertThat(header.getCurrency()).isEqualTo(Thanks.INSTANCE);
     assertThat(header.getTimestamp()).isEqualTo(TEST_TIMESTAMP);
     assertThat(header.getLocation()).isEqualTo(TEST_LOCATION);

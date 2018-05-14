@@ -1,6 +1,5 @@
 package io.github.thanktoken.core.impl.validate;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +7,7 @@ import java.util.Objects;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.config.ThankConfiguration;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankLocation;
 import io.github.thanktoken.core.api.header.ThankTarget;
@@ -109,11 +109,11 @@ public class ThankTokenValidatorImpl extends AbstractThankVersionStrategyContain
     ThankVersion version = header.getVersion();
     Objects.requireNonNull(version, "header.version");
     verifyVersion(version);
-    BigDecimal amount = header.getAmount();
+    ThankValue amount = header.getAmount();
     Objects.requireNonNull(amount, "header.amount");
-    if (amount.signum() != 1) {
-      throw new IllegalArgumentException("Amount has to be positive: " + amount);
-    }
+    // if (amount.getUnscaledValue() > MAX_AMOUNT) {
+    // throw new IllegalArgumentException("Amount has to be less than maximum: " + amount);
+    // }
     ThankCurrency currency = header.getCurrency();
     Objects.requireNonNull(currency, "header.currency");
     currency.validate(header);

@@ -1,6 +1,5 @@
 package io.github.thanktoken.core.api.header;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -8,10 +7,7 @@ import org.junit.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
-import io.github.thanktoken.core.api.header.ThankHeaderField;
-import io.github.thanktoken.core.api.header.ThankLocation;
-import io.github.thanktoken.core.api.header.ThankTarget;
-import io.github.thanktoken.core.api.header.ThankVersion;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 
 /**
  * Test of {@link ThankHeaderField}.
@@ -36,7 +32,7 @@ public class ThankHeaderFieldTest extends TestCase {
   @Test
   public void testAmount() {
 
-    checkField(ThankHeaderField.AMOUNT, "amount", BigDecimal.class);
+    checkField(ThankHeaderField.AMOUNT, "amount", ThankValue.class);
   }
 
   /** Test of {@link ThankHeaderField#TIMESTAMP}. */

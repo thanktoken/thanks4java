@@ -11,9 +11,9 @@ import io.github.thanktoken.core.api.datatype.StringType;
 
 /**
  * Each {@link ThankToken} initially gets created for a specific
- * {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget() target} that defines the {@link #getType() type} and
- * {@link #getLevel() level}. This {@link ThankTarget target} is the initial purpose the {@link ThankToken} has to be
- * spent for in order to become regular money.
+ * {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget() target} that defines the {@link #getType() type}
+ * and {@link #getLevel() level}. This {@link ThankTarget target} is the initial purpose the {@link ThankToken} has to
+ * be spent for in order to become regular money.
  *
  * @see io.github.thanktoken.core.api.header.ThankHeader#getTarget()
  */
@@ -21,12 +21,13 @@ public class ThankTarget extends StringType {
 
   /**
    * The {@link #getType() type} for money that has initially been created for an individual person. A
-   * {@link io.github.thanktoken.core.api.ThankToken} {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget() with}
-   * this target is only valid, if it has passed all the way down to last {@link ThankLocation#getSegment(int) location
-   * segment} and then to the according person. As each person can verify his personal income it will easily be assured
-   * that enough money gets created. As anybody can verify the total money that gets created it can also be ensured that
-   * only the correct amount of money is produced. This amount simply depends on the number of people registered in the
-   * according {@link ThankLocation location}, what can also be verified.<br>
+   * {@link io.github.thanktoken.core.api.ThankToken}
+   * {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget() with} this target is only valid, if it has
+   * passed all the way down to last {@link ThankLocation#getSegment(int) location segment} and then to the according
+   * person. As each person can verify his personal income it will easily be assured that enough money gets created. As
+   * anybody can verify the total money that gets created it can also be ensured that only the correct amount of money
+   * is produced. This amount simply depends on the number of people registered in the according {@link ThankLocation
+   * location}, what can also be verified.<br>
    * <b>ATTENTION:</b> The {@link #getLevel() level} of this type always has to be {@code 0} by definition.<br>
    * <br>
    * Each person is valuable and hence gets an equal basic income. However, the purchasing power of the money depends on
@@ -47,13 +48,14 @@ public class ThankTarget extends StringType {
    * have to be taken away from people working for money. Hence, no laws are needed for taxes, no people need to control
    * tax payment and nobody can be fined for not paying taxes. All the saved potential can be used for jobs that provide
    * more value to the community.<br>
-   * A {@link io.github.thanktoken.core.api.ThankToken} {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget()
-   * with} this target is only valid, if it has passed all the way down to last {@link ThankLocation#getSegment(int)
-   * location segment}, from there to a {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient}
-   * published by the corresponding government and then to any public
-   * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient} (a company that earned the tax for
-   * providing a service). This way it gets transparent where the government spent the money. As the people represented
-   * by the according government actively get involved (e.g. by via
+   * A {@link io.github.thanktoken.core.api.ThankToken}
+   * {@link io.github.thanktoken.core.api.header.ThankHeader#getTarget() with} this target is only valid, if it has
+   * passed all the way down to last {@link ThankLocation#getSegment(int) location segment}, from there to a
+   * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient} published by the
+   * corresponding government and then to any public
+   * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient} (a company that earned
+   * the tax for providing a service). This way it gets transparent where the government spent the money. As the people
+   * represented by the according government actively get involved (e.g. by via
    * {@link io.github.thanktoken.core.api.currency.Vote}s) that the money is supposed to be spent for reasonable and
    * mainly regional things.
    */
@@ -64,9 +66,9 @@ public class ThankTarget extends StringType {
    * created as a fund for sustainability (mainly ecologic invests for the enviroment but also preservation order) on
    * the according {@link ThankTarget#getLevel() level}. This kind of money is like {@link #TYPE_COMMUNITY community
    * income} but has the requirement that it only gets valid money if the government transfers it to a public
-   * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient} that is certified as a company
-   * serving the environment or other sustainable goals. There has to be an institute controlling such companies and
-   * verifying that they spend this money solely to deal sustainability (e.g. to growing trees, renaturation, rescue
+   * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getRecipient() recipient} that is certified as a
+   * company serving the environment or other sustainable goals. There has to be an institute controlling such companies
+   * and verifying that they spend this money solely to deal sustainability (e.g. to growing trees, renaturation, rescue
    * endangered species, preserve historic monuments, etc.). Public reports have to be published about all these
    * activities and all the money that has been spent. There will be no more argument anymore like "there is no money
    * left to save the environment". If there are not enough projects available to spend the money from this fund, it has
@@ -121,7 +123,7 @@ public class ThankTarget extends StringType {
    *
    * @param value - see {@link #getValue()}.
    */
-  public ThankTarget(String value) {
+  protected ThankTarget(String value) {
 
     super(value);
     int length = value.length();

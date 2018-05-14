@@ -10,9 +10,12 @@ import java.util.Set;
 import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.datatype.StringType;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
+import io.github.thanktoken.core.api.header.ThankHeaderField;
 import io.github.thanktoken.core.api.header.ThankTarget;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
+import net.sf.mmm.util.exception.api.ValueOutOfRangeException;
 
 /**
  * A {@link ThankCurrency} represents the {@link ThankHeader#getCurrency() currency} of a {@link ThankToken}.
@@ -44,9 +47,9 @@ public abstract class ThankCurrency extends StringType {
    * @param token the {@link ThankToken} to calculate the value of. Shall have this {@link ThankCurrency} as
    *        {@link ThankHeader#getCurrency() currency}.
    * @param time the {@link Instant} for the point in time for which the value shall be calculated.
-   * @return the {@link BigDecimal} representing the value of the {@link ThankToken} for the given {@link Instant}.
+   * @return the {@link ThankValue} representing the value of the {@link ThankToken} for the given {@link Instant}.
    */
-  public abstract BigDecimal getValue(ThankToken token, Instant time);
+  public abstract ThankValue getValue(ThankToken token, Instant time);
 
   /**
    * @param header the {@link ThankHeader} to validate. Only validates currency specific aspects such as
@@ -109,6 +112,7 @@ public abstract class ThankCurrency extends StringType {
    */
   protected void validateAmount(ThankHeader header) {
 
+    ValueOutOfRangeException.checkRange(header.getAmount(), getMinAmount(), getMaxAmount(), ThankHeaderField.AMOUNT.getName());
   }
 
   /**
@@ -139,9 +143,9 @@ public abstract class ThankCurrency extends StringType {
    * @param time the {@link Instant} for the point in time for which the value shall be calculated.
    * @param dailyFactor the percentage factor as interest rate per day (e.g. {@code 0.9995} for a daily demurage of
    *        {@code 0.05%}).
-   * @return the {@link BigDecimal} representing the value of the {@link ThankToken} for the given {@link Instant}.
+   * @return the {@link ThankValue} representing the value of the {@link ThankToken} for the given {@link Instant}.
    */
-  protected BigDecimal getValue(ThankToken token, Instant time, BigDecimal dailyFactor) {
+  protected ThankValue getValue(ThankToken token, Instant time, BigDecimal dailyFactor) {
 
     Objects.requireNonNull(token, "token");
     Objects.requireNonNull(time, "time");
@@ -153,13 +157,32 @@ public abstract class ThankCurrency extends StringType {
     // int precision is sufficient for ~5 million (5.883.516) years
     int ageInDays = (int) ChronoUnit.DAYS.between(creationDay, targetDay);
     BigDecimal factor = dailyFactor.pow(ageInDays);
-    BigDecimal value = header.getAmount().multiply(factor);
-    return value;
+    BigDecimal value = header.getAmount().bigDecimalValue().multiply(factor);
+    return ThankValue.of(value);
   }
 
   @Override
   public int getMaxLength() {
 
     return MAX_LENGTH;
+  }
+
+  /**
+   * @return the absolute minimum {@link ThankHeader#getAmount() amount} for {@link ThankToken}s accepted by this
+   *         currency. In case you merge small and aged {@link ThankToken}s with low {@link ThankToken#getValue() value}
+   *         you need to collect at least this amount.
+   */
+  public ThankValue getMinAmount() {
+
+    return ThankValue.VALUE_0_01;
+  }
+
+  /**
+   * @return the absolute maximum {@link ThankHeader#getAmount() amount} for {@link ThankToken}s accepted by this
+   *         currency. You may not merge {@link ThankToken}s up to an amount larger than this maximum.
+   */
+  public ThankValue getMaxAmount() {
+
+    return ThankValue.VALUE_1000;
   }
 }

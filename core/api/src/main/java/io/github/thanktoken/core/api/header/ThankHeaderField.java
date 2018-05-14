@@ -1,12 +1,12 @@
 package io.github.thanktoken.core.api.header;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.field.ThankField;
 import io.github.thanktoken.core.api.field.ThankFieldMap;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
@@ -29,7 +29,7 @@ public class ThankHeaderField<T> extends ThankField<T, ThankHeader, ThankHeaderB
       ThankHeaderBean::setVersion);
 
   /** Identifies the {@link ThankHeader#getAmount() amount}. */
-  public static final ThankHeaderField<BigDecimal> AMOUNT = new ThankHeaderField<>("a", "amount", BigDecimal.class, ThankHeader::getAmount,
+  public static final ThankHeaderField<ThankValue> AMOUNT = new ThankHeaderField<>("a", "amount", ThankValue.class, ThankHeader::getAmount,
       ThankHeaderBean::setAmount);
 
   /** Identifies the {@link ThankHeader#getCurrency() currency}. */

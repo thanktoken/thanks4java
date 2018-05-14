@@ -9,9 +9,9 @@ import java.util.function.Function;
 import org.junit.Test;
 
 import io.github.thanktoken.core.api.TestCase;
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.currency.Thanks;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 
 /**
  * Test of {@link ThankHeaderBean}.
@@ -35,7 +35,7 @@ public class ThankHeaderBeanTest extends TestCase {
 
     List<ThankHeaderField<?>> fields = new ArrayList<>();
     checkField(ThankHeaderField.VERSION, ThankVersion.of(999), ThankHeaderBean::getVersion, ThankHeaderBean::setVersion, fields);
-    checkField(ThankHeaderField.AMOUNT, ThankConstants.AMOUNT_0001_00, ThankHeaderBean::getAmount, ThankHeaderBean::setAmount, fields);
+    checkField(ThankHeaderField.AMOUNT, ThankValue.VALUE_1, ThankHeaderBean::getAmount, ThankHeaderBean::setAmount, fields);
     checkField(ThankHeaderField.CURRENCY, Thanks.INSTANCE, ThankHeaderBean::getCurrency, ThankHeaderBean::setCurrency, fields);
     checkField(ThankHeaderField.TIMESTAMP, Instant.now(), ThankHeaderBean::getTimestamp, ThankHeaderBean::setTimestamp, fields);
     checkField(ThankHeaderField.LOCATION, TEST_LOCATION, ThankHeaderBean::getLocation, ThankHeaderBean::setLocation, fields);

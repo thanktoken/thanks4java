@@ -1,7 +1,5 @@
 package io.github.thanktoken.core.api.field;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,9 +14,9 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.ThankDataObject;
 import io.github.thanktoken.core.api.datatype.IntegerType;
+import io.github.thanktoken.core.api.datatype.TimestampHelper;
 import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankValueParser;
 import net.sf.mmm.util.exception.api.IllegalCaseException;
@@ -32,8 +30,6 @@ import net.sf.mmm.util.lang.api.BinaryType;
  * @param <B> generic type of the mutable bean owning this {@link ThankField}.
  */
 public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
-
-  private static final DecimalFormat FORMAT = new DecimalFormat("#.####");
 
   private final String id;
 
@@ -162,37 +158,11 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
     if (value instanceof BinaryType) {
       valueAsString = ((BinaryType) value).getBase64();
     } else if (value instanceof Instant) {
-      valueAsString = formatInstant((Instant) value);
-    } else if (value instanceof BigDecimal) {
-      valueAsString = formatBigDecimal((BigDecimal) value);
+      valueAsString = TimestampHelper.format((Instant) value);
     } else {
       valueAsString = value.toString();
     }
     return valueAsString;
-  }
-
-  /**
-   * @param value the {@link BigDecimal} value.
-   * @return the {@code value} formatted as {@link String}.
-   */
-  public static String formatBigDecimal(BigDecimal value) {
-
-    if (value == null) {
-      return "<null>";
-    }
-    return FORMAT.format(value);
-  }
-
-  /**
-   * @param value the {@link Instant} value.
-   * @return the {@code value} formatted as {@link String}.
-   */
-  public static String formatInstant(Instant value) {
-
-    if (value == null) {
-      return "<null>";
-    }
-    return ThankConstants.TIMESTAMP_FORMATTER.format(value);
   }
 
   /**
@@ -236,8 +206,6 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
         }
       }
       jsonGenerator.writeEnd();
-    } else if (value instanceof BigDecimal) {
-      jsonGenerator.write(this.id, (BigDecimal) value);
     } else {
       jsonGenerator.write(this.id, format(value));
     }
@@ -264,16 +232,14 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
     } else if (e == Event.VALUE_FALSE) {
       return Boolean.FALSE;
     } else if (e == Event.VALUE_NUMBER) {
-      if (this.type.equals(BigDecimal.class)) {
-        return jsonParser.getBigDecimal();
-      } else if (this.type.equals(Integer.class)) {
+      if (this.type.equals(Integer.class)) {
         return Integer.valueOf(jsonParser.getInt());
       } else if (this.type.equals(Long.class)) {
         return Long.valueOf(jsonParser.getLong());
       } else if (this.type.equals(ThankVersion.class)) {
         return ThankVersion.of(jsonParser.getInt());
       } else {
-        throw new IllegalCaseException(this.type.getName());
+        throw new IllegalCaseException(this.type.getName() + "(as JSON number)");
       }
     } else if (e == Event.VALUE_STRING) {
       return parser.parse(jsonParser.getString(), this.type);

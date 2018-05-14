@@ -2,11 +2,11 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api.io;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
-import io.github.thanktoken.core.api.ThankConstants;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
+import io.github.thanktoken.core.api.datatype.ThankValue;
+import io.github.thanktoken.core.api.datatype.TimestampHelper;
 import io.github.thanktoken.core.api.header.ThankLocation;
 import io.github.thanktoken.core.api.header.ThankTarget;
 import io.github.thanktoken.core.api.header.ThankVersion;
@@ -36,14 +36,14 @@ public interface ThankValueParser {
       result = ThankVersion.of(value);
     } else if (type == ThankCurrency.class) {
       result = ThankCurrency.of(value);
-    } else if (type == BigDecimal.class) {
-      result = new BigDecimal(value);
+    } else if (type == ThankValue.class) {
+      result = ThankValue.of(value);
     } else if (type == ThankLocation.class) {
       result = ThankLocation.of(value);
     } else if (type == ThankTarget.class) {
       result = ThankTarget.of(value);
     } else if (type == Instant.class) {
-      result = Instant.from(ThankConstants.TIMESTAMP_FORMATTER.parse(value));
+      result = TimestampHelper.parse(value);
     } else if (type == SecurityEncryptedData.class) {
       result = SecurityEncryptedData.ofBase64(value);
     } else if (type == SecuritySignature.class) {

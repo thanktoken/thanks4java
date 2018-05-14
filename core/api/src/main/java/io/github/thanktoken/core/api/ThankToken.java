@@ -2,12 +2,12 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
 import io.github.thanktoken.core.api.currency.ThankCurrency;
 import io.github.thanktoken.core.api.currency.Thanks;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankTarget;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
@@ -102,7 +102,7 @@ public interface ThankToken {
    *         currency}.
    * @see #getValue(Instant)
    */
-  default BigDecimal getValue() {
+  default ThankValue getValue() {
 
     return getValue(Instant.now());
   }
@@ -114,13 +114,14 @@ public interface ThankToken {
    *        {@link ThankHeader#getTimestamp() creation timestamp}.
    * @return the value of this {@link ThankToken} at the given {@link Instant}.
    */
-  default BigDecimal getValue(Instant time) {
+  default ThankValue getValue(Instant time) {
 
     ThankCurrency currency = getHeader().getCurrency();
     if (currency == null) {
       return null;
     }
     return currency.getValue(this, time);
+
   }
 
 }

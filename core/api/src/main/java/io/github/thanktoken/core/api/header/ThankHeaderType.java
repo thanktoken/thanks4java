@@ -1,10 +1,10 @@
 package io.github.thanktoken.core.api.header;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
+import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignature;
@@ -18,7 +18,7 @@ public class ThankHeaderType extends AbstractThankHeader {
 
   private final ThankCurrency currency;
 
-  private final BigDecimal amount;
+  private final ThankValue amount;
 
   private final Instant timestamp;
 
@@ -45,7 +45,7 @@ public class ThankHeaderType extends AbstractThankHeader {
    * @param recipient - see {@link #getRecipient()}.
    * @param signature - see {@link #getSignature()}.
    */
-  public ThankHeaderType(ThankVersion version, ThankCurrency currency, BigDecimal amount, Instant timestamp, ThankLocation location, ThankTarget target,
+  public ThankHeaderType(ThankVersion version, ThankCurrency currency, ThankValue amount, Instant timestamp, ThankLocation location, ThankTarget target,
       ThankTokenReferenceType reference, SecurityPublicKey recipient, SecuritySignature signature) {
 
     super();
@@ -92,7 +92,7 @@ public class ThankHeaderType extends AbstractThankHeader {
   }
 
   @Override
-  public BigDecimal getAmount() {
+  public ThankValue getAmount() {
 
     return this.amount;
   }

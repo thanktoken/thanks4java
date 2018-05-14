@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import io.github.thanktoken.core.api.ThankToken;
-import io.github.thanktoken.core.api.field.ThankField;
+import io.github.thanktoken.core.api.datatype.TimestampHelper;
 import io.github.thanktoken.core.api.header.ThankLocation;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
@@ -103,7 +103,7 @@ public class ThankTokenReferenceBean implements ThankTokenReference {
   @Override
   public String toString() {
 
-    return this.location + "@" + ThankField.formatInstant(this.timestamp) + '@' + this.creator.getHex();
+    return this.location + "@" + TimestampHelper.format(this.timestamp) + '@' + this.creator.getHex();
   }
 
 }
