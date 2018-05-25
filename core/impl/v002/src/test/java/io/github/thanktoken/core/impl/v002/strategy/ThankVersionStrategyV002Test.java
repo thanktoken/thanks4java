@@ -10,12 +10,11 @@ import io.github.thanktoken.core.impl.io.ThankReaderDelegate;
 import io.github.thanktoken.core.impl.io.ThankReaderImpl;
 import io.github.thanktoken.core.impl.io.ThankWriterDelegate;
 import io.github.thanktoken.core.impl.io.ThankWriterImpl;
-import io.github.thanktoken.core.impl.sign.ThankTokenSignerDelegate;
-import io.github.thanktoken.core.impl.sign.ThankTokenSignerImpl;
+import io.github.thanktoken.core.impl.sign.ThankSignerDelegate;
+import io.github.thanktoken.core.impl.sign.ThankSignerImpl;
 import io.github.thanktoken.core.impl.strategy.ThankGlobalStrategyImpl;
-import io.github.thanktoken.core.impl.v002.strategy.ThankVersionStrategyV002;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorDelegate;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorImpl;
+import io.github.thanktoken.core.impl.validate.ThankValidatorDelegate;
+import io.github.thanktoken.core.impl.validate.ThankValidatorImpl;
 
 /**
  * Test of {@link ThankGlobalStrategy} and {@link ThankStrategyFactory#getGlobalStrategy()}.
@@ -32,8 +31,8 @@ public class ThankVersionStrategyV002Test extends Assertions {
     assertThat(globalStrategy).isNotNull().isInstanceOf(ThankGlobalStrategyImpl.class);
     assertThat(globalStrategy.getReader()).isNotNull().isSameAs(ThankReaderDelegate.get());
     assertThat(globalStrategy.getWriter()).isNotNull().isSameAs(ThankWriterDelegate.get());
-    assertThat(globalStrategy.getSigner()).isNotNull().isSameAs(ThankTokenSignerDelegate.get());
-    assertThat(globalStrategy.getValidator()).isNotNull().isSameAs(ThankTokenValidatorDelegate.get());
+    assertThat(globalStrategy.getSigner()).isNotNull().isSameAs(ThankSignerDelegate.get());
+    assertThat(globalStrategy.getValidator()).isNotNull().isSameAs(ThankValidatorDelegate.get());
   }
 
   /**
@@ -50,8 +49,8 @@ public class ThankVersionStrategyV002Test extends Assertions {
     assertThat(strategy.getVersion()).isEqualTo(ThankVersionStrategyV002.VERSION);
     assertThat(strategy.getReader()).isInstanceOf(ThankReaderImpl.class);
     assertThat(strategy.getWriter()).isInstanceOf(ThankWriterImpl.class);
-    assertThat(strategy.getSigner()).isInstanceOf(ThankTokenSignerImpl.class);
-    assertThat(strategy.getValidator()).isInstanceOf(ThankTokenValidatorImpl.class);
+    assertThat(strategy.getSigner()).isInstanceOf(ThankSignerImpl.class);
+    assertThat(strategy.getValidator()).isInstanceOf(ThankValidatorImpl.class);
   }
 
 }

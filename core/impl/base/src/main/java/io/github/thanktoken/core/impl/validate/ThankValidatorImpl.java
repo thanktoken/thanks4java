@@ -15,9 +15,9 @@ import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.identity.ThankIdentity;
 import io.github.thanktoken.core.api.identity.ThankIdentityType;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
-import io.github.thanktoken.core.api.validate.ThankTokenValidationException;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.validate.ThankValidationException;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategy;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategyContainer;
 import net.sf.mmm.security.api.hash.SecurityHashCreator;
@@ -27,16 +27,16 @@ import net.sf.mmm.security.api.sign.SecuritySignatureFactory;
 import net.sf.mmm.security.api.sign.SecuritySignatureVerifier;
 
 /**
- * Implementation of {@link ThankTokenValidator}.
+ * Implementation of {@link ThankValidator}.
  */
-public class ThankTokenValidatorImpl extends AbstractThankVersionStrategyContainer implements ThankTokenValidator {
+public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer implements ThankValidator {
 
   /**
    * The constructor.
    *
    * @param strategy the {@link AbstractThankVersionStrategy}.
    */
-  public ThankTokenValidatorImpl(AbstractThankVersionStrategy strategy) {
+  public ThankValidatorImpl(AbstractThankVersionStrategy strategy) {
 
     super(strategy);
   }
@@ -51,12 +51,12 @@ public class ThankTokenValidatorImpl extends AbstractThankVersionStrategyContain
       byte[] hash = validateHeader(token.getHeader(), mode, hashCreator);
       validateTransactions(token, mode, hash, hashCreator);
     } catch (Exception e) {
-      throw new ThankTokenValidationException(e, token);
+      throw new ThankValidationException(e, token);
     }
   }
 
   @Override
-  public void validateHeader(ThankToken token, ThankValidationMode mode) throws ThankTokenValidationException {
+  public void validateHeader(ThankToken token, ThankValidationMode mode) {
 
     try {
       Objects.requireNonNull(token, "token");
@@ -64,12 +64,12 @@ public class ThankTokenValidatorImpl extends AbstractThankVersionStrategyContain
       SecurityHashCreator hashCreator = configuration.getHashFactory().newHashCreator();
       validateHeader(token.getHeader(), mode, hashCreator);
     } catch (Exception e) {
-      throw new ThankTokenValidationException(e, token);
+      throw new ThankValidationException(e, token);
     }
   }
 
   @Override
-  public void validateTransaction(ThankToken token, ThankTransaction tx, ThankValidationMode mode) throws ThankTokenValidationException {
+  public void validateTransaction(ThankToken token, ThankTransaction tx, ThankValidationMode mode) {
 
     try {
       Objects.requireNonNull(token, "token");
@@ -100,7 +100,7 @@ public class ThankTokenValidatorImpl extends AbstractThankVersionStrategyContain
       validateTransaction(tx, index, previousOwner, mode, token, timestamp, hash, hashCreator);
 
     } catch (Exception e) {
-      throw new ThankTokenValidationException(e, token);
+      throw new ThankValidationException(e, token);
     }
   }
 

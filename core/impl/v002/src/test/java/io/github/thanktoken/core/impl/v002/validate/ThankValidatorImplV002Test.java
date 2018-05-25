@@ -9,18 +9,18 @@ import io.github.thanktoken.core.api.identity.ThankIdentity;
 import io.github.thanktoken.core.api.identity.ThankIdentityBean;
 import io.github.thanktoken.core.api.identity.ThankIdentityProvider;
 import io.github.thanktoken.core.api.identity.ThankIdentityType;
-import io.github.thanktoken.core.api.validate.ThankTokenValidationException;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.validate.ThankValidationException;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 import io.github.thanktoken.core.impl.v002.TestKeyPairsV002;
 import io.github.thanktoken.core.impl.v002.strategy.ThankVersionStrategyV002;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorImpl;
+import io.github.thanktoken.core.impl.validate.ThankValidatorImpl;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
 /**
- * Test of {@link ThankTokenValidatorImpl}.
+ * Test of {@link ThankValidatorImpl}.
  */
-public class ThankTokenValidatorImplV002Test extends Assertions implements TestKeyPairsV002 {
+public class ThankValidatorImplV002Test extends Assertions implements TestKeyPairsV002 {
 
   private static final ThankVersionStrategyV002 STRATEGY = new ThankVersionStrategyV002(new TestIdentityProvider());
 
@@ -32,57 +32,57 @@ public class ThankTokenValidatorImplV002Test extends Assertions implements TestK
   private static final ThankToken TEST_TOKEN_P3_WITHOUT_TX = new ThankTokenBean(TEST_TOKEN_P3_WITH_TX.getHeader());
 
   /**
-   * Tests {@link ThankTokenValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with
+   * Tests {@link ThankValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with
    * {@code null} as token.
    */
-  @Test(expected = ThankTokenValidationException.class)
+  @Test(expected = ThankValidationException.class)
   public void testInvalidTokenNull() {
 
     STRATEGY.getValidator().validate(null, ThankValidationMode.MINIMAL);
   }
 
   /**
-   * Tests {@link ThankTokenValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with
+   * Tests {@link ThankValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with
    * {@code null} as {@link ThankValidationMode}.
    */
-  @Test(expected = ThankTokenValidationException.class)
+  @Test(expected = ThankValidationException.class)
   public void testInvalidModeNull() {
 
     STRATEGY.getValidator().validate(TEST_TOKEN_P3_WITHOUT_TX, null);
   }
 
   /**
-   * Tests {@link ThankTokenValidator#validate(ThankToken, ThankValidationMode)} with a valid {@link ThankToken}s and
+   * Tests {@link ThankValidator#validate(ThankToken, ThankValidationMode)} with a valid {@link ThankToken}s and
    * {@link ThankValidationMode#MINIMAL}.
    */
   @Test
   public void testValidMinimal() {
 
-    ThankTokenValidator validator = STRATEGY.getValidator();
+    ThankValidator validator = STRATEGY.getValidator();
     validator.validate(TEST_TOKEN_P3_WITHOUT_TX, ThankValidationMode.MINIMAL);
     validator.validate(TEST_TOKEN_P3_WITH_TX, ThankValidationMode.MINIMAL);
   }
 
   /**
-   * Tests {@link ThankTokenValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with with
+   * Tests {@link ThankValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with with
    * valid {@link ThankToken}s and {@link ThankValidationMode#MINIMAL}.
    */
   @Test
   public void testValidFull() {
 
-    ThankTokenValidator validator = STRATEGY.getValidator();
+    ThankValidator validator = STRATEGY.getValidator();
     validator.validate(TEST_TOKEN_P3_WITHOUT_TX, ThankValidationMode.FULL);
     validator.validate(TEST_TOKEN_P3_WITH_TX, ThankValidationMode.FULL);
   }
 
   /**
-   * Tests {@link ThankTokenValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with
-   * valid {@link ThankToken}s and {@link ThankValidationMode#OFFLINE}.
+   * Tests {@link ThankValidator#validate(io.github.thanktoken.core.api.ThankToken, ThankValidationMode)} with valid
+   * {@link ThankToken}s and {@link ThankValidationMode#OFFLINE}.
    */
   @Test
   public void testValidOffline() {
 
-    ThankTokenValidator validator = STRATEGY.getValidator();
+    ThankValidator validator = STRATEGY.getValidator();
     validator.validate(TEST_TOKEN_P3_WITHOUT_TX, ThankValidationMode.OFFLINE);
     validator.validate(TEST_TOKEN_P3_WITH_TX, ThankValidationMode.OFFLINE);
   }

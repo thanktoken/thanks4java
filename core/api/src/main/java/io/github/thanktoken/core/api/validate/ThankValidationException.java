@@ -3,11 +3,11 @@ package io.github.thanktoken.core.api.validate;
 import io.github.thanktoken.core.api.ThankToken;
 
 /**
- * An {@link ThankTokenValidationException} is thrown if a {@link ThankToken} is invalid.
+ * An {@link ThankValidationException} is thrown if a {@link ThankToken} is invalid.
  *
- * @see ThankTokenValidator#validate(ThankToken, ThankValidationMode)
+ * @see ThankValidator#validate(ThankToken, ThankValidationMode)
  */
-public class ThankTokenValidationException extends RuntimeException {
+public class ThankValidationException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class ThankTokenValidationException extends RuntimeException {
    * @param cause is the exception that caused this error.
    * @param token the invalid {@link ThankToken}.
    */
-  public ThankTokenValidationException(Throwable cause, ThankToken token) {
+  public ThankValidationException(Throwable cause, ThankToken token) {
 
     super(createMessage(token, cause), cause);
   }

@@ -7,8 +7,8 @@ import io.github.thanktoken.core.api.strategy.ThankGlobalStrategy;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.impl.io.ThankReaderDelegate;
 import io.github.thanktoken.core.impl.io.ThankWriterDelegate;
-import io.github.thanktoken.core.impl.sign.ThankTokenSignerDelegate;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorDelegate;
+import io.github.thanktoken.core.impl.sign.ThankSignerDelegate;
+import io.github.thanktoken.core.impl.validate.ThankValidatorDelegate;
 
 /**
  * Test of {@link ThankGlobalStrategy} and {@link ThankStrategyFactory#getGlobalStrategy()}.
@@ -25,8 +25,8 @@ public class ThankGlobalStrategyTest extends Assertions {
     assertThat(globalStrategy).isNotNull().isInstanceOf(ThankGlobalStrategyImpl.class);
     assertThat(globalStrategy.getReader()).isNotNull().isSameAs(ThankReaderDelegate.get());
     assertThat(globalStrategy.getWriter()).isNotNull().isSameAs(ThankWriterDelegate.get());
-    assertThat(globalStrategy.getSigner()).isNotNull().isSameAs(ThankTokenSignerDelegate.get());
-    assertThat(globalStrategy.getValidator()).isNotNull().isSameAs(ThankTokenValidatorDelegate.get());
+    assertThat(globalStrategy.getSigner()).isNotNull().isSameAs(ThankSignerDelegate.get());
+    assertThat(globalStrategy.getValidator()).isNotNull().isSameAs(ThankValidatorDelegate.get());
   }
 
 }

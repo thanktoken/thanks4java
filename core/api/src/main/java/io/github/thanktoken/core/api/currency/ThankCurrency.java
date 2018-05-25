@@ -54,7 +54,7 @@ public abstract class ThankCurrency extends StringType {
   /**
    * @param header the {@link ThankHeader} to validate. Only validates currency specific aspects such as
    *        {@link ThankHeader#getAmount() amount} or {@link ThankHeader#getTarget() target}.
-   * @see io.github.thanktoken.core.api.validate.ThankTokenValidator
+   * @see io.github.thanktoken.core.api.validate.ThankValidator
    */
   public void validate(ThankHeader header) {
 

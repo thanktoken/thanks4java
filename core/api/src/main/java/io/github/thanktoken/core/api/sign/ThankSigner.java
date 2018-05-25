@@ -9,7 +9,7 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
 /**
  * Interface for creating a {@link SecuritySignature} for a {@link ThankToken}.
  */
-public interface ThankTokenSigner {
+public interface ThankSigner {
 
   /**
    * Creates the {@link SecuritySignature} for the given {@link ThankToken} and the given new but yet unsigned

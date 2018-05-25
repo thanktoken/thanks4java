@@ -1,7 +1,7 @@
 package io.github.thanktoken.core.api.transaction;
 
 /**
- * This is the implementation of {@link ThankTransaction} as Java bean.
+ * This is the abstract base implementation of {@link ThankTransaction}.
  */
 public abstract class AbstractThankTransaction implements ThankTransaction {
 

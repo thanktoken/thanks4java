@@ -5,8 +5,8 @@ import io.github.thanktoken.core.api.config.ThankConfiguration;
 import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankReader;
 import io.github.thanktoken.core.api.io.ThankWriter;
-import io.github.thanktoken.core.api.sign.ThankTokenSigner;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.sign.ThankSigner;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 
 /**
  * This is the interface for a strategy that bridges to the implementation of particular {@link ThankVersion}(s).
@@ -19,14 +19,14 @@ public interface ThankStrategy {
   ThankConfiguration getConfiguration();
 
   /**
-   * @return the {@link ThankTokenSigner} used to sign a {@link ThankToken}.
+   * @return the {@link ThankSigner} used to sign a {@link ThankToken}.
    */
-  ThankTokenSigner getSigner();
+  ThankSigner getSigner();
 
   /**
-   * @return the {@link ThankTokenSigner} used to validate a {@link ThankToken}.
+   * @return the {@link ThankSigner} used to validate a {@link ThankToken}.
    */
-  ThankTokenValidator getValidator();
+  ThankValidator getValidator();
 
   /**
    * @return the {@link ThankReader} used to read a {@link ThankToken}.

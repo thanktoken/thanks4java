@@ -7,7 +7,7 @@ import io.github.thanktoken.core.api.identity.ThankIdentityType;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 
 /**
- * Represents the mode for {@link ThankTokenValidator#validate(ThankToken, ThankValidationMode) validation}. Each
+ * Represents the mode for {@link ThankValidator#validate(ThankToken, ThankValidationMode) validation}. Each
  * {@link io.github.thanktoken.core.api.ThankToken} has a {@link io.github.thanktoken.core.api.ThankToken#getHeader()
  * header} containing a {@link io.github.thanktoken.core.api.header.ThankLocation location} and a
  * {@link io.github.thanktoken.core.api.header.ThankTarget target} it is initially created for. Also a

@@ -11,7 +11,7 @@ import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankTarget;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 
 /**
  * A {@link ThankToken} represents an atomic unit of value. It has the following goals and principles:
@@ -48,7 +48,7 @@ import io.github.thanktoken.core.api.validate.ThankTokenValidator;
  * However, this so far does not solve the <em>double spending problem</em> solved by block-chains. Therefore,
  * {@link ThankToken}s are tracked in a distributed <em>public storage</em> in the cloud to solve this and prevent
  * somebody from transferring the same {@link ThankToken} to two different people. Such action is called <em>split</em>
- * and is illegal. It will be detected during the {@link ThankTokenValidator validation} in the public store. In such
+ * and is illegal. It will be detected during the {@link ThankValidator validation} in the public store. In such
  * case the {@link ThankToken} gets blocked and banned for further transactions for a predefined period (e.g. two
  * days).<br>
  * The advantages over regular block-chains are as following:

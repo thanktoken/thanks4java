@@ -5,13 +5,13 @@ import io.github.thanktoken.core.api.config.ThankConfiguration;
 import io.github.thanktoken.core.api.identity.ThankIdentityProvider;
 import io.github.thanktoken.core.api.io.ThankReader;
 import io.github.thanktoken.core.api.io.ThankWriter;
-import io.github.thanktoken.core.api.sign.ThankTokenSigner;
+import io.github.thanktoken.core.api.sign.ThankSigner;
 import io.github.thanktoken.core.api.strategy.ThankVersionStrategy;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 import io.github.thanktoken.core.impl.io.ThankReaderImpl;
 import io.github.thanktoken.core.impl.io.ThankWriterImpl;
-import io.github.thanktoken.core.impl.sign.ThankTokenSignerImpl;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorImpl;
+import io.github.thanktoken.core.impl.sign.ThankSignerImpl;
+import io.github.thanktoken.core.impl.validate.ThankValidatorImpl;
 
 /**
  * The abstract base implementation of {@link ThankVersionStrategy}.
@@ -26,9 +26,9 @@ public abstract class AbstractThankVersionStrategy implements ThankVersionStrate
 
   private ThankWriter writer;
 
-  private ThankTokenSigner signer;
+  private ThankSigner signer;
 
-  private ThankTokenValidator validator;
+  private ThankValidator validator;
 
   /**
    * The constructor.
@@ -84,7 +84,7 @@ public abstract class AbstractThankVersionStrategy implements ThankVersionStrate
   }
 
   @Override
-  public ThankTokenSigner getSigner() {
+  public ThankSigner getSigner() {
 
     if (this.signer == null) {
       this.signer = createSigner();
@@ -95,13 +95,13 @@ public abstract class AbstractThankVersionStrategy implements ThankVersionStrate
   /**
    * @return the new {@link #getSigner() signer}.
    */
-  protected ThankTokenSigner createSigner() {
+  protected ThankSigner createSigner() {
 
-    return new ThankTokenSignerImpl(this);
+    return new ThankSignerImpl(this);
   }
 
   @Override
-  public ThankTokenValidator getValidator() {
+  public ThankValidator getValidator() {
 
     if (this.validator == null) {
       this.validator = createValidator();
@@ -120,9 +120,9 @@ public abstract class AbstractThankVersionStrategy implements ThankVersionStrate
   /**
    * @return the new {@link #getValidator() validator}.
    */
-  protected ThankTokenValidator createValidator() {
+  protected ThankValidator createValidator() {
 
-    return new ThankTokenValidatorImpl(this);
+    return new ThankValidatorImpl(this);
   }
 
 }

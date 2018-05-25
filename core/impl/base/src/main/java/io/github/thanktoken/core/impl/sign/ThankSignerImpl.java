@@ -6,7 +6,7 @@ import java.util.Objects;
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.header.ThankHeaderField;
-import io.github.thanktoken.core.api.sign.ThankTokenSigner;
+import io.github.thanktoken.core.api.sign.ThankSigner;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import io.github.thanktoken.core.api.transaction.ThankTransactionField;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategy;
@@ -17,16 +17,16 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
 import net.sf.mmm.security.api.sign.SecuritySignatureSigner;
 
 /**
- * Implementation of {@link ThankTokenSigner}.
+ * Implementation of {@link ThankSigner}.
  */
-public class ThankTokenSignerImpl extends AbstractThankVersionStrategyContainer implements ThankTokenSigner {
+public class ThankSignerImpl extends AbstractThankVersionStrategyContainer implements ThankSigner {
 
   /**
    * The constructor.
    *
    * @param strategy the {@link AbstractThankVersionStrategy}.
    */
-  public ThankTokenSignerImpl(AbstractThankVersionStrategy strategy) {
+  public ThankSignerImpl(AbstractThankVersionStrategy strategy) {
 
     super(strategy);
   }

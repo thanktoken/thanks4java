@@ -3,14 +3,14 @@ package io.github.thanktoken.core.impl.strategy;
 import io.github.thanktoken.core.api.config.ThankConfiguration;
 import io.github.thanktoken.core.api.io.ThankReader;
 import io.github.thanktoken.core.api.io.ThankWriter;
-import io.github.thanktoken.core.api.sign.ThankTokenSigner;
+import io.github.thanktoken.core.api.sign.ThankSigner;
 import io.github.thanktoken.core.api.strategy.ThankGlobalStrategy;
-import io.github.thanktoken.core.api.validate.ThankTokenValidator;
+import io.github.thanktoken.core.api.validate.ThankValidator;
 import io.github.thanktoken.core.impl.config.ThankConfigurationImpl;
 import io.github.thanktoken.core.impl.io.ThankReaderDelegate;
 import io.github.thanktoken.core.impl.io.ThankWriterDelegate;
-import io.github.thanktoken.core.impl.sign.ThankTokenSignerDelegate;
-import io.github.thanktoken.core.impl.validate.ThankTokenValidatorDelegate;
+import io.github.thanktoken.core.impl.sign.ThankSignerDelegate;
+import io.github.thanktoken.core.impl.validate.ThankValidatorDelegate;
 
 /**
  * Implementation of {@link ThankGlobalStrategy}.
@@ -35,15 +35,15 @@ public class ThankGlobalStrategyImpl implements ThankGlobalStrategy {
   }
 
   @Override
-  public ThankTokenSigner getSigner() {
+  public ThankSigner getSigner() {
 
-    return ThankTokenSignerDelegate.get();
+    return ThankSignerDelegate.get();
   }
 
   @Override
-  public ThankTokenValidator getValidator() {
+  public ThankValidator getValidator() {
 
-    return ThankTokenValidatorDelegate.get();
+    return ThankValidatorDelegate.get();
   }
 
   @Override
