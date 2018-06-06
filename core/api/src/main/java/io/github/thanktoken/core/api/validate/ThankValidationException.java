@@ -1,5 +1,6 @@
 package io.github.thanktoken.core.api.validate;
 
+import io.github.thanktoken.core.api.ThankDataObject;
 import io.github.thanktoken.core.api.ThankToken;
 
 /**
@@ -15,17 +16,17 @@ public class ThankValidationException extends RuntimeException {
    * The constructor.
    *
    * @param cause is the exception that caused this error.
-   * @param token the invalid {@link ThankToken}.
+   * @param data the invalid {@link ThankDataObject}.
    */
-  public ThankValidationException(Throwable cause, ThankToken token) {
+  public ThankValidationException(Throwable cause, ThankDataObject data) {
 
-    super(createMessage(token, cause), cause);
+    super(createMessage(data, cause), cause);
   }
 
-  private static String createMessage(ThankToken token, Throwable cause) {
+  private static String createMessage(ThankDataObject data, Throwable cause) {
 
-    StringBuilder sb = new StringBuilder("Invalid token ");
-    sb.append(token);
+    StringBuilder sb = new StringBuilder("Invalid data ");
+    sb.append(data);
     String message = null;
     if (cause != null) {
       message = cause.getMessage();

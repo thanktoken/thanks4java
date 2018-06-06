@@ -4,8 +4,8 @@ import java.time.Instant;
 import java.util.Objects;
 
 import io.github.thanktoken.core.api.ThankToken;
-import io.github.thanktoken.core.api.datatype.TimestampHelper;
 import io.github.thanktoken.core.api.header.ThankLocation;
+import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankValueParser;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
@@ -13,6 +13,14 @@ import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
  * Identifier that references a {@link ThankToken}.
  */
 public class ThankTokenReferenceType implements ThankTokenReference {
+
+  private static final char VERSION_SUFFIX = '$';
+
+  private static final char LOCATION_SUFFIX = '@';
+
+  private static final char TIMESTAMP_SUFFIX = '~';
+
+  private final ThankVersion version;
 
   private final ThankLocation location;
 
@@ -23,16 +31,18 @@ public class ThankTokenReferenceType implements ThankTokenReference {
   /**
    * The constructor.
    *
+   * @param version the {@link #getVersion() version}.
    * @param location the {@link #getLocation() location}.
    * @param timestamp the {@link #getTimestamp() timestamp}.
    * @param recipient the {@link #getRecipient() creator}.
    */
-  public ThankTokenReferenceType(ThankLocation location, Instant timestamp, SecurityPublicKey recipient) {
+  public ThankTokenReferenceType(ThankVersion version, ThankLocation location, Instant timestamp, SecurityPublicKey recipient) {
 
     super();
     Objects.requireNonNull(timestamp, "timestamp");
     Objects.requireNonNull(location, "location");
     Objects.requireNonNull(recipient, "recipient");
+    this.version = version;
     this.timestamp = timestamp;
     this.location = location;
     this.recipient = recipient;
@@ -45,7 +55,17 @@ public class ThankTokenReferenceType implements ThankTokenReference {
    */
   public ThankTokenReferenceType(ThankTokenReference ref) {
 
-    this(ref.getLocation(), ref.getTimestamp(), ref.getRecipient());
+    this(ref.getVersion(), ref.getLocation(), ref.getTimestamp(), ref.getRecipient());
+  }
+
+  /**
+   * @return the {@link ThankVersion}.
+   * @see io.github.thanktoken.core.api.header.ThankHeader#getVersion()
+   */
+  @Override
+  public ThankVersion getVersion() {
+
+    return this.version;
   }
 
   /**
@@ -114,7 +134,21 @@ public class ThankTokenReferenceType implements ThankTokenReference {
   @Override
   public String toString() {
 
-    return this.location + "@" + TimestampHelper.format(this.timestamp) + '@' + this.recipient.getBase64();
+    StringBuilder sb = new StringBuilder();
+    if (this.version != null) {
+      sb.append(this.version);
+      sb.append(VERSION_SUFFIX);
+    }
+    if (this.location != null) {
+      sb.append(this.location);
+      sb.append(LOCATION_SUFFIX);
+    }
+    sb.append(this.timestamp);
+    if (this.recipient != null) {
+      sb.append(TIMESTAMP_SUFFIX);
+      sb.append(this.recipient.getBase64());
+    }
+    return sb.toString();
   }
 
   /**
@@ -127,14 +161,32 @@ public class ThankTokenReferenceType implements ThankTokenReference {
     if (string == null) {
       return null;
     }
-    String[] segments = string.split("@");
-    if (segments.length != 3) {
-      throw new IllegalArgumentException("Invalid reference: '" + string + "'.");
+    // version
+    ThankVersion version = null;
+    int start = 0;
+    int versionSuffixIndex = string.indexOf(VERSION_SUFFIX);
+    if (versionSuffixIndex > 0) {
+      version = ThankVersion.of(string.substring(0, versionSuffixIndex));
+      start = versionSuffixIndex + 1;
     }
-    ThankLocation location = parser.parse(segments[0], ThankLocation.class);
-    Instant timestamp = parser.parse(segments[1], Instant.class);
-    SecurityPublicKey recipient = parser.parse(segments[2], SecurityPublicKey.class);
-    return new ThankTokenReferenceType(location, timestamp, recipient);
+    // location
+    ThankLocation location = null;
+    int locationSuffixIndex = string.indexOf(LOCATION_SUFFIX, start);
+    if (locationSuffixIndex > 0) {
+      location = ThankLocation.of(string.substring(start, locationSuffixIndex));
+      start = locationSuffixIndex + 1;
+    }
+    // recipient
+    SecurityPublicKey recipient = null;
+    int timestampSuffixIndex = string.indexOf(TIMESTAMP_SUFFIX, start);
+    int end = string.length();
+    if (timestampSuffixIndex > 0) {
+      recipient = parser.parse(string.substring(timestampSuffixIndex), SecurityPublicKey.class);
+      end = timestampSuffixIndex + 1;
+    }
+    // timestamp
+    Instant timestamp = parser.parse(string.substring(start, end), Instant.class);
+    return new ThankTokenReferenceType(version, location, timestamp, recipient);
   }
 
 }

@@ -5,6 +5,7 @@ package io.github.thanktoken.core.api;
 import java.time.Instant;
 import java.util.List;
 
+import io.github.thanktoken.core.api.attribute.AttributeReadValue;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
 import io.github.thanktoken.core.api.currency.Thanks;
 import io.github.thanktoken.core.api.datatype.ThankValue;
@@ -48,9 +49,8 @@ import io.github.thanktoken.core.api.validate.ThankValidator;
  * However, this so far does not solve the <em>double spending problem</em> solved by block-chains. Therefore,
  * {@link ThankToken}s are tracked in a distributed <em>public storage</em> in the cloud to solve this and prevent
  * somebody from transferring the same {@link ThankToken} to two different people. Such action is called <em>split</em>
- * and is illegal. It will be detected during the {@link ThankValidator validation} in the public store. In such
- * case the {@link ThankToken} gets blocked and banned for further transactions for a predefined period (e.g. two
- * days).<br>
+ * and is illegal. It will be detected during the {@link ThankValidator validation} in the public store. In such case
+ * the {@link ThankToken} gets blocked and banned for further transactions for a predefined period (e.g. two days).<br>
  * The advantages over regular block-chains are as following:
  * <ul>
  * <li>You (or a wallet) only need(s) to store the {@link ThankToken} owned by you and even more important your
@@ -77,7 +77,7 @@ import io.github.thanktoken.core.api.validate.ThankValidator;
  * additionally saves resources such as storage and bandwidth.</li>
  * </ul>
  */
-public interface ThankToken {
+public interface ThankToken extends AttributeReadValue {
 
   /**
    * @return the {@link ThankHeader header} with the main data of this token such as the {@link ThankHeader#getAmount()
@@ -95,25 +95,7 @@ public interface ThankToken {
    */
   List<? extends ThankTransaction> getTransactions();
 
-  /**
-   * @return the current value of this {@link ThankToken} in the actual {@link ThankHeader#getCurrency() currency}. The
-   *         value is determined from the original {@link ThankHeader#getAmount() amount} and changes over the time
-   *         {@link ThankCurrency#getValue(ThankToken, Instant) according} to its {@link ThankHeader#getCurrency()
-   *         currency}.
-   * @see #getValue(Instant)
-   */
-  default ThankValue getValue() {
-
-    return getValue(Instant.now());
-  }
-
-  /**
-   * @see #getValue()
-   *
-   * @param time is the point in time for which the value shall be calculated. Should not be before the
-   *        {@link ThankHeader#getTimestamp() creation timestamp}.
-   * @return the value of this {@link ThankToken} at the given {@link Instant}.
-   */
+  @Override
   default ThankValue getValue(Instant time) {
 
     ThankCurrency currency = getHeader().getCurrency();

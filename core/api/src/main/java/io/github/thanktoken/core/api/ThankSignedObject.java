@@ -2,6 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api;
 
+import io.github.thanktoken.core.api.attribute.AttributeReadRecipient;
+import io.github.thanktoken.core.api.attribute.AttributeReadSignature;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
@@ -14,20 +16,12 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
  * @see ThankHeader
  * @see ThankTransaction
  */
-public abstract interface ThankSignedObject {
+public abstract interface ThankSignedObject extends AttributeReadSignature, AttributeReadRecipient {
 
-  /**
-   * @return the {@link SecurityPublicKey} of the recipient (current owner) of the {@link ThankToken} at the time when
-   *         this object has been created and verified.
-   */
+  @Override
   SecurityPublicKey getRecipient();
 
-  /**
-   * @return the {@link SecuritySignature} as its hash (excluding this {@link SecuritySignature}) signed using the
-   *         private key of the (previous) {@link #getRecipient() recipient} (owner). So this signature can be validated
-   *         using the {@link #getRecipient() recipient} of the {@link ThankToken#getTransactions() previous}
-   *         {@link ThankTransaction}.
-   */
+  @Override
   SecuritySignature getSignature();
 
 }

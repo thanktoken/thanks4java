@@ -3,6 +3,14 @@ package io.github.thanktoken.core.api.header;
 import java.time.Instant;
 
 import io.github.thanktoken.core.api.ThankToken;
+import io.github.thanktoken.core.api.attribute.AttributeWriteAmount;
+import io.github.thanktoken.core.api.attribute.AttributeWriteCurrency;
+import io.github.thanktoken.core.api.attribute.AttributeWriteLocation;
+import io.github.thanktoken.core.api.attribute.AttributeWriteRecipient;
+import io.github.thanktoken.core.api.attribute.AttributeWriteSignature;
+import io.github.thanktoken.core.api.attribute.AttributeWriteTarget;
+import io.github.thanktoken.core.api.attribute.AttributeWriteTimestamp;
+import io.github.thanktoken.core.api.attribute.AttributeWriteVersion;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
 import io.github.thanktoken.core.api.currency.Thanks;
 import io.github.thanktoken.core.api.datatype.ThankValue;
@@ -13,7 +21,9 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
 /**
  * This is the implementation of {@link ThankToken} as Java bean.
  */
-public class ThankHeaderBean extends AbstractThankHeader {
+public class ThankHeaderBean extends AbstractThankHeader implements AttributeWriteTimestamp<ThankHeaderBean>, AttributeWriteLocation<ThankHeaderBean>,
+    AttributeWriteCurrency<ThankHeaderBean>, AttributeWriteAmount<ThankHeaderBean>, AttributeWriteVersion<ThankHeaderBean>,
+    AttributeWriteTarget<ThankHeaderBean>, AttributeWriteRecipient<ThankHeaderBean>, AttributeWriteSignature<ThankHeaderBean> {
 
   private ThankVersion version;
 
@@ -68,10 +78,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.version;
   }
 
-  /**
-   * @param version new value of {@link #getVersion()}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setVersion(ThankVersion version) {
 
     this.version = version;
@@ -84,10 +91,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.currency;
   }
 
-  /**
-   * @param currency new {@link #getCurrency() currency}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setCurrency(ThankCurrency currency) {
 
     this.currency = currency;
@@ -100,11 +104,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.amount;
   }
 
-  /**
-   * @param amount the new {@link #getAmount() amount}. Where suitable you may use of the predefined {@code VALUE_*}
-   *        constants such as {@link ThankValue#VALUE_0_01}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setAmount(ThankValue amount) {
 
     this.amount = amount;
@@ -117,10 +117,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.timestamp;
   }
 
-  /**
-   * @param timestamp the new {@link #getTimestamp() timestamp}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setTimestamp(Instant timestamp) {
 
     this.timestamp = timestamp;
@@ -133,10 +130,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.location;
   }
 
-  /**
-   * @param location the new {@link #getLocation() location}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setLocation(ThankLocation location) {
 
     this.location = location;
@@ -149,10 +143,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.recipient;
   }
 
-  /**
-   * @param creator new value of {@link #getRecipient()}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setRecipient(SecurityPublicKey creator) {
 
     this.recipient = creator;
@@ -165,10 +156,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
     return this.target;
   }
 
-  /**
-   * @param target the new {@link #getTarget() target}.
-   * @return this.
-   */
+  @Override
   public ThankHeaderBean setTarget(ThankTarget target) {
 
     this.target = target;
@@ -185,6 +173,7 @@ public class ThankHeaderBean extends AbstractThankHeader {
    * @param signature the new {@link #getSignature() signature}.
    * @return this.
    */
+  @Override
   public ThankHeaderBean setSignature(SecuritySignature signature) {
 
     this.signature = signature;

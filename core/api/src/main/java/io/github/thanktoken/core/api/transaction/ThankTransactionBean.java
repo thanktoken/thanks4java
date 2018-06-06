@@ -4,6 +4,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.thanktoken.core.api.attribute.AttributeWriteEncryptedPurpose;
+import io.github.thanktoken.core.api.attribute.AttributeWritePublicPurpose;
+import io.github.thanktoken.core.api.attribute.AttributeWriteRecipient;
+import io.github.thanktoken.core.api.attribute.AttributeWriteReference;
+import io.github.thanktoken.core.api.attribute.AttributeWriteSignature;
+import io.github.thanktoken.core.api.attribute.AttributeWriteTimestamp;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
 import net.sf.mmm.security.api.crypt.SecurityEncryptedData;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
@@ -12,7 +18,9 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
 /**
  * This is the implementation of {@link ThankTransaction} as Java bean.
  */
-public class ThankTransactionBean extends AbstractThankTransaction {
+public class ThankTransactionBean extends AbstractThankTransaction
+    implements AttributeWriteTimestamp<ThankTransactionBean>, AttributeWriteSignature<ThankTransactionBean>, AttributeWriteReference<ThankTransactionBean>,
+    AttributeWriteRecipient<ThankTransactionBean>, AttributeWritePublicPurpose<ThankTransactionBean>, AttributeWriteEncryptedPurpose<ThankTransactionBean> {
 
   private Instant timestamp;
 
@@ -56,10 +64,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.timestamp;
   }
 
-  /**
-   * @param timestamp the new {@link #getTimestamp() timestamp}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setTimestamp(Instant timestamp) {
 
     this.timestamp = timestamp;
@@ -72,10 +77,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.recipient;
   }
 
-  /**
-   * @param recipient the new {@link #getRecipient() recipient}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setRecipient(SecurityPublicKey recipient) {
 
     this.recipient = recipient;
@@ -88,10 +90,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.publicPurpose;
   }
 
-  /**
-   * @param publicPurpose new value of {@link #getPublicPurpose()}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setPublicPurpose(String publicPurpose) {
 
     this.publicPurpose = publicPurpose;
@@ -104,10 +103,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.encryptedPurpose;
   }
 
-  /**
-   * @param privatePurpose new value of {@link #getEncryptedPurpose()}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setEncryptedPurpose(SecurityEncryptedData privatePurpose) {
 
     this.encryptedPurpose = privatePurpose;
@@ -123,10 +119,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.referenceList;
   }
 
-  /**
-   * @param reference the new {@link #getReference() reference}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setReference(ThankTokenReferenceType reference) {
 
     if (reference == null) {
@@ -156,10 +149,7 @@ public class ThankTransactionBean extends AbstractThankTransaction {
     return this.signature;
   }
 
-  /**
-   * @param signature the new {@link #getSignature() signature}.
-   * @return this.
-   */
+  @Override
   public ThankTransactionBean setSignature(SecuritySignature signature) {
 
     this.signature = signature;

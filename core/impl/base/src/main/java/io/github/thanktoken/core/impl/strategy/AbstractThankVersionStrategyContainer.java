@@ -11,6 +11,7 @@ import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import io.github.thanktoken.core.api.transaction.ThankTransactionField;
 import net.sf.mmm.security.api.hash.SecurityHashCreator;
+import net.sf.mmm.security.api.sign.SecuritySignature;
 import net.sf.mmm.util.exception.api.ObjectMismatchException;
 
 /**
@@ -73,24 +74,25 @@ public class AbstractThankVersionStrategyContainer {
   /**
    * @param token the {@link ThankToken}.
    * @param txIndex the {@link java.util.List#get(int) index} of the {@link ThankTransaction} from the
-   *        {@link ThankToken}s {@link ThankToken#getTransactions() transactions} to hash or {@code -1} to
-   *        {@link #hash(ThankHeader, SecurityHashCreator) hash only the header}.
+   *        {@link ThankToken#getTransactions() transactions} of the {@link ThankToken} to get a hash from or {@code -1}
+   *        to get the hash from the {@link ThankToken#getHeader() header}.
    * @param hashCreator the {@link SecurityHashCreator} to use.
    * @return the hash of the given {@link ThankTransaction}.
    */
   protected byte[] hash(ThankToken token, int txIndex, SecurityHashCreator hashCreator) {
 
-    byte[] hash = hash(token.getHeader(), hashCreator);
     List<? extends ThankTransaction> transactions = token.getTransactions();
-    if (txIndex >= transactions.size()) {
+    if ((txIndex < -1) || (txIndex >= transactions.size())) {
       throw new IndexOutOfBoundsException(Integer.toString(txIndex));
     }
-    for (int i = 0; i < txIndex; i++) {
-      ThankTransaction tx = transactions.get(i);
-      hashCreator.update(hash);
-      hash = ThankTransactionField.getFields().hash(tx, hashCreator);
+    SecuritySignature signature;
+    if (txIndex == -1) {
+      signature = token.getHeader().getSignature();
+    } else {
+      ThankTransaction tx = transactions.get(txIndex);
+      signature = tx.getSignature();
     }
-    return hash;
+    return hashCreator.process(signature, true);
   }
 
 }

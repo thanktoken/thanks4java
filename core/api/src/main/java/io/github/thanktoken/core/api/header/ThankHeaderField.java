@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import io.github.thanktoken.core.api.ThankToken;
+import io.github.thanktoken.core.api.attribute.ThankAttributeField;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
 import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.field.ThankField;
@@ -25,36 +26,28 @@ public class ThankHeaderField<T> extends ThankField<T, ThankHeader, ThankHeaderB
   private static final FieldMap FIELD_MAP = new FieldMap();
 
   /** Identifies the {@link ThankHeader#getVersion() version}. */
-  public static final ThankHeaderField<ThankVersion> VERSION = new ThankHeaderField<>("v", "version", ThankVersion.class, ThankHeader::getVersion,
-      ThankHeaderBean::setVersion);
+  public static final ThankHeaderField<ThankVersion> VERSION = new ThankHeaderField<>(ThankAttributeField.VERSION);
 
   /** Identifies the {@link ThankHeader#getAmount() amount}. */
-  public static final ThankHeaderField<ThankValue> AMOUNT = new ThankHeaderField<>("a", "amount", ThankValue.class, ThankHeader::getAmount,
-      ThankHeaderBean::setAmount);
+  public static final ThankHeaderField<ThankValue> AMOUNT = new ThankHeaderField<>(ThankAttributeField.AMOUNT);
 
   /** Identifies the {@link ThankHeader#getCurrency() currency}. */
-  public static final ThankHeaderField<ThankCurrency> CURRENCY = new ThankHeaderField<>("c", "currency", ThankCurrency.class, ThankHeader::getCurrency,
-      ThankHeaderBean::setCurrency);
+  public static final ThankHeaderField<ThankCurrency> CURRENCY = new ThankHeaderField<>(ThankAttributeField.CURRENCY);
 
   /** Identifies the {@link ThankHeader#getTimestamp() timestamp}. */
-  public static final ThankHeaderField<Instant> TIMESTAMP = new ThankHeaderField<>("ts", "timestamp", Instant.class, ThankHeader::getTimestamp,
-      ThankHeaderBean::setTimestamp);
+  public static final ThankHeaderField<Instant> TIMESTAMP = new ThankHeaderField<>(ThankAttributeField.TIMESTAMP);
 
   /** Identifies the {@link ThankHeader#getLocation() location}. */
-  public static final ThankHeaderField<ThankLocation> LOCATION = new ThankHeaderField<>("loc", "location", ThankLocation.class, ThankHeader::getLocation,
-      ThankHeaderBean::setLocation);
+  public static final ThankHeaderField<ThankLocation> LOCATION = new ThankHeaderField<>(ThankAttributeField.LOCATION);
 
   /** Identifies the {@link ThankHeader#getTarget() target}. */
-  public static final ThankHeaderField<ThankTarget> TARGET = new ThankHeaderField<>("tgt", "target", ThankTarget.class, ThankHeader::getTarget,
-      ThankHeaderBean::setTarget);
+  public static final ThankHeaderField<ThankTarget> TARGET = new ThankHeaderField<>(ThankAttributeField.TARGET);
 
   /** Identifies the {@link ThankHeader#getRecipient() recipient}. */
-  public static final ThankHeaderField<SecurityPublicKey> RECIPIENT = new ThankHeaderField<>("rcp", "recipient", SecurityPublicKey.class,
-      ThankHeader::getRecipient, ThankHeaderBean::setRecipient);
+  public static final ThankHeaderField<SecurityPublicKey> RECIPIENT = new ThankHeaderField<>(ThankAttributeField.RECIPIENT);
 
   /** Identifies the {@link ThankHeader#getSignature() signature}. */
-  public static final ThankHeaderField<SecuritySignature> SIGNATURE = new ThankHeaderField<>("sig", "signature", SecuritySignature.class,
-      ThankHeader::getSignature, ThankHeaderBean::setSignature);
+  public static final ThankHeaderField<SecuritySignature> SIGNATURE = new ThankHeaderField<>(ThankAttributeField.SIGNATURE);
 
   @Override
   public Class<?> getComponentType() {
@@ -71,6 +64,12 @@ public class ThankHeaderField<T> extends ThankField<T, ThankHeader, ThankHeaderB
   private ThankHeaderField(String id, String name, Class<T> type, Function<ThankHeader, T> getter, BiConsumer<ThankHeaderBean, T> setter) {
 
     super(id, name, type, getter, setter);
+    FIELD_MAP.add(this);
+  }
+
+  private ThankHeaderField(ThankField<T, ? super ThankHeader, ? super ThankHeaderBean> parent) {
+
+    super(parent);
     FIELD_MAP.add(this);
   }
 

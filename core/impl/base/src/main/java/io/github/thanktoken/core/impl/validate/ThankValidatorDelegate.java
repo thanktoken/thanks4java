@@ -2,8 +2,10 @@ package io.github.thanktoken.core.impl.validate;
 
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.header.ThankHeader;
+import io.github.thanktoken.core.api.message.ThankMessage;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
+import io.github.thanktoken.core.api.validate.ThankValidationException;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
 import io.github.thanktoken.core.api.validate.ThankValidator;
 import io.github.thanktoken.core.impl.ThankDelegate;
@@ -48,6 +50,12 @@ public class ThankValidatorDelegate extends ThankDelegate implements ThankValida
   public void validateTransaction(ThankToken token, ThankTransaction tx, ThankValidationMode mode) {
 
     getStrategy(token).getValidator().validateTransaction(token, tx, mode);
+  }
+
+  @Override
+  public void validateMessage(ThankMessage message, ThankValidationMode mode) throws ThankValidationException {
+
+    getStrategyFactory().getStrategy(message.getVersion()).getValidator().validateMessage(message, mode);
   }
 
 }

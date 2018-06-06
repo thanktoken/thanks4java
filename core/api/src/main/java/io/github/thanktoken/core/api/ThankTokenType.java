@@ -3,6 +3,7 @@
 package io.github.thanktoken.core.api;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.github.thanktoken.core.api.header.ThankHeader;
@@ -12,30 +13,25 @@ import io.github.thanktoken.core.api.transaction.ThankTransaction;
 /**
  * Implementation of {@link ThankToken} as mutable Java bean.
  */
-public class ThankTokenBean implements ThankToken {
+public class ThankTokenType implements ThankToken {
 
-  private ThankHeader header;
+  private final ThankHeader header;
 
-  private List<ThankTransaction> transactions;
+  private final List<ThankTransaction> transactionsMutable;
 
-  /**
-   * The constructor.
-   */
-  public ThankTokenBean() {
-
-    super();
-  }
+  private final List<ThankTransaction> transactions;
 
   /**
    * The constructor.
    *
    * @param header the fixed {@link #getHeader() header}.
    */
-  public ThankTokenBean(ThankHeader header) {
+  public ThankTokenType(ThankHeader header) {
 
     super();
     this.header = header;
-    this.transactions = new ArrayList<>();
+    this.transactionsMutable = new ArrayList<>();
+    this.transactions = Collections.unmodifiableList(this.transactionsMutable);
   }
 
   /**
@@ -43,27 +39,18 @@ public class ThankTokenBean implements ThankToken {
    *
    * @param token the {@link ThankToken} to copy.
    */
-  public ThankTokenBean(ThankToken token) {
+  public ThankTokenType(ThankToken token) {
 
     super();
     this.header = new ThankHeaderType(token.getHeader());
-    this.transactions = new ArrayList<>(token.getTransactions());
+    this.transactionsMutable = new ArrayList<>(token.getTransactions());
+    this.transactions = Collections.unmodifiableList(this.transactionsMutable);
   }
 
   @Override
   public ThankHeader getHeader() {
 
     return this.header;
-  }
-
-  /**
-   * @param header the new value of {@link #getHeader()}.
-   * @return this
-   */
-  public ThankTokenBean setHeader(ThankHeader header) {
-
-    this.header = header;
-    return this;
   }
 
   @Override
@@ -73,22 +60,12 @@ public class ThankTokenBean implements ThankToken {
   }
 
   /**
-   * @param transactions the new value of {@link #getTransactions()}.
-   * @return this
-   */
-  public ThankTokenBean setTransactions(List<ThankTransaction> transactions) {
-
-    this.transactions = transactions;
-    return this;
-  }
-
-  /**
    * @param tx the {@link ThankTransaction} to add to {@link #getTransactions()}.
    * @return this.
    */
-  public ThankTokenBean addTransaction(ThankTransaction tx) {
+  public ThankTokenType addTransaction(ThankTransaction tx) {
 
-    this.transactions.add(tx);
+    this.transactionsMutable.add(tx);
     return this;
   }
 

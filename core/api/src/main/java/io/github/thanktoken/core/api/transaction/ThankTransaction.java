@@ -1,13 +1,14 @@
 package io.github.thanktoken.core.api.transaction;
 
-import java.time.Instant;
 import java.util.List;
 
-import io.github.thanktoken.core.api.ThankDataObject;
 import io.github.thanktoken.core.api.ThankSignedObject;
 import io.github.thanktoken.core.api.ThankToken;
+import io.github.thanktoken.core.api.attribute.AttributeReadEncryptedPurpose;
+import io.github.thanktoken.core.api.attribute.AttributeReadPublicPurpose;
+import io.github.thanktoken.core.api.attribute.AttributeReadReference;
+import io.github.thanktoken.core.api.attribute.AttributeReadTimestamp;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
-import net.sf.mmm.security.api.crypt.SecurityEncryptedData;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignature;
 
@@ -27,13 +28,8 @@ import net.sf.mmm.security.api.sign.SecuritySignature;
  * @see ThankToken
  * @see ThankToken#getTransactions()
  */
-public interface ThankTransaction extends ThankSignedObject, ThankDataObject {
-
-  /**
-   * @return the exact {@link Instant} when this {@link ThankTransaction} was created and the according transaction was
-   *         prepared.
-   */
-  Instant getTimestamp();
+public interface ThankTransaction
+    extends ThankSignedObject, AttributeReadTimestamp, AttributeReadReference, AttributeReadPublicPurpose, AttributeReadEncryptedPurpose {
 
   /**
    * @return the {@link SecurityPublicKey} of the next owner the {@link ThankToken} is transferred to. May be
@@ -43,19 +39,10 @@ public interface ThankTransaction extends ThankSignedObject, ThankDataObject {
   SecurityPublicKey getRecipient();
 
   /**
-   * @return the public purpose of this transaction or {@code null} if not available.
-   */
-  String getPublicPurpose();
-
-  /**
-   * @return the private purpose of this transaction or {@code null} if not available.
-   */
-  SecurityEncryptedData getEncryptedPurpose();
-
-  /**
    * @return the {@link ThankTokenReferenceType} from {@link #getReferenceList() reference list} if it contains exactly
    *         one element, {@code null} otherwise.
    */
+  @Override
   default ThankTokenReferenceType getReference() {
 
     List<ThankTokenReferenceType> referenceList = getReferenceList();

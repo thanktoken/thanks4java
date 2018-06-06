@@ -7,6 +7,7 @@ import java.time.Instant;
 
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.header.ThankLocation;
+import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
 import net.sf.mmm.security.api.crypt.SecurityEncryptedData;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
@@ -51,6 +52,6 @@ public interface TestData {
   Instant TEST_TIMESTAMP = Instant.parse("2000-12-31T23:59:59.0001Z");
 
   /** {@link ThankTokenReferenceType} for testing. */
-  ThankTokenReferenceType TEST_REFERENCE = new ThankTokenReferenceType(TEST_LOCATION, TEST_TIMESTAMP, TEST_PUBLIC_KEY);
+  ThankTokenReferenceType TEST_REFERENCE = new ThankTokenReferenceType(ThankVersion.of(2), TEST_LOCATION, TEST_TIMESTAMP, TEST_PUBLIC_KEY);
 
 }

@@ -60,7 +60,7 @@ public class ThankSignerImpl extends AbstractThankVersionStrategyContainer imple
     Objects.requireNonNull(privateKey, "PrivateKey");
     try {
       List<? extends ThankTransaction> transactions = token.getTransactions();
-      byte[] hash = hash(token, hashCreator, transactions.size());
+      byte[] hash = hash(token, transactions.size() - 1, hashCreator);
       hashCreator.update(hash);
       hash = ThankTransactionField.getFields().hash(newTx, hashCreator);
       SecuritySignatureSigner signer = getStrategy().getConfiguration().getSignatureFactory().newSigner(privateKey);
@@ -69,18 +69,6 @@ public class ThankSignerImpl extends AbstractThankVersionStrategyContainer imple
     } catch (Exception e) {
       throw new IllegalStateException(e);
     }
-  }
-
-  private byte[] hash(ThankToken token, SecurityHashCreator hashCreator, int txCount) {
-
-    byte[] hash = ThankHeaderField.getFields().hash(token.getHeader(), hashCreator);
-    List<? extends ThankTransaction> transactions = token.getTransactions();
-    for (int i = 0; i < txCount; i++) {
-      ThankTransaction tx = transactions.get(i);
-      hashCreator.update(hash);
-      hash = ThankTransactionField.getFields().hash(tx, hashCreator);
-    }
-    return hash;
   }
 
 }

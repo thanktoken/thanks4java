@@ -37,9 +37,11 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
 
   private final Class<T> type;
 
-  private final Function<D, T> getter;
+  private final Function<? super D, T> getter;
 
-  private final BiConsumer<B, T> setter;
+  private final BiConsumer<? super B, T> setter;
+
+  private final ThankField<T, ? super D, ?> parent;
 
   /**
    * The constructor.
@@ -50,7 +52,7 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    * @param getter - see {@link #get(ThankDataObject)}.
    * @param setter - see {@link #set(ThankDataObject, Object)}.
    */
-  protected ThankField(String id, String name, Class<T> type, Function<D, T> getter, BiConsumer<B, T> setter) {
+  protected ThankField(String id, String name, Class<T> type, Function<? super D, T> getter, BiConsumer<? super B, T> setter) {
 
     super();
     this.id = id;
@@ -58,6 +60,24 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
     this.type = type;
     this.getter = getter;
     this.setter = setter;
+    this.parent = null;
+  }
+
+  /**
+   * The constructor.
+   *
+   * @param parent - see #getParent.
+   */
+  @SuppressWarnings({ "rawtypes", "unchecked" })
+  // https://github.com/m-m-m/util/issues/166
+  protected ThankField(ThankField<T, ? super D, ?/* super B */> parent) {
+
+    this.id = parent.id;
+    this.name = parent.name;
+    this.type = parent.type;
+    this.getter = parent.getter;
+    this.setter = (BiConsumer) parent.setter;
+    this.parent = parent;
   }
 
   /**
@@ -90,6 +110,9 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    */
   public Class<?> getComponentType() {
 
+    if (this.parent != null) {
+      return this.parent.getComponentType();
+    }
     return null;
   }
 
@@ -99,7 +122,18 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    */
   public ThankFieldMap<?, ?, ?> getFieldMap() {
 
+    if (this.parent != null) {
+      return this.parent.getFieldMap();
+    }
     return null;
+  }
+
+  /**
+   * @return the parent {@link ThankField} to inherit this field or {@code null} if not inherited.
+   */
+  public ThankField<T, ? super D, ?> getParent() {
+
+    return this.parent;
   }
 
   /**

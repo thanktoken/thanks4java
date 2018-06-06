@@ -14,6 +14,8 @@ import io.github.thanktoken.core.api.header.ThankTarget;
 import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.identity.ThankIdentity;
 import io.github.thanktoken.core.api.identity.ThankIdentityType;
+import io.github.thanktoken.core.api.message.ThankMessage;
+import io.github.thanktoken.core.api.message.ThankMessageType;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import io.github.thanktoken.core.api.validate.ThankValidationException;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
@@ -48,8 +50,8 @@ public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer im
       Objects.requireNonNull(token, "token");
       ThankConfiguration configuration = getStrategy().getConfiguration();
       SecurityHashCreator hashCreator = configuration.getHashFactory().newHashCreator();
-      byte[] hash = validateHeader(token.getHeader(), mode, hashCreator);
-      validateTransactions(token, mode, hash, hashCreator);
+      validateHeader(token.getHeader(), mode, hashCreator);
+      validateTransactions(token, mode, hashCreator);
     } catch (Exception e) {
       throw new ThankValidationException(e, token);
     }
@@ -104,7 +106,7 @@ public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer im
     }
   }
 
-  private byte[] validateHeader(ThankHeader header, ThankValidationMode mode, SecurityHashCreator hashCreator) {
+  private void validateHeader(ThankHeader header, ThankValidationMode mode, SecurityHashCreator hashCreator) {
 
     ThankVersion version = header.getVersion();
     Objects.requireNonNull(version, "header.version");
@@ -147,10 +149,9 @@ public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer im
         }
       }
     }
-    return hash;
   }
 
-  private void validateTransactions(ThankToken token, ThankValidationMode mode, byte[] hash, SecurityHashCreator hashCreator) throws Exception {
+  private void validateTransactions(ThankToken token, ThankValidationMode mode, SecurityHashCreator hashCreator) throws Exception {
 
     ThankHeader header = token.getHeader();
     List<? extends ThankTransaction> transactions = token.getTransactions();
@@ -163,16 +164,16 @@ public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer im
       }
     }
     Instant timestamp = header.getTimestamp();
-    int index = 1;
-    byte[] currentHash = hash;
+    int index = 0;
     SecurityPublicKey previousOwner = header.getRecipient();
     for (ThankTransaction tx : transactions) {
+      byte[] currentHash = hash(token, index - 1, hashCreator);
       try {
         currentHash = validateTransaction(tx, index, previousOwner, mode, token, timestamp, currentHash, hashCreator);
         timestamp = tx.getTimestamp();
         previousOwner = tx.getRecipient();
       } catch (Exception e) {
-        throw new IllegalArgumentException("Invalid transaction #" + index + " (" + tx + "): " + e.getMessage(), e);
+        throw new IllegalArgumentException("Invalid transaction #" + (index + 1) + " (" + tx + "): " + e.getMessage(), e);
       }
       index++;
     }
@@ -203,5 +204,22 @@ public class ThankValidatorImpl extends AbstractThankVersionStrategyContainer im
       }
     }
     return newHash;
+  }
+
+  @Override
+  public void validateMessage(ThankMessage message, ThankValidationMode mode) throws ThankValidationException {
+
+    try {
+      Objects.requireNonNull(message, "message");
+      ThankVersion version = message.getVersion();
+      Objects.requireNonNull(version, "message.version");
+      verifyVersion(version);
+      SecurityPublicKey recipient = message.getRecipient();
+      Objects.requireNonNull(recipient, "message.recipient");
+      ThankMessageType<?> type = message.getType();
+      Objects.requireNonNull(type, "message.type");
+    } catch (Exception e) {
+      throw new ThankValidationException(e, message);
+    }
   }
 }
