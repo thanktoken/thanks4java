@@ -8,6 +8,10 @@ import java.security.PublicKey;
 import javax.json.Json;
 import javax.json.stream.JsonParser;
 
+import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
+import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKeyGeneric;
+import net.sf.mmm.util.datatype.api.BinaryType;
+
 import org.junit.Test;
 
 import io.github.thanktoken.core.api.TestCase;
@@ -16,9 +20,6 @@ import io.github.thanktoken.core.api.currency.Thanks;
 import io.github.thanktoken.core.api.datatype.ThankValue;
 import io.github.thanktoken.core.api.field.ThankFieldMap;
 import io.github.thanktoken.core.api.io.ThankValueParser;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKeyGeneric;
-import net.sf.mmm.util.lang.api.BinaryType;
 
 /**
  * Test of {@link ThankFieldMap#toJson(ThankDataObject)} and

@@ -14,13 +14,14 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
+import net.sf.mmm.util.datatype.api.BinaryType;
+import net.sf.mmm.util.exception.api.IllegalCaseException;
+
 import io.github.thanktoken.core.api.ThankDataObject;
 import io.github.thanktoken.core.api.datatype.IntegerType;
 import io.github.thanktoken.core.api.datatype.TimestampHelper;
 import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankValueParser;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.lang.api.BinaryType;
 
 /**
  * An instance of {@link ThankField} represent a field (property) of a {@link ThankDataObject}.
@@ -52,7 +53,8 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    * @param getter - see {@link #get(ThankDataObject)}.
    * @param setter - see {@link #set(ThankDataObject, Object)}.
    */
-  protected ThankField(String id, String name, Class<T> type, Function<? super D, T> getter, BiConsumer<? super B, T> setter) {
+  protected ThankField(String id, String name, Class<T> type, Function<? super D, T> getter,
+      BiConsumer<? super B, T> setter) {
 
     super();
     this.id = id;

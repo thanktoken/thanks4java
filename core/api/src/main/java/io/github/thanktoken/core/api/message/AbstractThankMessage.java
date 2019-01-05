@@ -5,10 +5,11 @@ package io.github.thanktoken.core.api.message;
 import java.time.Instant;
 import java.util.List;
 
-import io.github.thanktoken.core.api.ThankToken;
-import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import net.sf.mmm.security.api.sign.SecuritySignature;
 import net.sf.mmm.util.value.api.Range;
+
+import io.github.thanktoken.core.api.ThankToken;
+import io.github.thanktoken.core.api.transaction.ThankTransaction;
 
 /**
  * This is the abstract base implementation of {@link ThankMessage}.

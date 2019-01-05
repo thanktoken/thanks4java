@@ -16,8 +16,6 @@ import io.github.thanktoken.core.api.transaction.ThankTransactionField;
 import io.github.thanktoken.core.base.io.AbstractThankWriter;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategy;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategyContainer;
-import net.sf.mmm.util.io.api.IoMode;
-import net.sf.mmm.util.io.api.RuntimeIoException;
 
 /**
  * Implementation of {@link ThankWriter}.
@@ -46,7 +44,7 @@ public class ThankWriterImpl extends AbstractThankVersionStrategyContainer imple
     try {
       writer.close();
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.CLOSE);
+      throw new RuntimeException(e);
     }
   }
 
@@ -72,7 +70,7 @@ public class ThankWriterImpl extends AbstractThankVersionStrategyContainer imple
     try {
       writer.close();
     } catch (IOException e) {
-      throw new RuntimeIoException(e, IoMode.CLOSE);
+      throw new RuntimeException(e);
     }
   }
 

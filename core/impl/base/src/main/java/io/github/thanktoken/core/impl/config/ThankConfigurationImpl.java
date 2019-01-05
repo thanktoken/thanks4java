@@ -2,14 +2,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.impl.config;
 
-import io.github.thanktoken.core.api.io.ThankValueParser;
 import net.sf.mmm.security.api.AbstractSecurityFactories;
 import net.sf.mmm.security.api.crypt.asymmetric.SecurityAsymmetricCryptorFactoryPublicPrivate;
 import net.sf.mmm.security.api.hash.SecurityHashFactory;
 import net.sf.mmm.security.api.key.asymmetric.SecurityAsymmetricKeyCreator;
 import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 import net.sf.mmm.security.api.sign.SecuritySignatureFactory;
-import net.sf.mmm.util.lang.api.BinaryType;
+import net.sf.mmm.util.datatype.api.BinaryType;
+
+import io.github.thanktoken.core.api.io.ThankValueParser;
 
 /**
  * Implementation of {@link io.github.thanktoken.core.api.config.ThankConfiguration}.
@@ -24,8 +25,9 @@ public class ThankConfigurationImpl extends AbstractThankConfiguration implement
    * @param keyCreator - see {@link #getKeyCreator()}.
    * @param signatureFactory - see {@link #getSignatureFactory()}.
    */
-  public ThankConfigurationImpl(SecurityHashFactory hashFactory, SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory,
-      SecurityAsymmetricKeyCreator keyCreator, SecuritySignatureFactory signatureFactory) {
+  public ThankConfigurationImpl(SecurityHashFactory hashFactory,
+      SecurityAsymmetricCryptorFactoryPublicPrivate cryptorFactory, SecurityAsymmetricKeyCreator keyCreator,
+      SecuritySignatureFactory signatureFactory) {
 
     super(hashFactory, cryptorFactory, keyCreator, signatureFactory);
   }
