@@ -4,10 +4,10 @@ import java.util.Objects;
 
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.header.ThankHeader;
-import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankWriter;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.strategy.ThankVersionStrategy;
+import io.github.thanktoken.core.api.version.ThankVersion;
 
 /**
  * This is an implementation of {@link ThankWriter} that uses {@link ThankStrategyFactory} in order to write

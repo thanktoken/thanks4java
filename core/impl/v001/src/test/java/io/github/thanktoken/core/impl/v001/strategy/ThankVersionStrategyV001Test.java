@@ -6,6 +6,7 @@ import org.junit.Test;
 import io.github.thanktoken.core.api.strategy.ThankGlobalStrategy;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.strategy.ThankVersionStrategy;
+import io.github.thanktoken.core.api.validate.ThankValidatorImpl;
 import io.github.thanktoken.core.impl.io.ThankReaderDelegate;
 import io.github.thanktoken.core.impl.io.ThankReaderImpl;
 import io.github.thanktoken.core.impl.io.ThankWriterDelegate;
@@ -14,7 +15,6 @@ import io.github.thanktoken.core.impl.sign.ThankSignerDelegate;
 import io.github.thanktoken.core.impl.sign.ThankSignerImpl;
 import io.github.thanktoken.core.impl.strategy.ThankGlobalStrategyImpl;
 import io.github.thanktoken.core.impl.validate.ThankValidatorDelegate;
-import io.github.thanktoken.core.impl.validate.ThankValidatorImpl;
 
 /**
  * Test of {@link ThankGlobalStrategy} and {@link ThankStrategyFactory#getGlobalStrategy()}.

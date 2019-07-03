@@ -1,12 +1,13 @@
 package io.github.thanktoken.core.impl.v002.strategy;
 
-import io.github.thanktoken.core.api.header.ThankVersion;
+import net.sf.mmm.crypto.asymmetric.access.ec.bc.Curve25519;
+import net.sf.mmm.cryptooo.hash.SecurityHashConfigSha256;
+
 import io.github.thanktoken.core.api.identity.ThankIdentityProvider;
 import io.github.thanktoken.core.api.strategy.ThankVersionStrategy;
+import io.github.thanktoken.core.api.version.ThankVersion;
 import io.github.thanktoken.core.impl.config.ThankConfigurationImpl;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategy;
-import net.sf.mmm.security.api.crypt.asymmetric.Curve25519;
-import net.sf.mmm.security.api.hash.SecurityHashConfigSha256;
 
 /**
  * The implementation of {@link ThankVersionStrategy} for

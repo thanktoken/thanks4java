@@ -13,14 +13,13 @@ import io.github.thanktoken.core.api.header.ThankHeaderField;
 import io.github.thanktoken.core.api.io.ThankWriter;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import io.github.thanktoken.core.api.transaction.ThankTransactionField;
-import io.github.thanktoken.core.base.io.AbstractThankWriter;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategy;
 import io.github.thanktoken.core.impl.strategy.AbstractThankVersionStrategyContainer;
 
 /**
  * Implementation of {@link ThankWriter}.
  */
-public class ThankWriterImpl extends AbstractThankVersionStrategyContainer implements AbstractThankWriter {
+public class ThankWriterImpl extends AbstractThankVersionStrategyContainer implements ThankWriterImpl {
 
   /**
    * The constructor.

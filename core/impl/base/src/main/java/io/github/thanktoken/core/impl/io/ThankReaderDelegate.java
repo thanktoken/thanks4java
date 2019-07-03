@@ -6,19 +6,19 @@ import java.io.Reader;
 import javax.json.stream.JsonParser;
 
 import io.github.thanktoken.core.api.header.ThankHeader;
-import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankReader;
+import io.github.thanktoken.core.api.io.ThankReaderImpl;
 import io.github.thanktoken.core.api.strategy.ThankStrategy;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
-import io.github.thanktoken.core.base.io.AbstractThankReader;
+import io.github.thanktoken.core.api.version.ThankVersion;
 import io.github.thanktoken.core.impl.ThankDelegate;
 
 /**
  * This is an implementation of {@link ThankReader} that uses {@link ThankStrategyFactory} in order to read
  * {@link ThankHeader}s and {@link ThankTransaction}s for arbitrary {@link ThankHeader#getVersion() versions}.
  */
-public class ThankReaderDelegate extends ThankDelegate implements AbstractThankReader {
+public class ThankReaderDelegate extends ThankDelegate implements ThankReaderImpl {
 
   private static final ThankReaderDelegate INSTANCE = new ThankReaderDelegate();
 
@@ -46,11 +46,11 @@ public class ThankReaderDelegate extends ThankDelegate implements AbstractThankR
 
   /**
    * @param version the {@link ThankVersion}.
-   * @return the {@link AbstractThankReader} for the given {@link ThankVersion}.
+   * @return the {@link ThankReaderImpl} for the given {@link ThankVersion}.
    */
-  protected AbstractThankReader getReader(ThankVersion version) {
+  protected ThankReaderImpl getReader(ThankVersion version) {
 
-    return (AbstractThankReader) getStrategyFactory().getStrategy(version).getReader();
+    return (ThankReaderImpl) getStrategyFactory().getStrategy(version).getReader();
   }
 
   @Override

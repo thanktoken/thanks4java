@@ -5,22 +5,24 @@ package io.github.thanktoken.core.impl;
 import java.security.PublicKey;
 import java.time.Instant;
 
+import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
+import net.sf.mmm.crypto.crypt.EncryptedData;
+import net.sf.mmm.cryptoooo.asymmetric.key.SecurityPublicKey;
+import net.sf.mmm.cryptoooo.asymmetric.key.generic.SecurityPublicKeyGeneric;
+
 import io.github.thanktoken.core.api.ThankToken;
-import io.github.thanktoken.core.api.header.ThankLocation;
-import io.github.thanktoken.core.api.header.ThankVersion;
+import io.github.thanktoken.core.api.location.ThankLocation;
+import io.github.thanktoken.core.api.location.ThankLocationOlc;
 import io.github.thanktoken.core.api.reference.ThankTokenReferenceType;
-import net.sf.mmm.security.api.crypt.SecurityEncryptedData;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKeyGeneric;
-import net.sf.mmm.security.api.sign.SecuritySignature;
+import io.github.thanktoken.core.api.version.ThankVersion;
 
 /**
  * Test-values (dummy data) for {@link ThankToken} and related objects.
  */
 public interface TestData {
 
-  /** {@link ThankLocation} for testing. */
-  ThankLocation TEST_LOCATION = ThankLocation.of("DE/HE/412000");
+  /** {@link ThankLocation} for testing (Frankfurt a.M., Germany). */
+  ThankLocation TEST_LOCATION = ThankLocationOlc.of("9F2C4M");
 
   /** Base64 encoded string of {@link #TEST_PUBLIC_KEY}. */
   String TEST_PUBLIC_KEY_BASE64 = "AwAAAAAAAAAAAAAAAAAAAAAPDg0MCwoJCAcGBQQDAgEA";
@@ -31,14 +33,14 @@ public interface TestData {
   /** Base64 encoded string of {@link #TEST_SIGNATURE}. */
   String TEST_SIGNATURE_BASE64 = "Dw4NDAsKCQgHBgUEAwIBAA==";
 
-  /** {@link SecuritySignature} for testing. */
-  SecuritySignature TEST_SIGNATURE = SecuritySignature.ofBase64(TEST_SIGNATURE_BASE64);
+  /** {@link SignatureBinary} for testing. */
+  SignatureBinary TEST_SIGNATURE = SignatureBinary.ofBase64(TEST_SIGNATURE_BASE64);
 
   /** Base64 encoded string of {@link #TEST_ENCRYPTED_DATA}. */
   String TEST_ENCRYPTED_DATA_BASE64 = "/+7dzLuqmYh3ZlVEMyIRAA==";
 
-  /** {@link SecurityEncryptedData} for testing. */
-  SecurityEncryptedData TEST_ENCRYPTED_DATA = SecurityEncryptedData.ofBase64(TEST_ENCRYPTED_DATA_BASE64);
+  /** {@link EncryptedData} for testing. */
+  EncryptedData TEST_ENCRYPTED_DATA = EncryptedData.ofBase64(TEST_ENCRYPTED_DATA_BASE64);
 
   /** Compact string representation of {@link #TEST_TIMESTAMP}. */
   String TEST_TIMESTAMP_STRING = "20001231235959.0001";

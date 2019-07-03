@@ -1,5 +1,7 @@
 package io.github.thanktoken.core.impl.v001.validate;
 
+import net.sf.mmm.crypto.asymmetric.key.SecurityPublicKey;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -12,10 +14,9 @@ import io.github.thanktoken.core.api.identity.ThankIdentityType;
 import io.github.thanktoken.core.api.validate.ThankValidationException;
 import io.github.thanktoken.core.api.validate.ThankValidationMode;
 import io.github.thanktoken.core.api.validate.ThankValidator;
+import io.github.thanktoken.core.api.validate.ThankValidatorImpl;
 import io.github.thanktoken.core.impl.v001.TestKeyPairs;
 import io.github.thanktoken.core.impl.v001.strategy.ThankVersionStrategyV001;
-import io.github.thanktoken.core.impl.validate.ThankValidatorImpl;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPublicKey;
 
 /**
  * Test of {@link ThankValidatorImpl}.
@@ -97,11 +98,11 @@ public class ThankValidatorImplV001Test extends Assertions {
       } else if (TestKeyPairs.KEY_PERSON_2.getPublicKey().equals(publicKey)) {
         return id(publicKey, ThankIdentityType.NATURAL_PERSON);
       } else if (TestKeyPairs.KEY_COUNTRY_DE.getPublicKey().equals(publicKey)) {
-        return id(publicKey, ThankIdentityType.REPRESENTATIVES_L0);
+        return id(publicKey, ThankIdentityType.REPRESENTATIVE_L1);
       } else if (TestKeyPairs.KEY_STATE.getPublicKey().equals(publicKey)) {
-        return id(publicKey, ThankIdentityType.REPRESENTATIVES_L1);
+        return id(publicKey, ThankIdentityType.REPRESENTATIVE_L2);
       } else if (TestKeyPairs.KEY_COMMUNITY.getPublicKey().equals(publicKey)) {
-        return id(publicKey, ThankIdentityType.REPRESENTATIVES_L2);
+        return id(publicKey, ThankIdentityType.REPRESENTATIVE_L3);
       } else if (TestKeyPairs.KEY_ORGANIZATION_1.getPublicKey().equals(publicKey)) {
         return id(publicKey, ThankIdentityType.ORGANIZATION);
       } else if (TestKeyPairs.KEY_SUSTAINANILITY_1.getPublicKey().equals(publicKey)) {
@@ -113,7 +114,7 @@ public class ThankValidatorImplV001Test extends Assertions {
 
     private ThankIdentityBean id(SecurityPublicKey publicKey, ThankIdentityType type) {
 
-      return new ThankIdentityBean().setId(publicKey.getBase64()).setLatestPublicKey(publicKey).setType(type);
+      return new ThankIdentityBean().setId(publicKey.getBase64()).setLatestAddress(publicKey).setType(type);
     }
   }
 

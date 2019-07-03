@@ -1,13 +1,14 @@
 package io.github.thanktoken.core.impl.sign;
 
+import net.sf.mmm.crypto.asymmetric.key.SecurityPrivateKey;
+import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
+
 import io.github.thanktoken.core.api.ThankToken;
 import io.github.thanktoken.core.api.header.ThankHeader;
 import io.github.thanktoken.core.api.sign.ThankSigner;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
 import io.github.thanktoken.core.impl.ThankDelegate;
-import net.sf.mmm.security.api.key.asymmetric.SecurityPrivateKey;
-import net.sf.mmm.security.api.sign.SecuritySignature;
 
 /**
  * This is an implementation of {@link ThankSigner} that uses {@link ThankStrategyFactory} in order to sign
@@ -34,13 +35,13 @@ public class ThankSignerDelegate extends ThankDelegate implements ThankSigner {
   }
 
   @Override
-  public SecuritySignature signHeader(ThankHeader header, SecurityPrivateKey privateKey) {
+  public SignatureBinary signHeader(ThankHeader header, SecurityPrivateKey privateKey) {
 
     return getStrategy(header).getSigner().signHeader(header, privateKey);
   }
 
   @Override
-  public SecuritySignature signTransaction(ThankToken token, ThankTransaction newLine, SecurityPrivateKey privateKey) {
+  public SignatureBinary signTransaction(ThankToken token, ThankTransaction newLine, SecurityPrivateKey privateKey) {
 
     return getStrategy(token).getSigner().signTransaction(token, newLine, privateKey);
   }

@@ -3,12 +3,13 @@ package io.github.thanktoken.core.impl.io;
 import java.util.Collection;
 import java.util.Collections;
 
-import io.github.thanktoken.core.api.header.ThankVersion;
 import io.github.thanktoken.core.api.io.ThankReader;
+import io.github.thanktoken.core.api.io.ThankTokenReaderWriterTest;
 import io.github.thanktoken.core.api.io.ThankWriter;
 import io.github.thanktoken.core.api.strategy.ThankGlobalStrategy;
 import io.github.thanktoken.core.api.strategy.ThankStrategyFactory;
 import io.github.thanktoken.core.api.strategy.ThankVersionStrategy;
+import io.github.thanktoken.core.api.version.ThankVersion;
 import io.github.thanktoken.core.impl.strategy.ThankGlobalStrategyImpl;
 
 /**
