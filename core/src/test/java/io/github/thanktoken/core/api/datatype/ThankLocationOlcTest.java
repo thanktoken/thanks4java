@@ -65,13 +65,13 @@ public class ThankLocationOlcTest extends TestCase {
 
     ThankLocationOlc statureOfLiberty = ThankLocationOlc.of("87G7MX");
     ThankLocationOlc tajMahal = ThankLocationOlc.of("7JVW52");
-    assertThat(statureOfLiberty.getDistance(tajMahal)).isEqualTo(11937.038761055004);
-    assertThat(tajMahal.getDistance(statureOfLiberty)).isEqualTo(11937.038761055004);
+    assertThat(statureOfLiberty.getDistance(tajMahal)).isEqualTo(11937.038761055004, PRECISION_DOUBLE);
+    assertThat(tajMahal.getDistance(statureOfLiberty)).isEqualTo(11937.038761055004, PRECISION_DOUBLE);
 
     ThankLocationOlc eiffelTower = ThankLocationOlc.of("8FW4V7");
     ThankLocationOlc pyramidOfGiza = ThankLocationOlc.of("7GXHX4");
-    assertThat(eiffelTower.getDistance(pyramidOfGiza)).isEqualTo(3214.5767751762414);
-    assertThat(pyramidOfGiza.getDistance(eiffelTower)).isEqualTo(3214.5767751762414);
+    assertThat(eiffelTower.getDistance(pyramidOfGiza)).isEqualTo(3214.5767751762414, PRECISION_DOUBLE);
+    assertThat(pyramidOfGiza.getDistance(eiffelTower)).isEqualTo(3214.5767751762414, PRECISION_DOUBLE);
   }
 
   /** Test {@link ThankLocationOlc#getDistanceRegions(ThankLocationOlc)}. */
@@ -90,8 +90,7 @@ public class ThankLocationOlcTest extends TestCase {
       if (i > 0) {
         longitudeOffset = rnd.nextInt(i);
       }
-      assertThat(statureOfLiberty.getDistanceRegions(ThankLocationOlc.ofRegions(latitudeRegion, longitudeRegion + longitudeOffset)))
-          .isEqualTo(i);
+      assertThat(statureOfLiberty.getDistanceRegions(ThankLocationOlc.ofRegions(latitudeRegion, longitudeRegion + longitudeOffset))).isEqualTo(i);
       latitudeRegion++;
     }
 

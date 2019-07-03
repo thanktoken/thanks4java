@@ -14,6 +14,9 @@ public abstract class TestCase extends Assertions implements TestData {
   /** Required precision for calculations. */
   protected static final Offset<BigDecimal> PRECISION = Offset.offset(new BigDecimal("0.0000000000000001"));
 
+  /** Required precision for calculations. */
+  protected static final Offset<Double> PRECISION_DOUBLE = Offset.offset(Double.valueOf("0.000000000001"));
+
   /**
    * @param lambda the {@link Runnable} to execute that should throw a {@link Throwable}.
    * @param expectedError the {@link Class} reflecting the expected {@link Throwable}.
