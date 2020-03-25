@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.currency.Thanks;
@@ -39,18 +39,27 @@ public class ThankHeaderBeanTest extends TestCase {
   public void testFields() {
 
     List<ThankTokenHeaderField<?>> fields = new ArrayList<>();
-    checkField(ThankTokenHeaderField.VERSION, ThankVersion.of(999), ThankTokenHeaderBean::getVersion, ThankTokenHeaderBean::setVersion, fields);
-    checkField(ThankTokenHeaderField.ALGORITHM, TEST_ALGORITHM, ThankTokenHeaderBean::getAlgorithm, ThankTokenHeaderBean::setAlgorithm, fields);
-    checkField(ThankTokenHeaderField.CURRENCY, Thanks.INSTANCE, ThankTokenHeaderBean::getCurrency, ThankTokenHeaderBean::setCurrency, fields);
-    checkField(ThankTokenHeaderField.AMOUNT, ThankValue.VALUE_1, ThankTokenHeaderBean::getAmount, ThankTokenHeaderBean::setAmount, fields);
-    checkField(ThankTokenHeaderField.TIMESTAMP, ThankTimestamp.now(), ThankTokenHeaderBean::getTimestamp, ThankTokenHeaderBean::setTimestamp, fields);
-    checkField(ThankTokenHeaderField.LOCATION, TEST_LOCATION, ThankTokenHeaderBean::getLocation, ThankTokenHeaderBean::setLocation, fields);
-    checkField(ThankTokenHeaderField.TARGET, ThankTarget.PERSON_INCOME, ThankTokenHeaderBean::getTarget, ThankTokenHeaderBean::setTarget, fields);
-    checkField(ThankTokenHeaderField.RECIPIENT, TEST_KEY_PAIR_NP.getAddress(), ThankTokenHeaderBean::getRecipient, ThankTokenHeaderBean::setRecipient,
-        fields);
-    checkField(ThankTokenHeaderField.SIGNATURE, TEST_SIGNATURE, ThankTokenHeaderBean::getSignature, ThankTokenHeaderBean::setSignature, fields);
+    checkField(ThankTokenHeaderField.VERSION, ThankVersion.of(999), ThankTokenHeaderBean::getVersion,
+        ThankTokenHeaderBean::setVersion, fields);
+    checkField(ThankTokenHeaderField.ALGORITHM, TEST_ALGORITHM, ThankTokenHeaderBean::getAlgorithm,
+        ThankTokenHeaderBean::setAlgorithm, fields);
+    checkField(ThankTokenHeaderField.CURRENCY, Thanks.INSTANCE, ThankTokenHeaderBean::getCurrency,
+        ThankTokenHeaderBean::setCurrency, fields);
+    checkField(ThankTokenHeaderField.AMOUNT, ThankValue.VALUE_1, ThankTokenHeaderBean::getAmount,
+        ThankTokenHeaderBean::setAmount, fields);
+    checkField(ThankTokenHeaderField.TIMESTAMP, ThankTimestamp.now(), ThankTokenHeaderBean::getTimestamp,
+        ThankTokenHeaderBean::setTimestamp, fields);
+    checkField(ThankTokenHeaderField.LOCATION, TEST_LOCATION, ThankTokenHeaderBean::getLocation,
+        ThankTokenHeaderBean::setLocation, fields);
+    checkField(ThankTokenHeaderField.TARGET, ThankTarget.PERSON_INCOME, ThankTokenHeaderBean::getTarget,
+        ThankTokenHeaderBean::setTarget, fields);
+    checkField(ThankTokenHeaderField.RECIPIENT, TEST_KEY_PAIR_NP.getAddress(), ThankTokenHeaderBean::getRecipient,
+        ThankTokenHeaderBean::setRecipient, fields);
+    checkField(ThankTokenHeaderField.SIGNATURE, TEST_SIGNATURE, ThankTokenHeaderBean::getSignature,
+        ThankTokenHeaderBean::setSignature, fields);
 
-    assertThat(fields).containsExactly(ThankTokenHeaderField.getFields().getAll().toArray(new ThankTokenHeaderField[0]));
+    assertThat(fields)
+        .containsExactly(ThankTokenHeaderField.getFields().getAll().toArray(new ThankTokenHeaderField[0]));
   }
 
   private <T> void checkField(ThankTokenHeaderField<T> field, T value, Function<ThankTokenHeaderBean, T> getter,

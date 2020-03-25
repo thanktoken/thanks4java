@@ -2,7 +2,7 @@ package io.github.thanktoken.core.api.header;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
@@ -74,9 +74,10 @@ public class ThankHeaderFieldTest extends TestCase {
   public void testValues() {
 
     List<ThankTokenHeaderField<?>> values = ThankTokenHeaderField.getFields().getAll();
-    assertThat(values).containsExactly(ThankTokenHeaderField.VERSION, ThankTokenHeaderField.ALGORITHM, ThankTokenHeaderField.CURRENCY,
-        ThankTokenHeaderField.AMOUNT, ThankTokenHeaderField.TIMESTAMP, ThankTokenHeaderField.LOCATION, ThankTokenHeaderField.TARGET,
-        ThankTokenHeaderField.RECIPIENT, ThankTokenHeaderField.SIGNATURE);
+    assertThat(values).containsExactly(ThankTokenHeaderField.VERSION, ThankTokenHeaderField.ALGORITHM,
+        ThankTokenHeaderField.CURRENCY, ThankTokenHeaderField.AMOUNT, ThankTokenHeaderField.TIMESTAMP,
+        ThankTokenHeaderField.LOCATION, ThankTokenHeaderField.TARGET, ThankTokenHeaderField.RECIPIENT,
+        ThankTokenHeaderField.SIGNATURE);
   }
 
 }

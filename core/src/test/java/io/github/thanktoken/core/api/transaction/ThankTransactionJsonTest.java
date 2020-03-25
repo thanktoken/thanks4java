@@ -2,7 +2,7 @@ package io.github.thanktoken.core.api.transaction;
 
 import javax.json.stream.JsonParser;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.data.ThankDataObject;
@@ -40,9 +40,11 @@ public class ThankTransactionJsonTest extends TestCase {
     String json = ThankTransactionField.getFields().toJson(tx, header);
 
     // then
-    assertThat(json).isEqualTo("{\"ts\":\"" + TEST_TIMESTAMP_STRING + "\",\"rcp\":\"" + TEST_KEY_PAIR_PS.getAddress().formatBase64()
-        + "\",\"pp\":\"hello world\",\"ep\":\"" + TEST_ENCRYPTED_DATA_BASE64
-        + "\",\"ref\":{\"t\":\"mergeWith\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\"},\"sig\":\"" + TEST_SIGNATURE_BASE64 + "\"}");
+    assertThat(json)
+        .isEqualTo("{\"ts\":\"" + TEST_TIMESTAMP_STRING + "\",\"rcp\":\"" + TEST_KEY_PAIR_PS.getAddress().formatBase64()
+            + "\",\"pp\":\"hello world\",\"ep\":\"" + TEST_ENCRYPTED_DATA_BASE64
+            + "\",\"ref\":{\"t\":\"mergeWith\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\"},\"sig\":\""
+            + TEST_SIGNATURE_BASE64 + "\"}");
   }
 
 }

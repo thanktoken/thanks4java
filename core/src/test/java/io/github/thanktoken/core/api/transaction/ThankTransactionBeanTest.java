@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.timestamp.ThankTimestamp;
@@ -32,17 +32,21 @@ public class ThankTransactionBeanTest extends TestCase {
   public void testFields() {
 
     List<ThankTransactionField<?>> fields = new ArrayList<>();
-    checkField(ThankTransactionField.TIMESTAMP, ThankTimestamp.now(), ThankTransaction::getTimestamp, ThankTransactionBean::setTimestamp, fields);
-    checkField(ThankTransactionField.RECIPIENT, TEST_KEY_PAIR_PS.getAddress(), ThankTransaction::getRecipient, ThankTransactionBean::setRecipient,
-        fields);
-    checkField(ThankTransactionField.PUBLIC_PURPOSE, "Hello World", ThankTransaction::getPublicPurpose, ThankTransactionBean::setPublicPurpose,
-        fields);
+    checkField(ThankTransactionField.TIMESTAMP, ThankTimestamp.now(), ThankTransaction::getTimestamp,
+        ThankTransactionBean::setTimestamp, fields);
+    checkField(ThankTransactionField.RECIPIENT, TEST_KEY_PAIR_PS.getAddress(), ThankTransaction::getRecipient,
+        ThankTransactionBean::setRecipient, fields);
+    checkField(ThankTransactionField.PUBLIC_PURPOSE, "Hello World", ThankTransaction::getPublicPurpose,
+        ThankTransactionBean::setPublicPurpose, fields);
     checkField(ThankTransactionField.ENCRYPTED_PURPOSE, TEST_ENCRYPTED_DATA, ThankTransaction::getEncryptedPurpose,
         ThankTransactionBean::setEncryptedPurpose, fields);
-    checkField(ThankTransactionField.REFERENCE, TEST_REFERENCE, ThankTransaction::getReference, ThankTransactionBean::setReference, fields);
-    checkField(ThankTransactionField.SIGNATURE, TEST_SIGNATURE, ThankTransaction::getSignature, ThankTransactionBean::setSignature, fields);
+    checkField(ThankTransactionField.REFERENCE, TEST_REFERENCE, ThankTransaction::getReference,
+        ThankTransactionBean::setReference, fields);
+    checkField(ThankTransactionField.SIGNATURE, TEST_SIGNATURE, ThankTransaction::getSignature,
+        ThankTransactionBean::setSignature, fields);
 
-    assertThat(fields).containsExactly(ThankTransactionField.getFields().getAll().toArray(new ThankTransactionField[0]));
+    assertThat(fields)
+        .containsExactly(ThankTransactionField.getFields().getAll().toArray(new ThankTransactionField[0]));
   }
 
   private <T> void checkField(ThankTransactionField<T> field, T value, Function<ThankTransactionBean, T> getter,

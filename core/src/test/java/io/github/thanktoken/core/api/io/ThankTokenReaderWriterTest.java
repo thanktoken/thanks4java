@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestData;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithmRsa4096;
@@ -28,12 +28,12 @@ import io.github.thanktoken.core.api.value.ThankValue;
 public class ThankTokenReaderWriterTest extends Assertions implements TestData {
 
   private static final String EXPECTED_HEADER_STRING = "{\"ver\":999,\"alg\":\"rsa4k\",\"cur\":\"Gradido\",\"amt\":\"100\",\"ts\":\""
-      + TEST_TIMESTAMP_STRING + "\",\"loc\":\"" + TEST_LOCATION + "\",\"tgt\":\"P4\",\"rcp\":\"" + TEST_KEY_PAIR_NP.getAddress().formatBase64()
-      + "\"}";
+      + TEST_TIMESTAMP_STRING + "\",\"loc\":\"" + TEST_LOCATION + "\",\"tgt\":\"P4\",\"rcp\":\""
+      + TEST_KEY_PAIR_NP.getAddress().formatBase64() + "\"}";
 
   private static final String EXPECTED_TX_STRING = "{\"ts\":\"" + TEST_TIMESTAMP_STRING + "\",\"rcp\":\""
-      + TEST_KEY_PAIR_PS.getAddress().formatBase64() + "\",\"pp\":\"" + TEST_PUBLIC_PURPOSE + "\",\"ep\":\"" + TEST_ENCRYPTED_DATA_BASE64
-      + "\",\"sig\":\"" + TEST_SIGNATURE_BASE64 + "\"}";
+      + TEST_KEY_PAIR_PS.getAddress().formatBase64() + "\",\"pp\":\"" + TEST_PUBLIC_PURPOSE + "\",\"ep\":\""
+      + TEST_ENCRYPTED_DATA_BASE64 + "\",\"sig\":\"" + TEST_SIGNATURE_BASE64 + "\"}";
 
   /**
    * @return the {@link ThankWriter} to test.

@@ -5,7 +5,7 @@ package io.github.thanktoken.core.api;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.timestamp.ThankTimestamp;
 import io.github.thanktoken.core.api.token.ThankTokenBean;

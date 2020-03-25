@@ -1,6 +1,6 @@
 package io.github.thanktoken.core.api.validate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.identity.TestIdentityProvider;

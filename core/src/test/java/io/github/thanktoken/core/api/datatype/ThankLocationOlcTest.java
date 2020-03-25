@@ -2,7 +2,7 @@ package io.github.thanktoken.core.api.datatype;
 
 import java.security.SecureRandom;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.location.ThankLocationOlc;
@@ -56,7 +56,8 @@ public class ThankLocationOlcTest extends TestCase {
     assertThat(eastLongitude).isGreaterThan(westLongitude);
     assertThat(ThankLocationOlc.of(southLatitude, eastLongitude)).isEqualTo(location);
 
-    assertThat(ThankLocationOlc.ofRegions(location.getLatitudeRegion(), location.getLongitudeRegion())).isEqualTo(location);
+    assertThat(ThankLocationOlc.ofRegions(location.getLatitudeRegion(), location.getLongitudeRegion()))
+        .isEqualTo(location);
   }
 
   /** Test {@link ThankLocationOlc#getDistance(ThankLocationOlc)}. */
@@ -90,7 +91,9 @@ public class ThankLocationOlcTest extends TestCase {
       if (i > 0) {
         longitudeOffset = rnd.nextInt(i);
       }
-      assertThat(statureOfLiberty.getDistanceRegions(ThankLocationOlc.ofRegions(latitudeRegion, longitudeRegion + longitudeOffset))).isEqualTo(i);
+      assertThat(statureOfLiberty
+          .getDistanceRegions(ThankLocationOlc.ofRegions(latitudeRegion, longitudeRegion + longitudeOffset)))
+              .isEqualTo(i);
       latitudeRegion++;
     }
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.value.ThankValue;
@@ -53,8 +53,8 @@ public class ThankValueTest extends TestCase {
 
   private static void checkConstant(ThankValue value, String string, ThankValue sameValue) {
 
-    assertThat(value).isSameAs(sameValue).hasToString(string).isSameAs(ThankValue.of(string)).isSameAs(ThankValue.of(value.bigDecimalValue()))
-        .isSameAs(ThankValue.ofUnscaled(value.getUnscaledValue()));
+    assertThat(value).isSameAs(sameValue).hasToString(string).isSameAs(ThankValue.of(string))
+        .isSameAs(ThankValue.of(value.bigDecimalValue())).isSameAs(ThankValue.ofUnscaled(value.getUnscaledValue()));
   }
 
   /**
@@ -202,10 +202,12 @@ public class ThankValueTest extends TestCase {
     values.add(ThankValue.VALUE_0);
     values.add(ThankValue.of("42.42"));
     Collections.sort(values);
-    assertThat(values).containsExactly(ThankValue.VALUE_0, ThankValue.VALUE_0_00000001, ThankValue.VALUE_0_01, ThankValue.VALUE_0_02, ThankValue.VALUE_0_05,
-        ThankValue.VALUE_0_1, ThankValue.VALUE_0_2, ThankValue.VALUE_0_25, ThankValue.VALUE_0_5, ThankValue.VALUE_1, ThankValue.VALUE_2, ThankValue.VALUE_5,
-        ThankValue.VALUE_10, ThankValue.VALUE_11_11111111, ThankValue.VALUE_20, ThankValue.VALUE_25, ThankValue.VALUE_33_33333333, ThankValue.of("42.42"),
-        ThankValue.VALUE_50, ThankValue.VALUE_100, ThankValue.VALUE_1000, ThankValue.VALUE_1000);
+    assertThat(values).containsExactly(ThankValue.VALUE_0, ThankValue.VALUE_0_00000001, ThankValue.VALUE_0_01,
+        ThankValue.VALUE_0_02, ThankValue.VALUE_0_05, ThankValue.VALUE_0_1, ThankValue.VALUE_0_2, ThankValue.VALUE_0_25,
+        ThankValue.VALUE_0_5, ThankValue.VALUE_1, ThankValue.VALUE_2, ThankValue.VALUE_5, ThankValue.VALUE_10,
+        ThankValue.VALUE_11_11111111, ThankValue.VALUE_20, ThankValue.VALUE_25, ThankValue.VALUE_33_33333333,
+        ThankValue.of("42.42"), ThankValue.VALUE_50, ThankValue.VALUE_100, ThankValue.VALUE_1000,
+        ThankValue.VALUE_1000);
   }
 
   /**
@@ -244,7 +246,8 @@ public class ThankValueTest extends TestCase {
 
   private void checkAddOverflow(ThankValue value1, ThankValue value2) {
 
-    shouldThrow(() -> value1.add(value2), IllegalArgumentException.class, "Overflow whilst adding " + value1 + " and " + value2);
+    shouldThrow(() -> value1.add(value2), IllegalArgumentException.class,
+        "Overflow whilst adding " + value1 + " and " + value2);
   }
 
 }

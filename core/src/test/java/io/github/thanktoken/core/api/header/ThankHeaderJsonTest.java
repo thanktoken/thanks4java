@@ -7,7 +7,7 @@ import java.io.StringReader;
 import javax.json.Json;
 import javax.json.stream.JsonParser;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.currency.Thanks;
@@ -50,7 +50,7 @@ public class ThankHeaderJsonTest extends TestCase {
 
     // then
     assertThat(json).isEqualTo(
-        "{\"ver\":1,\"alg\":\"secp256k1\",\"cur\":\"Thanks\",\"amt\":\"0.1\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\",\"tgt\":\"P4\",\"rcp\":\"AVTVgCGfN3kcAwg/Gf0/mwAMf8jHw8CaFUifAITI56nZAA==\"}");
+        "{\"ver\":1,\"alg\":\"secp256k1\",\"cur\":\"Thanks\",\"amt\":\"0.1\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\",\"tgt\":\"P4\",\"rcp\":\"AWRU1YAhnzd5HAMIPxn9P5sADH/Ix8PAmhVInwCEyOep2Q==\"}");
   }
 
   /** Test of {@link ThankFieldMap#fromJson(JsonParser, ThankValueParser)} */
@@ -58,7 +58,7 @@ public class ThankHeaderJsonTest extends TestCase {
   public void testFromJson() {
 
     // given
-    String json = "{\"ver\":1,\"alg\":\"secp256k1\",\"amt\":\"0.1\",\"cur\":\"Thanks\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\",\"tgt\":\"P4\",\"rcp\":\"AVTVgCGfN3kcAwg/Gf0/mwAMf8jHw8CaFUifAITI56nZAA==\"}";
+    String json = "{\"ver\":1,\"alg\":\"secp256k1\",\"amt\":\"0.1\",\"cur\":\"Thanks\",\"ts\":\"19991231235959.000000001\",\"loc\":\"9F2C4M\",\"tgt\":\"P4\",\"rcp\":\"AWRU1YAhnzd5HAMIPxn9P5sADH/Ix8PAmhVInwCEyOep2Q==\"}";
     JsonParser jsonParser = Json.createParser(new StringReader(json));
 
     // when

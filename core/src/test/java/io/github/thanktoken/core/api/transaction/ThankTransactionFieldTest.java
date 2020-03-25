@@ -5,7 +5,7 @@ import java.util.List;
 import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
 import net.sf.mmm.crypto.crypt.EncryptedData;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.address.ThankAddress;
@@ -75,8 +75,9 @@ public class ThankTransactionFieldTest extends TestCase {
   public void testValues() {
 
     List<ThankTransactionField<?>> values = ThankTransactionField.getFields().getAll();
-    assertThat(values).containsExactly(ThankTransactionField.TIMESTAMP, ThankTransactionField.RECIPIENT, ThankTransactionField.PUBLIC_PURPOSE,
-        ThankTransactionField.ENCRYPTED_PURPOSE, ThankTransactionField.REFERENCE, ThankTransactionField.SIGNATURE);
+    assertThat(values).containsExactly(ThankTransactionField.TIMESTAMP, ThankTransactionField.RECIPIENT,
+        ThankTransactionField.PUBLIC_PURPOSE, ThankTransactionField.ENCRYPTED_PURPOSE, ThankTransactionField.REFERENCE,
+        ThankTransactionField.SIGNATURE);
   }
 
 }
