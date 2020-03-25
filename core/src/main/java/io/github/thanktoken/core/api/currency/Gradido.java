@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.github.thanktoken.core.api.address.ThankAddressType;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.target.ThankTarget;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.value.ThankValue;
@@ -34,8 +34,9 @@ public class Gradido extends ThankSustainableCurrency {
   public static final Gradido INSTANCE = new Gradido();
 
   private static final Set<ThankTarget> VALID_TARGETS = Collections
-      .unmodifiableSet(new HashSet<>(Arrays.asList(ThankTarget.PERSON_INCOME, ThankTarget.COMMUNITY_SECTOR, ThankTarget.COMMUNITY_AREA,
-          ThankTarget.COMMUNITY_REGION, ThankTarget.SUSTAINABILITY_SECTOR, ThankTarget.SUSTAINABILITY_AREA, ThankTarget.SUSTAINABILITY_REGION)));
+      .unmodifiableSet(new HashSet<>(Arrays.asList(ThankTarget.PERSON_INCOME, ThankTarget.COMMUNITY_SECTOR,
+          ThankTarget.COMMUNITY_AREA, ThankTarget.COMMUNITY_REGION, ThankTarget.SUSTAINABILITY_SECTOR,
+          ThankTarget.SUSTAINABILITY_AREA, ThankTarget.SUSTAINABILITY_REGION)));
 
   /**
    * The constructor.
@@ -58,7 +59,7 @@ public class Gradido extends ThankSustainableCurrency {
   }
 
   @Override
-  public ThankValue getAmount(ThankTarget target, ThankAddressType addressType) {
+  public ThankValue getAmount(ThankTarget target, ThankAddressHeader header) {
 
     if (target.isPersonIncome()) {
       // amount of 33.33333333/day are 12166.66666545/year (~1013.8/month)

@@ -8,7 +8,7 @@ import net.sf.mmm.binary.api.BinaryType;
 import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 
 import io.github.thanktoken.core.api.address.ThankAddress;
-import io.github.thanktoken.core.api.address.ThankAddressType;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.identity.ThankIdentity;
 import io.github.thanktoken.core.api.identity.ThankIdentityBean;
@@ -31,38 +31,39 @@ public class TestKeyPair {
   /**
    * The constructor.
    *
-   * @param addressType the {@link ThankAddressType} for the {@link #getAddress() address}.
+   * @param addressHeader the {@link ThankAddressHeader} for the {@link #getAddress() address}.
    * @param algorithm the {@link ThankAlgorithm} to use.
    */
-  public TestKeyPair(ThankAddressType addressType, ThankAlgorithm algorithm) {
+  public TestKeyPair(ThankAddressHeader addressHeader, ThankAlgorithm algorithm) {
 
-    this(algorithm.getKeyCreator().generateKeyPair(), addressType, algorithm);
+    this(algorithm.getKeyCreator().generateKeyPair(), addressHeader, algorithm);
   }
 
   /**
    * The constructor.
    *
    * @param keyBase64 the key pair / private key as base64 encoded {@link String}.
-   * @param addressType the {@link ThankAddressType} for the {@link #getAddress() address}.
+   * @param addressHeader the {@link ThankAddressHeader} for the {@link #getAddress() address}.
    * @param algorithm the {@link ThankAlgorithm} to use.
    */
-  public TestKeyPair(String keyBase64, ThankAddressType addressType, ThankAlgorithm algorithm) {
+  public TestKeyPair(String keyBase64, ThankAddressHeader addressHeader, ThankAlgorithm algorithm) {
 
-    this(algorithm.getKeyCreator().createKeyPair(BinaryType.parseBase64(keyBase64)), addressType, algorithm);
+    this(algorithm.getKeyCreator().createKeyPair(BinaryType.parseBase64(keyBase64)), addressHeader, algorithm);
   }
 
-  private TestKeyPair(AsymmetricKeyPair<?, ?> keyPair, ThankAddressType addressType, ThankAlgorithm algorithm) {
+  private TestKeyPair(AsymmetricKeyPair<?, ?> keyPair, ThankAddressHeader addressHeader, ThankAlgorithm algorithm) {
 
-    this(keyPair.getPrivateKey(), keyPair.getPublicKey(), addressType, algorithm);
+    this(keyPair.getPrivateKey(), keyPair.getPublicKey(), addressHeader, algorithm);
   }
 
-  private TestKeyPair(PrivateKey privateKey, PublicKey publicKey, ThankAddressType addressType, ThankAlgorithm algorithm) {
+  private TestKeyPair(PrivateKey privateKey, PublicKey publicKey, ThankAddressHeader addressHeader,
+      ThankAlgorithm algorithm) {
 
     super();
     this.algorithm = algorithm;
     this.privateKey = privateKey;
     this.publicKey = publicKey;
-    this.address = algorithm.createAddress(publicKey, addressType);
+    this.address = algorithm.createAddress(publicKey, addressHeader);
     ThankIdentityBean bean = new ThankIdentityBean();
     bean.setLatestAddress(this.address);
     bean.setLocation(TestData.TEST_LOCATION);

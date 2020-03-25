@@ -5,7 +5,7 @@ package io.github.thanktoken.core.api.currency;
 import java.math.BigDecimal;
 import java.time.Instant;
 
-import io.github.thanktoken.core.api.address.ThankAddressType;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.target.ThankTarget;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.token.header.ThankTokenHeader;
@@ -32,23 +32,11 @@ public abstract class ThankSustainableCurrency extends ThankCurrency {
 
   /**
    * @param target the {@link ThankTarget} the token was created for.
+   * @param header the {@link ThankAddressHeader}.
    * @return the proper {@link ThankTokenHeader#getAmount() amount} for creation according to the given
    *         {@link ThankTarget}.
    */
-  public ThankValue getAmount(ThankTarget target, ThankAddressType addressType) {
-
-    if (addressType.isNaturalPerson()) {
-      if (target.isPersonIncome()) {
-        return ThankValue.VALUE_32;
-      }
-      if (ThankAddressType.NATURAL_PERSON_CHILD.equals(addressType)) {
-
-      } else {
-
-      }
-    }
-    return null;
-  }
+  public abstract ThankValue getAmount(ThankTarget target, ThankAddressHeader header);
 
   /**
    * @return the factor less than {@code 1} for the retaining of the {@link #getValue(ThankToken, Instant) value} per
@@ -64,16 +52,16 @@ public abstract class ThankSustainableCurrency extends ThankCurrency {
       // token was created by split or merge - any positive value is possible
       return;
     }
-    ThankValue expectedAmount = getAmount(header.getTarget(), header.getRecipient().getType());
+    ThankValue expectedAmount = getAmount(header.getTarget(), header.getRecipient().getHeader());
     ThankValidationFailureMismatch.validate(ThankTokenHeaderField.AMOUNT, header, expectedAmount, receiver);
   }
 
   @Override
   public ThankValue getValue(ThankToken token, Instant time) {
 
-    ThankValue value = getValue(token, time, getDailyRetainingFactor());
+    ThankValue currentValue = getValue(token, time, getDailyRetainingFactor());
     int txCount = token.getTransactions().size();
-    return ThankValue.ofUnscaled(value.getUnscaledValue() - txCount);
+    return ThankValue.ofUnscaled(currentValue.getUnscaledValue() - txCount);
   }
 
 }

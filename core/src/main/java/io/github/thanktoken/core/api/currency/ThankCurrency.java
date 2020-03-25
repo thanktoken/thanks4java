@@ -81,13 +81,15 @@ public abstract class ThankCurrency extends StringType {
 
     T actualValue = field.get(header);
     if (!Objects.equals(actualValue, expectedValue)) {
-      failureReceiver.add(new ThankValidationFailureMismatch(field.getName(), "" + actualValue, "" + expectedValue, header));
+      failureReceiver
+          .add(new ThankValidationFailureMismatch(field.getName(), "" + actualValue, "" + expectedValue, header));
     }
   }
 
   /**
    * @param <V> generic type of the value to validate.
-   * @param header the {@link ThankTokenHeader} to {@link #validate(ThankTokenHeader) validate}.
+   * @param header the {@link ThankTokenHeader} to {@link #validate(ThankTokenHeader, ThankValidationFailureReceiver)
+   *        validate}.
    * @param actual the actual value to validate.
    * @param expected the {@link Set} containing the allowed values.
    */
@@ -130,7 +132,8 @@ public abstract class ThankCurrency extends StringType {
    */
   protected void validateAmount(ThankTokenHeader header, ThankValidationFailureReceiver receiver) {
 
-    ThankValidationFailureOutOfRange.validate(ThankTokenHeaderField.AMOUNT, header, getMinAmount(), getMaxAmount(), receiver);
+    ThankValidationFailureOutOfRange.validate(ThankTokenHeaderField.AMOUNT, header, getMinAmount(), getMaxAmount(),
+        receiver);
   }
 
   /**

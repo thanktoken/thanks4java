@@ -9,6 +9,7 @@ import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
 import net.sf.mmm.crypto.asymmetric.sign.rsa.SignatureRsa;
 import net.sf.mmm.crypto.crypt.EncryptedData;
 
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.address.ThankAddressType;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithmSecp256k1;
@@ -50,11 +51,12 @@ public interface TestData {
   ThankValue TEST_AMOUNT = ThankValue.VALUE_10;
 
   /** {@link TestKeyPair} of natural person for testing. */
-  TestKeyPair TEST_KEY_PAIR_NP = new TestKeyPair("0ud24ahpdi7jTBqCm3VnpjPr4rMro2+OtH1Dxtw1SUo=", ThankAddressType.NATURAL_PERSON_ADULT,
-      TEST_ALGORITHM);
+  TestKeyPair TEST_KEY_PAIR_NP = new TestKeyPair("0ud24ahpdi7jTBqCm3VnpjPr4rMro2+OtH1Dxtw1SUo=",
+      ThankAddressHeader.ofNaturalPerson(100), TEST_ALGORITHM);
 
   /** {@link TestKeyPair} of pseudonymous identity for testing. */
-  TestKeyPair TEST_KEY_PAIR_PS = new TestKeyPair("XoIhkBnQdcZamrUUmS/Rfl6WH9hcC3aDq9OdcIC5m0s=", ThankAddressType.PSEUDONYMOUS, TEST_ALGORITHM);
+  TestKeyPair TEST_KEY_PAIR_PS = new TestKeyPair("XoIhkBnQdcZamrUUmS/Rfl6WH9hcC3aDq9OdcIC5m0s=",
+      ThankAddressType.PSEUDONYMOUS.asHeader(0), TEST_ALGORITHM);
 
   /** Base64 encoded string of {@link #TEST_SIGNATURE}. */
   String TEST_SIGNATURE_BASE64 = "Dw4NDAsKCQgHBgUEAwIBAA==";
@@ -75,25 +77,26 @@ public interface TestData {
   ThankTimestamp TEST_TIMESTAMP = new ThankTimestamp(Instant.parse("1999-12-31T23:59:59.000000001Z"));
 
   /** {@link ThankTokenReferenceType} for testing. */
-  ThankTokenReferenceType TEST_REFERENCE = new ThankTokenReferenceType(AttributeReadReferenceType.TYPE_MERGE_WITH, TEST_TIMESTAMP, TEST_LOCATION,
-      null, null, null);
+  ThankTokenReferenceType TEST_REFERENCE = new ThankTokenReferenceType(AttributeReadReferenceType.TYPE_MERGE_WITH,
+      TEST_TIMESTAMP, TEST_LOCATION, null, null, null);
 
   /**
    * {@link io.github.thanktoken.core.api.transaction.ThankTransaction#getPublicPurpose() public purpose} for testing.
    */
   String TEST_PUBLIC_PURPOSE = "Donation for charity";
 
-  SignatureBinary TEST_TOKEN_P4_HEADER_SIGNATURE = TEST_ALGORITHM.getSignatureFactory()
-      .createSignature(BinaryType.parseBase64("IOHvCChErKHm02o6mjxCNAoyFvJ+UgA/5Ir806wI/5d0G1RUXYonfioTRy0PDHZu8zwyb/2dk+vF5Xr2+N/ko+c="));
+  SignatureBinary TEST_TOKEN_P4_HEADER_SIGNATURE = TEST_ALGORITHM.getSignatureFactory().createSignature(BinaryType
+      .parseBase64("IM8bvhM5X9ObN8i7mv495lugn092dPBIY54aW2l5s39AbsD0QjjPuL/0PF6/Ud0ZmJVoPi7KavPVbWoJjCWdtbo="));
 
-  ThankTokenHeader TEST_TOKEN_P4_HEADER = new ThankTokenHeaderType(TEST_VERSION, TEST_ALGORITHM, TEST_CURRENCY, ThankValue.VALUE_32, TEST_TIMESTAMP,
-      TEST_LOCATION, ThankTarget.PERSON_INCOME, null, TEST_KEY_PAIR_NP.getAddress(), TEST_TOKEN_P4_HEADER_SIGNATURE);
+  ThankTokenHeader TEST_TOKEN_P4_HEADER = new ThankTokenHeaderType(TEST_VERSION, TEST_ALGORITHM, TEST_CURRENCY,
+      ThankValue.VALUE_32, TEST_TIMESTAMP, TEST_LOCATION, ThankTarget.PERSON_INCOME, null,
+      TEST_KEY_PAIR_NP.getAddress(), TEST_TOKEN_P4_HEADER_SIGNATURE);
 
-  SignatureBinary TEST_TOKEN_P4_TX_0_SIGNATURE = TEST_ALGORITHM.getSignatureFactory()
-      .createSignature(BinaryType.parseBase64("ICoImylwg6mw2fF/rQtpXZg3age6+4qYYsnUw0EgROppDwRVC6xcJqllpCmsNcJla89jEZZw8JaUci/96g92VmY="));
+  SignatureBinary TEST_TOKEN_P4_TX_0_SIGNATURE = TEST_ALGORITHM.getSignatureFactory().createSignature(BinaryType
+      .parseBase64("IE1+gOYNOSviGu8rlmz3v3LFcUGI0u15pQ3IQaEYLbktQ6pd7h1fw4jMW28HlVRDQ7rhHyxH/BygXOyGG+Dcdpk="));
 
-  ThankTransaction TEST_TOKEN_P4_TX_0 = new ThankTransactionType(ThankTimestamp.of("20000101000101.000000001"), TEST_KEY_PAIR_PS.getAddress(), null,
-      TEST_ENCRYPTED_DATA, null, TEST_TOKEN_P4_TX_0_SIGNATURE);
+  ThankTransaction TEST_TOKEN_P4_TX_0 = new ThankTransactionType(ThankTimestamp.of("20000101000101.000000001"),
+      TEST_KEY_PAIR_PS.getAddress(), null, TEST_ENCRYPTED_DATA, null, TEST_TOKEN_P4_TX_0_SIGNATURE);
 
   ThankToken TEST_TOKEN_P4 = new ThankTokenType(TEST_TOKEN_P4_HEADER).addTransaction(TEST_TOKEN_P4_TX_0);
 

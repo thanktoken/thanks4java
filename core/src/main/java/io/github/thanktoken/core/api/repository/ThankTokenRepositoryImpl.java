@@ -4,6 +4,7 @@ import io.github.thanktoken.core.api.id.ThankTokenIdType;
 import io.github.thanktoken.core.api.io.ThankNetworkException;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.validate.ThankValidationException;
+import io.github.thanktoken.core.api.validate.ThankValidationFailureMode;
 import io.github.thanktoken.core.api.validate.ThankValidationResult;
 import io.github.thanktoken.core.api.validate.ThankValidationResultImpl;
 import io.github.thanktoken.core.api.validate.ThankValidator;
@@ -14,7 +15,8 @@ import io.github.thanktoken.core.api.validate.failure.ThankValidationFailureExce
  *
  * @since 1.0.0
  */
-public class ThankTokenRepositoryImpl extends AbstractThankTokenRepository implements ThankTokenRepositoryWithValidation {
+public class ThankTokenRepositoryImpl extends AbstractThankTokenRepository
+    implements ThankTokenRepositoryWithValidation {
 
   private final ThankTokenRepositoryRemoteService remoteService;
 
@@ -29,8 +31,8 @@ public class ThankTokenRepositoryImpl extends AbstractThankTokenRepository imple
    * @param cache
    * @param validator
    */
-  public ThankTokenRepositoryImpl(ThankTokenRepositoryRemoteService remoteService, ThankTokenRepositoryLocalCacheImpl cache,
-      ThankValidator validator) {
+  public ThankTokenRepositoryImpl(ThankTokenRepositoryRemoteService remoteService,
+      ThankTokenRepositoryLocalCacheImpl cache, ThankValidator validator) {
 
     super();
     this.remoteService = remoteService;
@@ -75,7 +77,8 @@ public class ThankTokenRepositoryImpl extends AbstractThankTokenRepository imple
         try {
           validationResult = this.validator.validate(token);
         } catch (ThankValidationException e) {
-          ThankValidationResultImpl resultImpl = new ThankValidationResultImpl();
+          ThankValidationResultImpl resultImpl = new ThankValidationResultImpl(
+              ThankValidationFailureMode.RETURN_RESULT);
           resultImpl.add(new ThankValidationFailureException(token, e));
           validationResult = resultImpl;
         }

@@ -20,7 +20,7 @@ public interface AttributeReadHash extends ThankDataObject {
    *         {@link io.github.thanktoken.core.api.field.ThankFieldMap#getAll() well-defined order}. This is a transient
    *         property only used internally to cache intermediate hashes and save performance.
    * @see io.github.thanktoken.core.api.token.header.AbstractThankTokenHeader#createHashes()
-   * @see io.github.thanktoken.core.api.transaction.AbstractThankTransaction#createHashes(io.github.thanktoken.core.api.ThankToken,
+   * @see io.github.thanktoken.core.api.transaction.AbstractThankTransaction#createHashes(io.github.thanktoken.core.api.token.ThankToken,
    *      Hash)
    */
   Hash getHash2Sign();
@@ -37,7 +37,7 @@ public interface AttributeReadHash extends ThankDataObject {
    *         because for multi-signatures multiple values can be valid and it is relevant who signed the transaction.
    *         This is a transient property only used internally to cache intermediate hashes and save performance.
    * @see io.github.thanktoken.core.api.token.header.AbstractThankTokenHeader#createHashes()
-   * @see io.github.thanktoken.core.api.transaction.AbstractThankTransaction#createHashes(io.github.thanktoken.core.api.ThankToken,
+   * @see io.github.thanktoken.core.api.transaction.AbstractThankTransaction#createHashes(io.github.thanktoken.core.api.token.ThankToken,
    *      Hash)
    */
   Hash getHash2Chain();

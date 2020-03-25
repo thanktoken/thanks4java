@@ -13,7 +13,7 @@ import io.github.thanktoken.core.api.version.ThankVersion;
  */
 public class ThankAddressSimple extends ThankAddress {
 
-  private ThankAddressType type;
+  private ThankAddressHeader header;
 
   private PublicKey publicKey;
 
@@ -40,12 +40,12 @@ public class ThankAddressSimple extends ThankAddress {
   }
 
   @Override
-  public ThankAddressType getType() {
+  public ThankAddressHeader getHeader() {
 
-    if (this.type == null) {
-      this.type = ThankAddressType.of(getDataByte(0));
+    if (this.header == null) {
+      this.header = ThankAddressHeader.of(getDataByte(0), getDataByte(1));
     }
-    return this.type;
+    return this.header;
   }
 
   /**

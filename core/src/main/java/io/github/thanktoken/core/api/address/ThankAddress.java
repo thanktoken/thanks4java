@@ -25,12 +25,12 @@ public abstract class ThankAddress extends CryptoBinary {
   }
 
   /**
-   * @return the {@link ThankAddressType type} of this address. Please note that using the wrong type will render your
-   *         tokens, transactions and messages invalid. Official {@link ThankAddress}es have to be certified and
+   * @return the {@link ThankAddressHeader header} of this address. Please note that using the wrong header will render
+   *         your tokens, transactions and messages invalid. Official {@link ThankAddress}es have to be certified and
    *         confirmed via the {@link io.github.thanktoken.core.api.identity.ThankIdentity}-directory (see
    *         {@link io.github.thanktoken.core.api.identity.ThankIdentityProvider}).
    */
-  public abstract ThankAddressType getType();
+  public abstract ThankAddressHeader getHeader();
 
   /**
    * @return the ID (hash-code) of this address that may be used for

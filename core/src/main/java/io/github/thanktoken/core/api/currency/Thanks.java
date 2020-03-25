@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import io.github.thanktoken.core.api.address.ThankAddressType;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.target.ThankTarget;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.token.header.ThankTokenHeader;
@@ -36,8 +36,9 @@ public class Thanks extends ThankSustainableCurrency {
   /** The singleton instance. */
   public static final Thanks INSTANCE = new Thanks();
 
-  private static final Set<ThankTarget> VALID_TARGETS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ThankTarget.PERSON_INCOME,
-      ThankTarget.COMMUNITY_WORLD, ThankTarget.COMMUNITY_SECTOR, ThankTarget.COMMUNITY_AREA, ThankTarget.COMMUNITY_REGION)));
+  private static final Set<ThankTarget> VALID_TARGETS = Collections
+      .unmodifiableSet(new HashSet<>(Arrays.asList(ThankTarget.PERSON_INCOME, ThankTarget.COMMUNITY_WORLD,
+          ThankTarget.COMMUNITY_SECTOR, ThankTarget.COMMUNITY_AREA, ThankTarget.COMMUNITY_REGION)));
 
   /**
    * The constructor.
@@ -53,48 +54,38 @@ public class Thanks extends ThankSustainableCurrency {
     return VALID_TARGETS;
   }
 
-  /**
-   * @param target the {@link ThankTarget} the token was created for.
-   * @return the proper {@link ThankTokenHeader#getAmount() amount} for creation according to the given
-   *         {@link ThankTarget}.
-   */
   @Override
-  public ThankValue getAmount(ThankTarget target, ThankAddressType addressType) {
+  public ThankValue getAmount(ThankTarget target, ThankAddressHeader header) {
 
-    if (addressType.isNaturalPerson()) {
-      if (ThankAddressType.NATURAL_PERSON_CHILD.equals(addressType)) {
-        if (target.isPersonIncome()) {
-          return ThankValue.VALUE_16;
-        } else if (target.isTypeCommunity()) {
-          switch (target.getLevel()) {
-            case 0:
-              return ThankValue.VALUE_1;
-            case 1:
-              return ThankValue.VALUE_2;
-            case 2:
-              return ThankValue.VALUE_4;
-            case 3:
-              return ThankValue.VALUE_9;
-          }
+    ThankValue amount = null;
+    if (header.getType().isNaturalPerson()) {
+      if (target.isPersonIncome()) {
+        amount = ThankValue.VALUE_32;
+      } else if (target.isTypeCommunity()) {
+        switch (target.getLevel()) {
+          case 0:
+            amount = ThankValue.VALUE_2;
+            break;
+          case 1:
+            amount = ThankValue.VALUE_4;
+            break;
+          case 2:
+            amount = ThankValue.VALUE_9;
+            break;
+          case 3:
+            amount = ThankValue.VALUE_16;
+            break;
         }
-      } else {
-        if (target.isPersonIncome()) {
-          return ThankValue.VALUE_32;
-        } else if (target.isTypeCommunity()) {
-          switch (target.getLevel()) {
-            case 0:
-              return ThankValue.VALUE_2;
-            case 1:
-              return ThankValue.VALUE_4;
-            case 2:
-              return ThankValue.VALUE_8;
-            case 3:
-              return ThankValue.VALUE_18;
-          }
+      }
+      if (amount != null) {
+        int belonging = header.getDetail();
+        if (belonging != 100) {
+          long unscaled = (amount.getUnscaledValue() * belonging) / 100;
+          amount = ThankValue.ofUnscaled(unscaled);
         }
       }
     }
-    return null;
+    return amount;
   }
 
   @Override

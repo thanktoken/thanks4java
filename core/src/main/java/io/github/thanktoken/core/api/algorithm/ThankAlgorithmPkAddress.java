@@ -8,9 +8,9 @@ import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
 import net.sf.mmm.crypto.hash.Hash;
 
 import io.github.thanktoken.core.api.address.ThankAddress;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.address.ThankAddressSimple;
 import io.github.thanktoken.core.api.address.ThankAddressSimple.ThankAddressAccess;
-import io.github.thanktoken.core.api.address.ThankAddressType;
 
 /**
  * Abstract base implementation of {@link ThankAlgorithm} where the {@link CryptoBinaryFormat#FORMAT_COMPACT compact}
@@ -40,10 +40,10 @@ public abstract class ThankAlgorithmPkAddress extends ThankAlgorithm {
   }
 
   @Override
-  public ThankAddress createAddress(PublicKey key, ThankAddressType type) {
+  public ThankAddress createAddress(PublicKey key, ThankAddressHeader header) {
 
     byte[] data = getKeyCreator().asData(key, CryptoBinaryFormat.FORMAT_COMPACT);
-    byte[] address = type.appendBinary(data);
+    byte[] address = header.appendBinary(data);
     return new ThankAddressSimple(address, key);
   }
 

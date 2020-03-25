@@ -10,8 +10,8 @@ import net.sf.mmm.crypto.hash.Hash;
 import net.sf.mmm.crypto.hash.HashCreator;
 
 import io.github.thanktoken.core.api.address.ThankAddress;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.address.ThankAddressSimple;
-import io.github.thanktoken.core.api.address.ThankAddressType;
 
 /**
  * Abstract base implementation of {@link ThankAlgorithm} where {@link PublicKey} can be restored from
@@ -40,12 +40,12 @@ public abstract class ThankAlgorithmPkSignature extends ThankAlgorithm {
   }
 
   @Override
-  public ThankAddress createAddress(PublicKey key, ThankAddressType type) {
+  public ThankAddress createAddress(PublicKey key, ThankAddressHeader header) {
 
     byte[] raw = getKeyCreator().asData(key, CryptoBinaryFormat.FORMAT_COMPACT);
     HashCreator hashCreator = getHashFactory().newHashCreator();
     byte[] hash = hashCreator.hash(raw, true);
-    byte[] data = type.appendBinary(hash);
+    byte[] data = header.appendBinary(hash);
     return new ThankAddressSimple(data);
   }
 
@@ -53,7 +53,7 @@ public abstract class ThankAlgorithmPkSignature extends ThankAlgorithm {
   protected PublicKey createPublicKey(ThankAddress address, SignatureBinary signature, Hash messageHash) {
 
     PublicKey publicKey = ((SignatureWithPublicKeyRecovery) signature).recoverPublicKey(messageHash.getData());
-    ThankAddress pkAddress = createAddress(publicKey, address.getType());
+    ThankAddress pkAddress = createAddress(publicKey, address.getHeader());
     if (!pkAddress.equals(address)) {
       throw new IllegalStateException("Address does not match to signature!");
     }

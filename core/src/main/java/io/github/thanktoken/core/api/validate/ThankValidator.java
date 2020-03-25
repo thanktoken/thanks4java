@@ -26,10 +26,13 @@ public interface ThankValidator {
    *
    * @param token the {@link ThankToken} to validate.
    * @param mode the {@link ThankValidationMode} that defines the details how to validate the {@link ThankToken}.
-   * @return the {@link ThankValidationResult result} of the validation.
+   * @return the {@link ThankValidationResult result} of the validation. May be in{@link ThankValidationResult#isValid()
+   *         valid} if {@link ThankValidationMode#getFailureMode()} is {@code false}.
+   * @throws ThankValidationException if {@link ThankValidationMode#getFailureMode()} is {@code true} and a
+   *         validation error occurred.
    * @throws ThankNetworkException in case of a (temporary) network error. Validation may be retried.
    */
-  ThankValidationResult validate(ThankToken token, ThankValidationMode mode) throws ThankNetworkException;
+  ThankValidationResult validate(ThankToken token, ThankValidationMode mode) throws ThankValidationException, ThankNetworkException;
 
   // /**
   // * Validates the given {@link ThankTransaction}.
@@ -61,9 +64,12 @@ public interface ThankValidator {
    * @param message the {@link ThankMessage} to validate.
    * @param mode the {@link ThankValidationMode} that defines the details how to validate the {@link ThankMessage}.
    *        Specific {@link ThankValidationMode} may typically only be specified for testing.
-   * @return the {@link ThankValidationResult result} of the validation.
+   * @return the {@link ThankValidationResult result} of the validation. May be in{@link ThankValidationResult#isValid()
+   *         valid} if {@link ThankValidationMode#getFailureMode()} is {@code false}.
+   * @throws ThankValidationException if {@link ThankValidationMode#getFailureMode()} is {@code true} and a
+   *         validation error occurred.
    * @throws ThankNetworkException in case of a (temporary) network error. Validation may be retried.
    */
-  ThankValidationResult validateMessage(ThankMessage message, ThankValidationMode mode) throws ThankNetworkException;
+  ThankValidationResult validateMessage(ThankMessage message, ThankValidationMode mode) throws ThankValidationException, ThankNetworkException;
 
 }

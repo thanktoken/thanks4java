@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.github.thanktoken.core.api.validate.failure.ThankValidationFailure;
+import io.github.thanktoken.core.api.validate.failure.ThankValidationFailureException;
 
 /**
  * Implementation of {@link ThankValidationResult}.
@@ -14,7 +15,20 @@ import io.github.thanktoken.core.api.validate.failure.ThankValidationFailure;
  */
 public class ThankValidationResultImpl implements ThankValidationResult, ThankValidationFailureReceiver {
 
+  private final ThankValidationFailureMode failureMode;
+
   private List<ThankValidationFailure> failures;
+
+  /**
+   * The constructor.
+   *
+   * @param failureMode the {@link ThankValidationFailureMode}.
+   */
+  public ThankValidationResultImpl(ThankValidationFailureMode failureMode) {
+
+    super();
+    this.failureMode = failureMode;
+  }
 
   @Override
   public List<ThankValidationFailure> getFailures() {
@@ -33,14 +47,32 @@ public class ThankValidationResultImpl implements ThankValidationResult, ThankVa
       this.failures = new ArrayList<>();
     }
     this.failures.add(failure);
+    if (this.failureMode == ThankValidationFailureMode.THROW_ON_FIRST_FAILURE) {
+      Throwable error = null;
+      if (failure instanceof ThankValidationFailureException) {
+        error = failure.getError();
+      }
+      throw new ThankValidationException(this, error);
+    }
   }
 
-  void makeImmutable() {
+  void complete() {
 
     if (this.failures == null) {
       this.failures = Collections.emptyList();
     } else {
+      throwIfInvalid();
       this.failures = Collections.unmodifiableList(this.failures);
+    }
+  }
+
+  void throwIfInvalid() {
+
+    if (this.failureMode.isThrowException()) {
+      ThankValidationException exception = ThankValidationException.of(this);
+      if (exception != null) {
+        throw exception;
+      }
     }
   }
 

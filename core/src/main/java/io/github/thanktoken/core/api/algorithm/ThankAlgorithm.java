@@ -16,7 +16,7 @@ import net.sf.mmm.util.exception.api.DuplicateObjectException;
 import net.sf.mmm.util.exception.api.ObjectNotFoundException;
 
 import io.github.thanktoken.core.api.address.ThankAddress;
-import io.github.thanktoken.core.api.address.ThankAddressType;
+import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.datatype.StringType;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
@@ -76,7 +76,8 @@ public abstract class ThankAlgorithm extends StringType {
    */
   public ThankAlgorithm(String value, AsymmetricAccess<?, ?, ?, ?, ?> asymetricAccess) {
 
-    this(value, asymetricAccess, asymetricAccess, asymetricAccess.newKeyCreator(), asymetricAccess.getSignatureFactoryWithoutHash());
+    this(value, asymetricAccess, asymetricAccess, asymetricAccess.newKeyCreator(),
+        asymetricAccess.getSignatureFactoryWithoutHash());
   }
 
   /**
@@ -123,10 +124,10 @@ public abstract class ThankAlgorithm extends StringType {
 
   /**
    * @param key the {@link PublicKey}.
-   * @param type the {@link ThankAddressType type} of the {@link ThankAddress} to create.
+   * @param header the {@link ThankAddressHeader header} of the {@link ThankAddress} to create.
    * @return the {@link ThankAddress} for the given {@link PublicKey}.
    */
-  public abstract ThankAddress createAddress(PublicKey key, ThankAddressType type);
+  public abstract ThankAddress createAddress(PublicKey key, ThankAddressHeader header);
 
   @Override
   public int getMaxLength() {

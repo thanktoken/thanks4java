@@ -1,12 +1,10 @@
 package io.github.thanktoken.core.api.address;
 
-import net.sf.mmm.binary.api.Binary;
-
 /**
- * Type of a {@link ThankAddress}. {@link #isPseudonymous()}, {@link #isNaturalPerson()},
- * {@link #isIdentityServiceOfficer()}, etc.
+ * Type of a {@link ThankAddress} such as {@link #PSEUDONYMOUS}, {@link #NATURAL_PERSON}, etc.
  *
- * @see ThankAddress#getType()
+ * @see ThankAddressHeader#getType()
+ * @see ThankAddress#getHeader()
  * @since 1.0.0
  */
 public class ThankAddressType {
@@ -15,118 +13,116 @@ public class ThankAddressType {
   public static final ThankAddressType PSEUDONYMOUS = new ThankAddressType(0);
 
   /** {@link ThankAddressType} for a (certified) {@link #isNaturalPerson() natural person}. */
-  public static final ThankAddressType NATURAL_PERSON_CHILD = new ThankAddressType(1);
-
-  /** {@link ThankAddressType} for a (certified) {@link #isNaturalPerson() natural person}. */
-  public static final ThankAddressType NATURAL_PERSON_ADULT = new ThankAddressType(2);
+  public static final ThankAddressType NATURAL_PERSON = new ThankAddressType(1);
 
   /** {@link ThankAddressType} for a {@link #isIdentityServiceOfficer() identity service officer}. */
-  public static final ThankAddressType IDENTIFICATION_SERVICE_OFFICER = new ThankAddressType(3);
+  public static final ThankAddressType IDENTIFICATION_SERVICE_OFFICER = new ThankAddressType(2);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityRepresentative() community representative} of {@link #getLevel()
    * level} {@code 0} (world).
    */
-  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L0 = new ThankAddressType(4);
+  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L0 = new ThankAddressType(3);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityRepresentative() community representative} of {@link #getLevel()
    * level} {@code 1} (sector).
    */
-  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L1 = new ThankAddressType(5);
+  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L1 = new ThankAddressType(4);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityRepresentative() community representative} of {@link #getLevel()
    * level} {@code 2} (area).
    */
-  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L2 = new ThankAddressType(6);
+  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L2 = new ThankAddressType(5);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityRepresentative() community representative} of {@link #getLevel()
    * level} {@code 3} (region).
    */
-  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L3 = new ThankAddressType(7);
+  public static final ThankAddressType COMMUNITY_REPRESENTATIVE_L3 = new ThankAddressType(6);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityProject() community project} of {@link #getLevel() level}
    * {@code 0} (world).
    */
-  public static final ThankAddressType COMMUNITY_PROJECT_L0 = new ThankAddressType(8);
+  public static final ThankAddressType COMMUNITY_PROJECT_L0 = new ThankAddressType(7);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityProject() community project} of {@link #getLevel() level}
    * {@code 1} (sector).
    */
-  public static final ThankAddressType COMMUNITY_PROJECT_L1 = new ThankAddressType(9);
+  public static final ThankAddressType COMMUNITY_PROJECT_L1 = new ThankAddressType(8);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityProject() community project} of {@link #getLevel() level}
    * {@code 2} (area).
    */
-  public static final ThankAddressType COMMUNITY_PROJECT_L2 = new ThankAddressType(10);
+  public static final ThankAddressType COMMUNITY_PROJECT_L2 = new ThankAddressType(9);
 
   /**
    * {@link ThankAddressType} for a {@link #isCommunityProject() community project} of {@link #getLevel() level}
    * {@code 3} (region).
    */
-  public static final ThankAddressType COMMUNITY_PROJECT_L3 = new ThankAddressType(11);
+  public static final ThankAddressType COMMUNITY_PROJECT_L3 = new ThankAddressType(10);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityRepresentative() sustainability representative} of
    * {@link #getLevel() level} {@code 0} (world).
    */
-  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L0 = new ThankAddressType(12);
+  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L0 = new ThankAddressType(11);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityRepresentative() sustainability representative} of
    * {@link #getLevel() level} {@code 1} (sector).
    */
-  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L1 = new ThankAddressType(13);
+  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L1 = new ThankAddressType(12);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityRepresentative() sustainability representative} of
    * {@link #getLevel() level} {@code 2} (area).
    */
-  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L2 = new ThankAddressType(14);
+  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L2 = new ThankAddressType(13);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityRepresentative() sustainability representative} of
    * {@link #getLevel() level} {@code 3} (region).
    */
-  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L3 = new ThankAddressType(15);
+  public static final ThankAddressType SUSTAINABILITY_REPRESENTATIVE_L3 = new ThankAddressType(14);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityProject() sustainability project} of {@link #getLevel()
    * level} {@code 0} (world).
    */
-  public static final ThankAddressType SUSTAINABILITY_PROJECT_L0 = new ThankAddressType(16);
+  public static final ThankAddressType SUSTAINABILITY_PROJECT_L0 = new ThankAddressType(15);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityProject() sustainability project} of {@link #getLevel()
    * level} {@code 1} (sector).
    */
-  public static final ThankAddressType SUSTAINABILITY_PROJECT_L1 = new ThankAddressType(17);
+  public static final ThankAddressType SUSTAINABILITY_PROJECT_L1 = new ThankAddressType(16);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityProject() sustainability project} of {@link #getLevel()
    * level} {@code 2} (area).
    */
-  public static final ThankAddressType SUSTAINABILITY_PROJECT_L2 = new ThankAddressType(18);
+  public static final ThankAddressType SUSTAINABILITY_PROJECT_L2 = new ThankAddressType(17);
 
   /**
    * {@link ThankAddressType} for a {@link #isSustainabilityProject() sustainability project} of {@link #getLevel()
    * level} {@code 3} (region).
    */
-  public static final ThankAddressType SUSTAINABILITY_PROJECT_L3 = new ThankAddressType(19);
+  public static final ThankAddressType SUSTAINABILITY_PROJECT_L3 = new ThankAddressType(18);
 
   /** {@link ThankAddressType} for a {@link #isCompany() company}. */
-  public static final ThankAddressType COMPANY = new ThankAddressType(20);
+  public static final ThankAddressType COMPANY = new ThankAddressType(19);
 
-  private static final ThankAddressType[] TYPES = new ThankAddressType[] { PSEUDONYMOUS, NATURAL_PERSON_CHILD, NATURAL_PERSON_ADULT,
-  IDENTIFICATION_SERVICE_OFFICER, COMMUNITY_REPRESENTATIVE_L0, COMMUNITY_REPRESENTATIVE_L1, COMMUNITY_REPRESENTATIVE_L2, COMMUNITY_REPRESENTATIVE_L3,
-  COMMUNITY_PROJECT_L0, COMMUNITY_PROJECT_L1, COMMUNITY_PROJECT_L2, COMMUNITY_PROJECT_L3, SUSTAINABILITY_REPRESENTATIVE_L0,
-  SUSTAINABILITY_REPRESENTATIVE_L1, SUSTAINABILITY_REPRESENTATIVE_L2, SUSTAINABILITY_REPRESENTATIVE_L3, SUSTAINABILITY_PROJECT_L0,
-  SUSTAINABILITY_PROJECT_L1, SUSTAINABILITY_PROJECT_L2, SUSTAINABILITY_PROJECT_L3, COMPANY };
+  private static final ThankAddressType[] TYPES = new ThankAddressType[] { PSEUDONYMOUS, NATURAL_PERSON,
+  IDENTIFICATION_SERVICE_OFFICER, COMMUNITY_REPRESENTATIVE_L0, COMMUNITY_REPRESENTATIVE_L1, COMMUNITY_REPRESENTATIVE_L2,
+  COMMUNITY_REPRESENTATIVE_L3, COMMUNITY_PROJECT_L0, COMMUNITY_PROJECT_L1, COMMUNITY_PROJECT_L2, COMMUNITY_PROJECT_L3,
+  SUSTAINABILITY_REPRESENTATIVE_L0, SUSTAINABILITY_REPRESENTATIVE_L1, SUSTAINABILITY_REPRESENTATIVE_L2,
+  SUSTAINABILITY_REPRESENTATIVE_L3, SUSTAINABILITY_PROJECT_L0, SUSTAINABILITY_PROJECT_L1, SUSTAINABILITY_PROJECT_L2,
+  SUSTAINABILITY_PROJECT_L3, COMPANY };
 
   static {
     for (int i = TYPES.length - 1; i >= 0; i--) {
@@ -161,7 +157,7 @@ public class ThankAddressType {
    */
   public boolean isNaturalPerson() {
 
-    return (this.value == NATURAL_PERSON_CHILD.value) || (this.value == NATURAL_PERSON_ADULT.value);
+    return (this.value == NATURAL_PERSON.value);
   }
 
   /**
@@ -193,7 +189,8 @@ public class ThankAddressType {
    */
   public boolean isSustainabilityRepresentative() {
 
-    return ((this.value >= SUSTAINABILITY_REPRESENTATIVE_L0.value) && (this.value <= SUSTAINABILITY_REPRESENTATIVE_L3.value));
+    return ((this.value >= SUSTAINABILITY_REPRESENTATIVE_L0.value)
+        && (this.value <= SUSTAINABILITY_REPRESENTATIVE_L3.value));
   }
 
   /**
@@ -226,31 +223,20 @@ public class ThankAddressType {
   }
 
   /**
-   * This is an internal method that may change in future versions.
-   *
-   * @param blob the {@link Binary} to append.
-   * @return the {@code byte[]} with this type followed by the given BLOB.
+   * @return the internal value (ordinal).
    */
-  public byte[] appendBinary(Binary blob) {
+  public byte getValue() {
 
-    byte[] data = new byte[blob.getLength() + 1];
-    blob.getData(data, 1);
-    data[0] = this.value;
-    return data;
+    return this.value;
   }
 
   /**
-   * This is an internal method that may change in future versions.
-   *
-   * @param blob the {@code byte[]} to append.
-   * @return the {@code byte[]} with this type followed by the given BLOB.
+   * @param detail the {@link ThankAddressHeader#getDetail() detail}.
+   * @return the new {@link ThankAddressHeader} with this {@link ThankAddressType}.
    */
-  public byte[] appendBinary(byte[] blob) {
+  public ThankAddressHeader asHeader(int detail) {
 
-    byte[] data = new byte[blob.length + 1];
-    System.arraycopy(blob, 0, data, 1, blob.length);
-    data[0] = this.value;
-    return data;
+    return ThankAddressHeader.of(this, detail);
   }
 
   @Override

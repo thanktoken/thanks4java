@@ -1,21 +1,40 @@
 package io.github.thanktoken.core.api;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.concurrent.Callable;
+
+import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
+import net.sf.mmm.crypto.asymmetric.sign.SignatureFactory;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
+import org.bouncycastle.util.Arrays;
 
 /**
  * The abstract base class for test-cases.
  */
 public abstract class TestCase extends Assertions implements TestData {
 
+  private static final SecureRandom RANDOM;
+
   /** Required precision for calculations. */
   protected static final Offset<BigDecimal> PRECISION = Offset.offset(new BigDecimal("0.0000000000000001"));
 
   /** Required precision for calculations. */
   protected static final Offset<Double> PRECISION_DOUBLE = Offset.offset(Double.valueOf("0.000000000001"));
+
+  static {
+    SecureRandom rnd;
+    try {
+      rnd = SecureRandom.getInstanceStrong();
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+      rnd = new SecureRandom();
+    }
+    RANDOM = rnd;
+  }
 
   /**
    * @param lambda the {@link Runnable} to execute that should throw a {@link Throwable}.
@@ -112,6 +131,49 @@ public abstract class TestCase extends Assertions implements TestData {
       // However, users are requested to provide reasonable arguments to avoid this...
       assertThat(x.hashCode()).isNotEqualTo(y.hashCode());
     }
+  }
+
+  public static SignatureBinary toggleRandomBit(SignatureBinary binary) {
+
+    return toggleRandomBit(binary, TEST_ALGORITHM.getSignatureFactory());
+  }
+
+  public static SignatureBinary toggleRandomBit(SignatureBinary binary, SignatureFactory<?> signatureFactory) {
+
+    byte[] data = binary.getData();
+    data = toggleRandomBit(data);
+    SignatureBinary copy = signatureFactory.createSignature(data);
+    assertThat(copy.getClass()).isSameAs(binary.getClass());
+    return copy;
+  }
+
+  public static byte[] toggleRandomBit(byte[] data) {
+
+    assertThat(data).isNotNull().isNotEmpty();
+    int length = data.length;
+    byte[] copy = Arrays.copyOf(data, length);
+    int toggleByteIndex = RANDOM.nextInt(length);
+    copy[toggleByteIndex] = toggleRandomBit(data[toggleByteIndex]);
+    return copy;
+  }
+
+  public static byte toggleRandomBit(byte b) {
+
+    return toggleBit(b, RANDOM.nextInt(8));
+  }
+
+  public static byte toggleBit(byte b, int bit) {
+
+    assertThat(bit).isGreaterThanOrEqualTo(0).isLessThan(8);
+    int mask = 1 << bit;
+    int value = b & 0x0FF;
+    int selectedBit = value & mask;
+    if (selectedBit == 0) {
+      value = value | mask;
+    } else {
+      value = value & (~mask);
+    }
+    return (byte) value;
   }
 
 }

@@ -38,16 +38,22 @@ public class ThankValidationMode {
 
   private final boolean offline;
 
-  /**
-   * The constructor.
-   */
+  private final ThankValidationFailureMode failureMode;
+
   private ThankValidationMode(boolean publicValue, boolean validateCreation, boolean validatePurpose, boolean offline) {
+
+    this(publicValue, validateCreation, validatePurpose, offline, ThankValidationFailureMode.RETURN_RESULT);
+  }
+
+  private ThankValidationMode(boolean publicValue, boolean validateCreation, boolean validatePurpose, boolean offline,
+      ThankValidationFailureMode failureMode) {
 
     super();
     this.publicValue = publicValue;
     this.validateCreation = validateCreation;
     this.validatePurpose = validatePurpose;
     this.offline = offline;
+    this.failureMode = failureMode;
   }
 
   /**
@@ -65,16 +71,44 @@ public class ThankValidationMode {
   }
 
   /**
+   * @param publicValue the new value of {@link #isPublicValue()}.
+   * @return a (new) {@link ThankValidationMode} with {@link #isPublicValue() publicValue} set to the given value. Will
+   *         be this instance if unchanged.
+   */
+  public ThankValidationMode setPublicValue(boolean publicValue) {
+
+    if (this.validatePurpose == publicValue) {
+      return this;
+    } else {
+      return new ThankValidationMode(this.publicValue, this.validateCreation, this.validatePurpose, this.offline, this.failureMode);
+    }
+  }
+
+  /**
    * @return {@code true} to validate the creation of the {@link ThankToken}. Therefore the {@link ThankToken} has to be
    *         the generated as universal dividend by a {@link ThankTokenHeader#getRecipient() creator} that is a
-   *         {@link io.github.thanktoken.core.api.address.ThankAddressType#NATURAL_PERSON certified natural person} or
-   *         via the fork and merge process (what is only fully verified by online nodes). Otherwise if {@code false}
+   *         {@link io.github.thanktoken.core.api.address.ThankAddressType#isNaturalPerson() certified natural person}
+   *         or via the fork and merge process (what is only fully verified by online nodes). Otherwise if {@code false}
    *         the creation of the {@link ThankToken} is trusted without verification what should only be done in very
    *         specific situations.
    */
   public boolean isValidateCreation() {
 
     return this.validateCreation;
+  }
+
+  /**
+   * @param validateCreation the new value of {@link #isValidateCreation()}.
+   * @return a (new) {@link ThankValidationMode} with {@link #isValidateCreation() validateCreation} set to the given
+   *         value. Will be this instance if unchanged.
+   */
+  public ThankValidationMode setValidateCreation(boolean validateCreation) {
+
+    if (this.validatePurpose == validateCreation) {
+      return this;
+    } else {
+      return new ThankValidationMode(this.publicValue, validateCreation, this.validatePurpose, this.offline, this.failureMode);
+    }
   }
 
   /**
@@ -92,6 +126,20 @@ public class ThankValidationMode {
   }
 
   /**
+   * @param validatePurpose the new value of {@link #isValidatePurpose()}.
+   * @return a (new) {@link ThankValidationMode} with {@link #isValidatePurpose() validatePurpose} set to the given
+   *         value. Will be this instance if unchanged.
+   */
+  public ThankValidationMode setValidatePurpose(boolean validatePurpose) {
+
+    if (this.validatePurpose == validatePurpose) {
+      return this;
+    } else {
+      return new ThankValidationMode(this.publicValue, this.validateCreation, validatePurpose, this.offline, this.failureMode);
+    }
+  }
+
+  /**
    * @return {@code true} if the validation should not fail due to network issues (because you are offline). In that
    *         case validation checks such as {@link #isValidateCreation() creation} and {@link #isValidatePurpose()
    *         purpose} can only be performed if the required data is available in cache. While offline validation is
@@ -102,5 +150,44 @@ public class ThankValidationMode {
   public boolean isOffline() {
 
     return this.offline;
+  }
+
+  /**
+   * @param offline the new value of {@link #isOffline()}.
+   * @return a (new) {@link ThankValidationMode} with {@link #isOffline() offline} set to the given value. Will be this
+   *         instance if unchanged.
+   */
+  public ThankValidationMode setOffline(boolean offline) {
+
+    if (this.offline == offline) {
+      return this;
+    } else {
+      return new ThankValidationMode(this.publicValue, this.validateCreation, this.validatePurpose, offline, this.failureMode);
+    }
+  }
+
+  /**
+   * @return {@code true} if a validation failure should immediately result in throwing an
+   *         {@link io.github.thanktoken.core.api.validate.ThankValidationException}, {@code false} otherwise (to
+   *         collect all validation errors and return them as
+   *         {@link io.github.thanktoken.core.api.validate.ThankValidationResult}).
+   */
+  public ThankValidationFailureMode getFailureMode() {
+
+    return this.failureMode;
+  }
+
+  /**
+   * @param failureMode the new value of {@link #getFailureMode()}.
+   * @return a (new) {@link ThankValidationMode} with {@link #getFailureMode() failureMode} set to the given value. Will
+   *         be this instance if unchanged.
+   */
+  public ThankValidationMode setFailureMode(ThankValidationFailureMode failureMode) {
+
+    if (this.failureMode == failureMode) {
+      return this;
+    } else {
+      return new ThankValidationMode(this.publicValue, this.validateCreation, this.validatePurpose, this.offline, failureMode);
+    }
   }
 }

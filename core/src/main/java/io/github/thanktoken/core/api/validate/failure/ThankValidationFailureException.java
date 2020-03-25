@@ -21,8 +21,6 @@ public class ThankValidationFailureException extends ThankValidationFailure {
   public ThankValidationFailureException(ThankDataObject data, Throwable error) {
 
     super(ID, "Unexpected error!", data, error);
-    // TODO
-    error.printStackTrace();
   }
 
 }
