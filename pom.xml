@@ -147,4 +147,26 @@
       </plugin>
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <repositories>
+        <repository>
+          <id>ossrh</id>
+          <name>OSSRH Snapshots</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+       </repository>
+     </repositories>
+    </profile>
+  </profiles>
 </project>

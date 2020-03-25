@@ -16,11 +16,9 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.crypto.CryptoBinary;
-import net.sf.mmm.crypto.hash.HashCreator;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-import net.sf.mmm.util.exception.api.ObjectNotFoundException;
-
+import io.github.mmm.base.exception.ObjectNotFoundException;
+import io.github.mmm.crypto.CryptoBinary;
+import io.github.mmm.crypto.hash.HashCreator;
 import io.github.thanktoken.core.api.attribute.AttributeReadSignature;
 import io.github.thanktoken.core.api.context.ThankTokenContext;
 import io.github.thanktoken.core.api.data.ThankDataObject;
@@ -35,7 +33,8 @@ import io.github.thanktoken.core.api.io.ThankValueParser;
  * @param <B> type of the mutable {@link ThankDataObject}.
  * @param <F> type of the contained {@link ThankField}s.
  */
-public abstract class ThankFieldMap<D extends ThankDataObject, B extends D, F extends ThankField<?, D, B>> implements Iterable<F> {
+public abstract class ThankFieldMap<D extends ThankDataObject, B extends D, F extends ThankField<?, D, B>>
+    implements Iterable<F> {
 
   private static final Map<String, Object> JSON_CONFIG = createConfig();
 
@@ -173,7 +172,7 @@ public abstract class ThankFieldMap<D extends ThankDataObject, B extends D, F ex
       Event e = jsonParser.next();
       if (e == Event.START_OBJECT) {
         if (started) {
-          throw new IllegalCaseException(Event.class, e);
+          throw new IllegalStateException(e.toString());
         }
       } else if (e == Event.END_OBJECT) {
         return;
@@ -185,7 +184,7 @@ public abstract class ThankFieldMap<D extends ThankDataObject, B extends D, F ex
         }
         field.fromJson(jsonParser, bean, valueParser, context);
       } else {
-        throw new IllegalCaseException(Event.class, e);
+        throw new IllegalStateException(e.toString());
       }
       started = true;
     }
@@ -232,7 +231,8 @@ public abstract class ThankFieldMap<D extends ThankDataObject, B extends D, F ex
    * @param fieldIncluder the {@link Predicate} that {@link Predicate#test(Object) decides} which fields to include. If
    *        it returns {@code false} for a field, that field will be excluded from the JSON.
    */
-  public void toJson(D data, ThankTokenContext context, JsonGenerator jsonGenerator, Predicate<ThankField<?, ?, ?>> fieldIncluder) {
+  public void toJson(D data, ThankTokenContext context, JsonGenerator jsonGenerator,
+      Predicate<ThankField<?, ?, ?>> fieldIncluder) {
 
     if ((context == null) && (data instanceof ThankTokenContext)) {
       context = (ThankTokenContext) data;

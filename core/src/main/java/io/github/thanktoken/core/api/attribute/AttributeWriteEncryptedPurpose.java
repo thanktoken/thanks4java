@@ -2,7 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api.attribute;
 
-import net.sf.mmm.crypto.crypt.EncryptedData;
+import io.github.mmm.crypto.crypt.EncryptedData;
 
 /**
  * Interface to {@link #getEncryptedPurpose() read} and {@link #setEncryptedPurpose(EncryptedData) write} the
@@ -10,7 +10,8 @@ import net.sf.mmm.crypto.crypt.EncryptedData;
  *
  * @param <SELF> this type itself.
  */
-public interface AttributeWriteEncryptedPurpose<SELF extends AttributeWriteEncryptedPurpose<SELF>> extends AttributeReadEncryptedPurpose {
+public interface AttributeWriteEncryptedPurpose<SELF extends AttributeWriteEncryptedPurpose<SELF>>
+    extends AttributeReadEncryptedPurpose {
 
   /**
    * @param encryptedPurpose the new value of {@link #getEncryptedPurpose()}.

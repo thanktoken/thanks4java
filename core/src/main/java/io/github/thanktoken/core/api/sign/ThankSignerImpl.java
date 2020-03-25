@@ -4,10 +4,9 @@ import java.security.PrivateKey;
 import java.util.List;
 import java.util.Objects;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureSigner;
-import net.sf.mmm.crypto.hash.Hash;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.asymmetric.sign.SignatureSigner;
+import io.github.mmm.crypto.hash.Hash;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.context.ThankTokenContextHelper;
 import io.github.thanktoken.core.api.token.ThankToken;

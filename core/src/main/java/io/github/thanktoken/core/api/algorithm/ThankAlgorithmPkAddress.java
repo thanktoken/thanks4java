@@ -2,11 +2,10 @@ package io.github.thanktoken.core.api.algorithm;
 
 import java.security.PublicKey;
 
-import net.sf.mmm.crypto.CryptoBinaryFormat;
-import net.sf.mmm.crypto.asymmetric.access.AsymmetricAccess;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.hash.Hash;
-
+import io.github.mmm.crypto.CryptoBinaryFormat;
+import io.github.mmm.crypto.asymmetric.access.AsymmetricAccess;
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.hash.Hash;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.address.ThankAddressSimple;

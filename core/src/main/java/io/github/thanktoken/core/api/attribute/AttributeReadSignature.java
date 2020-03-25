@@ -4,8 +4,7 @@ package io.github.thanktoken.core.api.attribute;
 
 import java.util.Objects;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.data.ThankDataObject;
 
 /**

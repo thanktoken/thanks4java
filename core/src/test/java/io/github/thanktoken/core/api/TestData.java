@@ -4,11 +4,10 @@ package io.github.thanktoken.core.api;
 
 import java.time.Instant;
 
-import net.sf.mmm.binary.api.BinaryType;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.asymmetric.sign.rsa.SignatureRsa;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
+import io.github.mmm.binary.BinaryType;
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.asymmetric.sign.rsa.SignatureRsa;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.address.ThankAddressType;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;

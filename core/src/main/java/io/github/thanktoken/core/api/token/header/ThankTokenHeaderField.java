@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.token.header;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.attribute.ThankAttributeField;
@@ -28,31 +27,40 @@ public class ThankTokenHeaderField<T> extends ThankField<T, ThankTokenHeader, Th
   private static final FieldMap FIELD_MAP = new FieldMap();
 
   /** Identifies the {@link ThankTokenHeader#getVersion() version}. */
-  public static final ThankTokenHeaderField<ThankVersion> VERSION = new ThankTokenHeaderField<>(ThankAttributeField.VERSION);
+  public static final ThankTokenHeaderField<ThankVersion> VERSION = new ThankTokenHeaderField<>(
+      ThankAttributeField.VERSION);
 
   /** Identifies the {@link ThankTokenHeader#getAlgorithm() algorithm}. */
-  public static final ThankTokenHeaderField<ThankAlgorithm> ALGORITHM = new ThankTokenHeaderField<>(ThankAttributeField.ALGORITHM);
+  public static final ThankTokenHeaderField<ThankAlgorithm> ALGORITHM = new ThankTokenHeaderField<>(
+      ThankAttributeField.ALGORITHM);
 
   /** Identifies the {@link ThankTokenHeader#getCurrency() currency}. */
-  public static final ThankTokenHeaderField<ThankCurrency> CURRENCY = new ThankTokenHeaderField<>(ThankAttributeField.CURRENCY);
+  public static final ThankTokenHeaderField<ThankCurrency> CURRENCY = new ThankTokenHeaderField<>(
+      ThankAttributeField.CURRENCY);
 
   /** Identifies the {@link ThankTokenHeader#getAmount() amount}. */
-  public static final ThankTokenHeaderField<ThankValue> AMOUNT = new ThankTokenHeaderField<>(ThankAttributeField.AMOUNT);
+  public static final ThankTokenHeaderField<ThankValue> AMOUNT = new ThankTokenHeaderField<>(
+      ThankAttributeField.AMOUNT);
 
   /** Identifies the {@link ThankTokenHeader#getTimestamp() timestamp}. */
-  public static final ThankTokenHeaderField<ThankTimestamp> TIMESTAMP = new ThankTokenHeaderField<>(ThankAttributeField.TIMESTAMP);
+  public static final ThankTokenHeaderField<ThankTimestamp> TIMESTAMP = new ThankTokenHeaderField<>(
+      ThankAttributeField.TIMESTAMP);
 
   /** Identifies the {@link ThankTokenHeader#getLocation() location}. */
-  public static final ThankTokenHeaderField<ThankLocation> LOCATION = new ThankTokenHeaderField<>(ThankAttributeField.LOCATION);
+  public static final ThankTokenHeaderField<ThankLocation> LOCATION = new ThankTokenHeaderField<>(
+      ThankAttributeField.LOCATION);
 
   /** Identifies the {@link ThankTokenHeader#getTarget() target}. */
-  public static final ThankTokenHeaderField<ThankTarget> TARGET = new ThankTokenHeaderField<>(ThankAttributeField.TARGET);
+  public static final ThankTokenHeaderField<ThankTarget> TARGET = new ThankTokenHeaderField<>(
+      ThankAttributeField.TARGET);
 
   /** Identifies the {@link ThankTokenHeader#getRecipient() recipient}. */
-  public static final ThankTokenHeaderField<ThankAddress> RECIPIENT = new ThankTokenHeaderField<>(ThankAttributeField.RECIPIENT);
+  public static final ThankTokenHeaderField<ThankAddress> RECIPIENT = new ThankTokenHeaderField<>(
+      ThankAttributeField.RECIPIENT);
 
   /** Identifies the {@link ThankTokenHeader#getSignature() signature}. */
-  public static final ThankTokenHeaderField<SignatureBinary> SIGNATURE = new ThankTokenHeaderField<>(ThankAttributeField.SIGNATURE);
+  public static final ThankTokenHeaderField<SignatureBinary> SIGNATURE = new ThankTokenHeaderField<>(
+      ThankAttributeField.SIGNATURE);
 
   @Override
   public Class<?> getComponentType() {

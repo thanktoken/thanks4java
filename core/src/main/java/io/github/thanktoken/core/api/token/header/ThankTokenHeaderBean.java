@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.token.header;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
@@ -17,7 +16,8 @@ import io.github.thanktoken.core.api.version.ThankVersion;
 /**
  * This is the implementation of {@link ThankToken} as Java bean.
  */
-public class ThankTokenHeaderBean extends AbstractThankTokenHeader implements ThankTokenHeaderMutable<ThankTokenHeaderBean> {
+public class ThankTokenHeaderBean extends AbstractThankTokenHeader
+    implements ThankTokenHeaderMutable<ThankTokenHeaderBean> {
 
   private ThankVersion version;
 

@@ -5,12 +5,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.concurrent.Callable;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureFactory;
-
 import org.assertj.core.api.Assertions;
 import org.assertj.core.data.Offset;
 import org.bouncycastle.util.Arrays;
+
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.asymmetric.sign.SignatureFactory;
 
 /**
  * The abstract base class for test-cases.
@@ -58,7 +58,8 @@ public abstract class TestCase extends Assertions implements TestData {
    * @param expectedError the {@link Class} reflecting the expected {@link Throwable}.
    * @param message the expected {@link Throwable#getMessage()}.
    */
-  public static void shouldThrowException(Callable<?> lambda, Class<? extends Throwable> expectedError, String message) {
+  public static void shouldThrowException(Callable<?> lambda, Class<? extends Throwable> expectedError,
+      String message) {
 
     try {
       lambda.call();

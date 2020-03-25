@@ -2,9 +2,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api.io;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.context.ThankTokenContext;
@@ -49,7 +48,8 @@ public interface ThankValueParser {
       result = ThankAlgorithm.of(value);
     } else {
       if (context == null) {
-        throw new IllegalArgumentException("Context is required to parse value of type '" + type + "' but context is null.");
+        throw new IllegalArgumentException(
+            "Context is required to parse value of type '" + type + "' but context is null.");
       }
       ThankCurrency currency = context.getCurrency();
       if (currency == null) {

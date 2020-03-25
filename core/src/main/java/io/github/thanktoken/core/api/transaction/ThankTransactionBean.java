@@ -1,8 +1,7 @@
 package io.github.thanktoken.core.api.transaction;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.attribute.AttributeWriteEncryptedPurpose;
 import io.github.thanktoken.core.api.attribute.AttributeWritePublicPurpose;
@@ -16,8 +15,9 @@ import io.github.thanktoken.core.api.timestamp.ThankTimestamp;
 /**
  * This is the implementation of {@link ThankTransaction} as Java bean.
  */
-public class ThankTransactionBean extends AbstractThankTransaction implements AttributeWriteTimestamp<ThankTransactionBean>,
-    AttributeWriteSignature<ThankTransactionBean>, AttributeWriteReference<ThankTransactionBean>, AttributeWriteRecipient<ThankTransactionBean>,
+public class ThankTransactionBean extends AbstractThankTransaction
+    implements AttributeWriteTimestamp<ThankTransactionBean>, AttributeWriteSignature<ThankTransactionBean>,
+    AttributeWriteReference<ThankTransactionBean>, AttributeWriteRecipient<ThankTransactionBean>,
     AttributeWritePublicPurpose<ThankTransactionBean>, AttributeWriteEncryptedPurpose<ThankTransactionBean> {
 
   private ThankTimestamp timestamp;

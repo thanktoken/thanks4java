@@ -7,8 +7,6 @@ import javax.json.Json;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.token.ThankTokenBean;
 import io.github.thanktoken.core.api.token.header.ThankTokenHeader;
@@ -49,7 +47,7 @@ public class ThankReaderImpl implements ThankReader {
     JsonParser jsonParser = Json.createParser(reader);
     Event e = jsonParser.next();
     if (e != Event.START_OBJECT) {
-      throw new IllegalCaseException(Event.class, e);
+      throw new IllegalStateException(e.toString());
     }
     return ThankTokenHeaderField.getFields().fromJson(jsonParser, getValueParser());
   }
@@ -60,7 +58,7 @@ public class ThankReaderImpl implements ThankReader {
     JsonParser jsonParser = Json.createParser(reader);
     Event e = jsonParser.next();
     if (e != Event.START_OBJECT) {
-      throw new IllegalCaseException(Event.class, e);
+      throw new IllegalStateException(e.toString());
     }
     return ThankTransactionField.getFields().fromJson(jsonParser, getValueParser(), header);
   }

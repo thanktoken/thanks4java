@@ -4,10 +4,9 @@ package io.github.thanktoken.core.api.data;
 
 import java.util.Objects;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.hash.Hash;
-import net.sf.mmm.crypto.hash.HashCreator;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.hash.Hash;
+import io.github.mmm.crypto.hash.HashCreator;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.attribute.AttributeReadHash;
 import io.github.thanktoken.core.api.attribute.AttributeReadSignature;

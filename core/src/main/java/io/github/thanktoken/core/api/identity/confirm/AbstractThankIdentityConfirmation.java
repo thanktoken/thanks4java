@@ -1,8 +1,7 @@
 package io.github.thanktoken.core.api.identity.confirm;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.hash.HashCreator;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.hash.HashCreator;
 import io.github.thanktoken.core.api.data.AbstractThankDataObjectWithHash;
 
 /**

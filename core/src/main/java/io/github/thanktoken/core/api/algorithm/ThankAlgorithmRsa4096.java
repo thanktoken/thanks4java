@@ -1,7 +1,7 @@
 package io.github.thanktoken.core.api.algorithm;
 
-import net.sf.mmm.crypto.asymmetric.access.rsa.Rsa;
-import net.sf.mmm.crypto.hash.sha2.Sha256;
+import io.github.mmm.crypto.asymmetric.access.rsa.Rsa;
+import io.github.mmm.crypto.hash.sha2.Sha256;
 
 /**
  * {@link ThankAlgorithm} based on {@link Rsa RSA}.

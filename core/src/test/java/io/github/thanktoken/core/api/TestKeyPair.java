@@ -3,10 +3,9 @@ package io.github.thanktoken.core.api;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import net.sf.mmm.binary.api.Binary;
-import net.sf.mmm.binary.api.BinaryType;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
-
+import io.github.mmm.binary.Binary;
+import io.github.mmm.binary.BinaryType;
+import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyPair;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;

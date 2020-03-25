@@ -1,7 +1,7 @@
 package io.github.thanktoken.core.api.algorithm;
 
-import net.sf.mmm.crypto.asymmetric.access.ec.bc.Secp256k1;
-import net.sf.mmm.crypto.hash.sha2.Sha256;
+import io.github.mmm.crypto.asymmetric.access.ec.bc.Secp256k1;
+import io.github.mmm.crypto.hash.sha2.Sha256;
 
 /**
  * {@link ThankAlgorithm} based on {@link Secp256k1 Secp256k1}.

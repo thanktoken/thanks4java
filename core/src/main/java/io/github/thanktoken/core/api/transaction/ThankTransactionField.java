@@ -3,9 +3,8 @@ package io.github.thanktoken.core.api.transaction;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.attribute.ThankAttributeField;
 import io.github.thanktoken.core.api.field.ThankField;
@@ -25,19 +24,23 @@ public class ThankTransactionField<T> extends ThankField<T, ThankTransaction, Th
   private static final FieldMap FIELD_MAP = new FieldMap();
 
   /** Identifies the {@link ThankTransaction#getTimestamp() timestamp}. */
-  public static final ThankTransactionField<ThankTimestamp> TIMESTAMP = new ThankTransactionField<>(ThankAttributeField.TIMESTAMP);
+  public static final ThankTransactionField<ThankTimestamp> TIMESTAMP = new ThankTransactionField<>(
+      ThankAttributeField.TIMESTAMP);
 
   /** Identifies the {@link ThankTransaction#getRecipient() recipient}. */
-  public static final ThankTransactionField<ThankAddress> RECIPIENT = new ThankTransactionField<>(ThankAttributeField.RECIPIENT, true);
+  public static final ThankTransactionField<ThankAddress> RECIPIENT = new ThankTransactionField<>(
+      ThankAttributeField.RECIPIENT, true);
 
   /** Identifies the {@link ThankTransaction#getPublicPurpose() public purpose}. */
-  public static final ThankTransactionField<String> PUBLIC_PURPOSE = new ThankTransactionField<>(ThankAttributeField.PUBLIC_PURPOSE);
+  public static final ThankTransactionField<String> PUBLIC_PURPOSE = new ThankTransactionField<>(
+      ThankAttributeField.PUBLIC_PURPOSE);
 
   /** Identifies the {@link ThankTransaction#getEncryptedPurpose() encrypted purpose}. */
-  public static final ThankTransactionField<EncryptedData> ENCRYPTED_PURPOSE = new ThankTransactionField<>(ThankAttributeField.ENCRYPTED_PURPOSE);
+  public static final ThankTransactionField<EncryptedData> ENCRYPTED_PURPOSE = new ThankTransactionField<>(
+      ThankAttributeField.ENCRYPTED_PURPOSE);
 
   /** Identifies the {@link ThankTransaction#getReference() reference}. */
-  public static final ThankTransactionField<ThankTokenReferenceType> REFERENCE = new ThankTransactionField<ThankTokenReferenceType>(
+  public static final ThankTransactionField<ThankTokenReferenceType> REFERENCE = new ThankTransactionField<>(
       ThankAttributeField.REFERENCE) {
     @Override
     public ThankFieldMap<?, ?, ?> getFieldMap() {
@@ -47,8 +50,8 @@ public class ThankTransactionField<T> extends ThankField<T, ThankTransaction, Th
   };
 
   /** Identifies the {@link ThankTransaction#getSignature() signature}. */
-  public static final ThankTransactionField<SignatureBinary> SIGNATURE = new ThankTransactionField<>("sig", "signature", SignatureBinary.class,
-      ThankTransaction::getSignature, ThankTransactionBean::setSignature);
+  public static final ThankTransactionField<SignatureBinary> SIGNATURE = new ThankTransactionField<>("sig", "signature",
+      SignatureBinary.class, ThankTransaction::getSignature, ThankTransactionBean::setSignature);
 
   /**
    * The constructor.
@@ -75,7 +78,8 @@ public class ThankTransactionField<T> extends ThankField<T, ThankTransaction, Th
     FIELD_MAP.add(this);
   }
 
-  private ThankTransactionField(ThankField<T, ? super ThankTransaction, ? super ThankTransactionBean> parent, boolean optional) {
+  private ThankTransactionField(ThankField<T, ? super ThankTransaction, ? super ThankTransactionBean> parent,
+      boolean optional) {
 
     super(parent, optional);
     FIELD_MAP.add(this);

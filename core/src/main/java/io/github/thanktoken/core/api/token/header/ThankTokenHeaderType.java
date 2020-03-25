@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.token.header;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
@@ -53,8 +52,8 @@ public class ThankTokenHeaderType extends AbstractThankTokenHeader {
    * @param signature - see {@link #getSignature()}.
    */
   public ThankTokenHeaderType(ThankVersion version, ThankAlgorithm algorithm, ThankCurrency currency, ThankValue amount,
-      ThankTimestamp timestamp, ThankLocation location, ThankTarget target, ThankTokenReferenceType reference, ThankAddress recipient,
-      SignatureBinary signature) {
+      ThankTimestamp timestamp, ThankLocation location, ThankTarget target, ThankTokenReferenceType reference,
+      ThankAddress recipient, SignatureBinary signature) {
 
     super();
     this.version = version;

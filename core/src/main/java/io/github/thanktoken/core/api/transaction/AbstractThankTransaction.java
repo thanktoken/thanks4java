@@ -1,8 +1,7 @@
 package io.github.thanktoken.core.api.transaction;
 
-import net.sf.mmm.crypto.hash.Hash;
-import net.sf.mmm.crypto.hash.HashCreator;
-
+import io.github.mmm.crypto.hash.Hash;
+import io.github.mmm.crypto.hash.HashCreator;
 import io.github.thanktoken.core.api.attribute.AttributeReadSignature;
 import io.github.thanktoken.core.api.context.ThankTokenContext;
 import io.github.thanktoken.core.api.data.AbstractThankDataObjectWithHash;

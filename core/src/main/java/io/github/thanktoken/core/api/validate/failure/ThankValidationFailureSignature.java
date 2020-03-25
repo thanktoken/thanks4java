@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.validate.failure;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.attribute.AttributeReadHash;

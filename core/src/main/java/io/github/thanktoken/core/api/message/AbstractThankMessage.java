@@ -4,9 +4,9 @@ package io.github.thanktoken.core.api.message;
 
 import java.time.Instant;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.util.value.api.Range;
-
+import io.github.mmm.base.range.Range;
+import io.github.mmm.base.range.RangeType;
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;
@@ -46,8 +46,8 @@ public abstract class AbstractThankMessage implements ThankMessage {
 
   /**
    * @param message the {@link ThankMessage} to get the timestamp {@link Range} from.
-   * @return the timestamp {@link Range} of the new {@link io.github.thanktoken.core.api.token.header.ThankTokenHeader}s or
-   *         {@link io.github.thanktoken.core.api.transaction.ThankTransaction}s from the given {@link ThankMessage}.
+   * @return the timestamp {@link Range} of the new {@link io.github.thanktoken.core.api.token.header.ThankTokenHeader}s
+   *         or {@link io.github.thanktoken.core.api.transaction.ThankTransaction}s from the given {@link ThankMessage}.
    * @see io.github.thanktoken.core.api.token.header.ThankTokenHeader#getTimestamp()
    * @see io.github.thanktoken.core.api.transaction.ThankTransaction#getTimestamp()
    */
@@ -73,7 +73,7 @@ public abstract class AbstractThankMessage implements ThankMessage {
         max = ts;
       }
     }
-    return new Range<>(min, max);
+    return new RangeType<>(min, max);
   }
 
 }

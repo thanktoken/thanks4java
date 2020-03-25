@@ -1,8 +1,7 @@
 package io.github.thanktoken.core.api.version;
 
-import net.sf.mmm.binary.api.codec.Base64;
-import net.sf.mmm.binary.api.codec.BinaryCodec;
-
+import io.github.mmm.binary.codec.Base64;
+import io.github.mmm.binary.codec.BinaryCodec;
 import io.github.thanktoken.core.api.datatype.IntegerType;
 
 /**

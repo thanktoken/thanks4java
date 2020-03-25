@@ -2,8 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api.attribute;
 
-import net.sf.mmm.crypto.hash.Hash;
-
+import io.github.mmm.crypto.hash.Hash;
 import io.github.thanktoken.core.api.data.ThankDataObject;
 
 /**
@@ -30,7 +29,7 @@ public interface AttributeReadHash extends ThankDataObject {
    *         (see linked {@code createHashes} methods) and the {@link AttributeReadSignature#getSignature() signature}
    *         being present. This hash is created by hashing the {@link #getHash2Sign() hash to sign} together with the
    *         {@link AttributeReadSignature#getSignature() signature}. It is then
-   *         {@link net.sf.mmm.crypto.hash.HashCreator#update(net.sf.mmm.crypto.CryptoBinary) used} by the next
+   *         {@link io.github.mmm.crypto.hash.HashCreator#update(io.github.mmm.crypto.CryptoBinary) used} by the next
    *         {@link ThankDataObject} ({@link io.github.thanktoken.core.api.transaction.ThankTransaction}) to calculate
    *         the {@link #getHash2Sign() hash to sign}. This creates a chain that can not be manipulated without breaking
    *         the hashes. The {@link AttributeReadSignature#getSignature() signature} is included in this hash to chain
@@ -38,7 +37,7 @@ public interface AttributeReadHash extends ThankDataObject {
    *         This is a transient property only used internally to cache intermediate hashes and save performance.
    * @see io.github.thanktoken.core.api.token.header.AbstractThankTokenHeader#createHashes()
    * @see io.github.thanktoken.core.api.transaction.AbstractThankTransaction#createHashes(io.github.thanktoken.core.api.token.ThankToken,
-   *      Hash)
+   *      io.github.thanktoken.core.api.transaction.Hash)
    */
   Hash getHash2Chain();
 

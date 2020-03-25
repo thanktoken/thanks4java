@@ -1,6 +1,6 @@
 package io.github.thanktoken.core.api.address;
 
-import net.sf.mmm.binary.api.Binary;
+import io.github.mmm.binary.Binary;
 
 /**
  * The header of a {@link ThankAddress}. Contains the {@link #getType() type} of the identitiy and an optional

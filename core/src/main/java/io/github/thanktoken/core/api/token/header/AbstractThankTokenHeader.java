@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.token.header;
 
-import net.sf.mmm.crypto.hash.HashCreator;
-
+import io.github.mmm.crypto.hash.HashCreator;
 import io.github.thanktoken.core.api.attribute.AttributeReadSignature;
 import io.github.thanktoken.core.api.context.ThankTokenContext;
 import io.github.thanktoken.core.api.data.AbstractThankDataObjectWithHash;

@@ -2,11 +2,10 @@ package io.github.thanktoken.core.api.transaction;
 
 import java.util.List;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
 import org.junit.jupiter.api.Test;
 
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.TestCase;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.timestamp.ThankTimestamp;

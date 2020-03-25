@@ -5,9 +5,8 @@ package io.github.thanktoken.core.api.attribute;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.crypt.EncryptedData;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.crypt.EncryptedData;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 import io.github.thanktoken.core.api.currency.ThankCurrency;
@@ -43,7 +42,8 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
 
   /** {@link ThankAttributeField} for {@link AttributeReadAmount#getAmount()}. */
   public static final ThankAttributeField<ThankValue, AttributeReadAmount, AttributeWriteAmount<?>> AMOUNT = new ThankAttributeField<>(
-      "amt", AttributeReadAmount.PROPERT_AMOUNT, ThankValue.class, AttributeReadAmount::getAmount, AttributeWriteAmount::setAmount);
+      "amt", AttributeReadAmount.PROPERT_AMOUNT, ThankValue.class, AttributeReadAmount::getAmount,
+      AttributeWriteAmount::setAmount);
 
   /** {@link ThankAttributeField} for {@link AttributeReadAmount#getAmount()}. */
   public static final ThankAttributeField<ThankCurrency, AttributeReadCurrency, AttributeWriteCurrency<?>> CURRENCY = new ThankAttributeField<>(
@@ -62,7 +62,8 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
 
   /** {@link ThankAttributeField} for {@link AttributeReadTarget#getTarget()}. */
   public static final ThankAttributeField<ThankTarget, AttributeReadTarget, AttributeWriteTarget<?>> TARGET = new ThankAttributeField<>(
-      "tgt", AttributeReadTarget.PROPERTY_TARGET, ThankTarget.class, AttributeReadTarget::getTarget, AttributeWriteTarget::setTarget);
+      "tgt", AttributeReadTarget.PROPERTY_TARGET, ThankTarget.class, AttributeReadTarget::getTarget,
+      AttributeWriteTarget::setTarget);
 
   /** {@link ThankAttributeField} for {@link AttributeReadRecipient#getRecipient()}. */
   public static final ThankAttributeField<ThankAddress, AttributeReadRecipient, AttributeWriteRecipient<?>> RECIPIENT = new ThankAttributeField<>(
@@ -70,9 +71,9 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
       AttributeWriteRecipient::setRecipient);
 
   /** {@link ThankAttributeField} for {@link AttributeReadReference#getReference()}. */
-  public static final ThankAttributeField<ThankTokenReferenceType, AttributeReadReference, AttributeWriteReference<?>> REFERENCE = new ThankAttributeField<ThankTokenReferenceType, AttributeReadReference, AttributeWriteReference<?>>(
-      "ref", AttributeReadReference.PROPERTY_REFERENCE, ThankTokenReferenceType.class, AttributeReadReference::getReference,
-      AttributeWriteReference::setReference, true) {
+  public static final ThankAttributeField<ThankTokenReferenceType, AttributeReadReference, AttributeWriteReference<?>> REFERENCE = new ThankAttributeField<>(
+      "ref", AttributeReadReference.PROPERTY_REFERENCE, ThankTokenReferenceType.class,
+      AttributeReadReference::getReference, AttributeWriteReference::setReference, true) {
 
     @Override
     public ThankFieldMap<?, ?, ?> getFieldMap() {
@@ -89,8 +90,8 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
 
   /** {@link ThankAttributeField} for {@link AttributeReadPublicPurpose#getPublicPurpose()}. */
   public static final ThankAttributeField<String, AttributeReadPublicPurpose, AttributeWritePublicPurpose<?>> PUBLIC_PURPOSE = new ThankAttributeField<>(
-      "pp", AttributeReadPublicPurpose.PROPERTY_PUBLIC_PURPOSE, String.class, AttributeReadPublicPurpose::getPublicPurpose,
-      AttributeWritePublicPurpose::setPublicPurpose, true);
+      "pp", AttributeReadPublicPurpose.PROPERTY_PUBLIC_PURPOSE, String.class,
+      AttributeReadPublicPurpose::getPublicPurpose, AttributeWritePublicPurpose::setPublicPurpose, true);
 
   /** {@link ThankAttributeField} for {@link AttributeReadEncryptedPurpose#getEncryptedPurpose()}. */
   public static final ThankAttributeField<EncryptedData, AttributeReadEncryptedPurpose, AttributeWriteEncryptedPurpose<?>> ENCRYPTED_PURPOSE = new ThankAttributeField<>(
@@ -111,7 +112,8 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
    * @param getter - see {@link #get(ThankDataObject)}.
    * @param setter - see {@link #set(ThankDataObject, Object)}.
    */
-  public ThankAttributeField(String id, String name, Class<T> type, Function<? super D, T> getter, BiConsumer<? super B, T> setter) {
+  public ThankAttributeField(String id, String name, Class<T> type, Function<? super D, T> getter,
+      BiConsumer<? super B, T> setter) {
 
     this(id, name, type, getter, setter, false);
   }
@@ -126,8 +128,8 @@ public class ThankAttributeField<T, D extends ThankDataObject, B extends D> exte
    * @param setter - see {@link #set(ThankDataObject, Object)}.
    * @param optional - see {@link #isOptional()}.
    */
-  public ThankAttributeField(String id, String name, Class<T> type, Function<? super D, T> getter, BiConsumer<? super B, T> setter,
-      boolean optional) {
+  public ThankAttributeField(String id, String name, Class<T> type, Function<? super D, T> getter,
+      BiConsumer<? super B, T> setter, boolean optional) {
 
     super(id, name, type, getter, setter, optional);
   }

@@ -2,8 +2,7 @@ package io.github.thanktoken.core.api.sign;
 
 import java.security.PrivateKey;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.token.ThankToken;
 import io.github.thanktoken.core.api.token.header.ThankTokenHeader;
 import io.github.thanktoken.core.api.transaction.ThankTransaction;

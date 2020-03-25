@@ -13,10 +13,8 @@ import javax.json.stream.JsonGenerator;
 import javax.json.stream.JsonParser;
 import javax.json.stream.JsonParser.Event;
 
-import net.sf.mmm.binary.api.BinaryType;
-import net.sf.mmm.binary.api.codec.BinaryCodec;
-import net.sf.mmm.util.exception.api.IllegalCaseException;
-
+import io.github.mmm.binary.BinaryType;
+import io.github.mmm.binary.codec.BinaryCodec;
 import io.github.thanktoken.core.api.context.ThankTokenContext;
 import io.github.thanktoken.core.api.data.ThankDataObject;
 import io.github.thanktoken.core.api.datatype.IntegerType;
@@ -57,8 +55,8 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    * @param setter - see {@link #set(ThankDataObject, Object)}.
    * @param optional - see {@link #isOptional()}.
    */
-  protected ThankField(String id, String name, Class<T> type, Function<? super D, T> getter, BiConsumer<? super B, T> setter,
-      boolean optional) {
+  protected ThankField(String id, String name, Class<T> type, Function<? super D, T> getter,
+      BiConsumer<? super B, T> setter, boolean optional) {
 
     super();
     this.id = id;
@@ -262,7 +260,8 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
    *        it returns {@code false} for a field, that field will be excluded from the JSON.
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public void toJson(D data, ThankTokenContext context, JsonGenerator jsonGenerator, Predicate<ThankField<?, ?, ?>> fieldIncluder) {
+  public void toJson(D data, ThankTokenContext context, JsonGenerator jsonGenerator,
+      Predicate<ThankField<?, ?, ?>> fieldIncluder) {
 
     T value = get(data);
     if (isEmpty(value)) {
@@ -321,7 +320,7 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
       } else if (this.type.equals(ThankVersion.class)) {
         return ThankVersion.of(jsonParser.getInt());
       } else {
-        throw new IllegalCaseException(this.type.getName() + "(as JSON number)");
+        throw new IllegalArgumentException(this.type.getName() + "(as JSON number)");
       }
     } else if (e == Event.VALUE_STRING) {
       return parser.parse(jsonParser.getString(), this.type, context);
@@ -353,7 +352,7 @@ public abstract class ThankField<T, D extends ThankDataObject, B extends D> {
         }
         value = fieldMap.fromJson(jsonParser, parser, context);
       } else {
-        throw new IllegalCaseException(Event.class, e);
+        throw new IllegalStateException(e.toString());
       }
     }
     set(bean, (T) value);

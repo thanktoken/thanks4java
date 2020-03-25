@@ -4,17 +4,16 @@ import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.mmm.crypto.asymmetric.access.AsymmetricAccess;
-import net.sf.mmm.crypto.asymmetric.crypt.AsymmetricCryptorFactory;
-import net.sf.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-import net.sf.mmm.crypto.asymmetric.sign.SignatureProcessorFactory;
-import net.sf.mmm.crypto.hash.Hash;
-import net.sf.mmm.crypto.hash.HashCreator;
-import net.sf.mmm.crypto.hash.HashFactory;
-import net.sf.mmm.util.exception.api.DuplicateObjectException;
-import net.sf.mmm.util.exception.api.ObjectNotFoundException;
-
+import io.github.mmm.base.exception.DuplicateObjectException;
+import io.github.mmm.base.exception.ObjectNotFoundException;
+import io.github.mmm.crypto.asymmetric.access.AsymmetricAccess;
+import io.github.mmm.crypto.asymmetric.crypt.AsymmetricCryptorFactory;
+import io.github.mmm.crypto.asymmetric.key.AsymmetricKeyCreator;
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
+import io.github.mmm.crypto.asymmetric.sign.SignatureProcessorFactory;
+import io.github.mmm.crypto.hash.Hash;
+import io.github.mmm.crypto.hash.HashCreator;
+import io.github.mmm.crypto.hash.HashFactory;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.address.ThankAddressHeader;
 import io.github.thanktoken.core.api.datatype.StringType;

@@ -2,8 +2,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0 */
 package io.github.thanktoken.core.api.data;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.address.ThankAddress;
 import io.github.thanktoken.core.api.attribute.AttributeReadRecipient;
 import io.github.thanktoken.core.api.attribute.AttributeReadSignature;

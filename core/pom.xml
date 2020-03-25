@@ -13,19 +13,14 @@
   <description>API to access thank-tokens and calculate the value in thanks.</description>
   <dependencies>
     <dependency>
-      <groupId>net.sf.m-m-m</groupId>
+      <groupId>io.github.m-m-m</groupId>
       <artifactId>mmm-crypto-bc</artifactId>
-      <version>1.0.0-beta4</version>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>net.sf.m-m-m</groupId>
-      <artifactId>mmm-util-value</artifactId>
-      <version>8.6.0</version>
-    </dependency>
-    <dependency>
-      <groupId>net.sf.m-m-m</groupId>
-      <artifactId>mmm-util-pojo</artifactId>
-      <version>8.6.0</version>
+      <groupId>io.github.m-m-m</groupId>
+      <artifactId>mmm-base</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>javax.json</groupId>

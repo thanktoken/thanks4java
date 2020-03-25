@@ -5,8 +5,6 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
-import net.sf.mmm.util.exception.api.ObjectMismatchException;
-
 import io.github.thanktoken.core.api.context.ThankTokenContext;
 import io.github.thanktoken.core.api.datatype.StringType;
 import io.github.thanktoken.core.api.io.ThankValueParser;
@@ -103,7 +101,8 @@ public abstract class ThankCurrency extends StringType {
         }
         sb.append(e);
       }
-      throw new ObjectMismatchException(actual, sb.toString(), header.toString());
+      throw new IllegalStateException(
+          "Missing value " + actual + " in " + sb.toString() + " for header: " + header.toString());
     }
   }
 

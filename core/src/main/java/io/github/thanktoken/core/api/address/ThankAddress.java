@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api.address;
 
-import net.sf.mmm.crypto.CryptoBinary;
-
+import io.github.mmm.crypto.CryptoBinary;
 import io.github.thanktoken.core.api.algorithm.ThankAlgorithm;
 
 /**

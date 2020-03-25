@@ -1,7 +1,6 @@
 package io.github.thanktoken.core.api;
 
-import net.sf.mmm.crypto.asymmetric.sign.SignatureBinary;
-
+import io.github.mmm.crypto.asymmetric.sign.SignatureBinary;
 import io.github.thanktoken.core.api.sign.ThankSignerImpl;
 import io.github.thanktoken.core.api.token.ThankTokenBean;
 import io.github.thanktoken.core.api.token.header.ThankTokenHeaderBean;
